@@ -7,8 +7,8 @@ A boxing game where your character mimics your own motions.
 
 Before setting up the development environment, ensure you have the following installed:
 
-- **Godot Engine** (latest version)
-- **UV** (Python package manager)
+- **Godot Engine** (latest)
+- **UV (Python project manager)** (latest)
 
 ### Setup
 
