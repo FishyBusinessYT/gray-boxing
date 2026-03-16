@@ -23,7 +23,8 @@ fps = cap.get(cv2.CAP_PROP_FPS)
 current_frame = 0
 
 with vision.PoseLandmarker.create_from_options(options) as landmarker:
-    cv2.namedWindow("whatever", cv2.WINDOW_NORMAL)
+    cv2.namedWindow("whatever")
+    cv2.moveWindow("whatever", 550, 200)
     while True:
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
