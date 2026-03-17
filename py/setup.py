@@ -2,7 +2,7 @@ import os
 import urllib.request
 
 
-def setup():
+def download_task():
     url = ("https://storage.googleapis.com/mediapipe-models/pose_landmarker/"
            "pose_landmarker_full/float16/latest/pose_landmarker_full.task")
     filename = "pose_landmarker_full.task"
