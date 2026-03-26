@@ -92,7 +92,7 @@ def calculate_directions(landmarks):
         "r_shoulder_elbow": get_direction(nodes['r_shoulder'], nodes['r_elbow']),
         "r_elbow_wrist": get_direction(nodes['r_elbow'], nodes['r_wrist']),
         "r_wrist_hand": get_direction(nodes['r_wrist'], nodes['r_hand']),
-        "l_shoulder_hip": get_direction(nodes['l_shoulder'], nodes['r_hip']),
+        "l_shoulder_hip": get_direction(nodes['l_shoulder'], nodes['l_hip']),
         "r_shoulder_hip": get_direction(nodes['r_shoulder'], nodes['r_hip']),
         "l_hip_hip": get_direction(nodes['l_hip'], nodes['r_hip']),
         "l_hip_knee": get_direction(nodes['l_hip'], nodes['l_knee']),
