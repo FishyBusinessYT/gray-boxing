@@ -1,8 +1,8 @@
 class Vector3:
-    def __init__(self, landmark):
-        self.x = landmark.x
-        self.y = landmark.y
-        self.z = landmark.z
+    def __init__(self, base):
+        self.x = base.x
+        self.y = base.y
+        self.z = base.z
 
     def sum(self):
         return self.x + self.y + self.z
@@ -24,8 +24,8 @@ class Vector3:
         return result
 
     def __truediv__(self, other):
-        if other is not int:
-            TypeError()
+        if type(other) is not int:
+            raise TypeError()
 
         result = Vector3(self)
         result.x /= other
@@ -36,19 +36,19 @@ class Vector3:
 
     def __pow__(self, other):
         if type(other) is not int and type(other) is not float:
-            TypeError()
+            raise TypeError()
 
         result = Vector3(self)
-        result.x ** other
-        result.y ** other
-        result.z ** other
+        result.x **= other
+        result.y **= other
+        result.z **= other
 
         return result
 
 
 def get_direction(node1, node2):
     dirVector = node1 - node2
-    dirVectorLength = abs((dirVector ** 2).sum()) ** (1/2)
+    dirVectorLength = (dirVector ** 2).sum() ** (1/2)
 
     directionNormalized = [
         dirVector.x / dirVectorLength,
