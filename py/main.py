@@ -33,7 +33,7 @@ while True:
             nd = node_directions[direction_name]
             print('\n\n\nDIRNAME:', direction_name, '\n\nVALUES:')
             for i in range(3):
-                print(nd[i], type(nd[i]), sep='\n')
+                print(nd[i])
         break
 
 
