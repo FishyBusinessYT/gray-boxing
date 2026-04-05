@@ -9,5 +9,5 @@ wheels/
 # Virtual environments
 .venv
 
-# Task file
+# Task file (too big, better to download locally)
 *.task
