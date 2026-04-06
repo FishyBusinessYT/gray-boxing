@@ -1,4 +1,3 @@
-# gray_boxing_input.spec
 from PyInstaller.utils.hooks import collect_data_files, collect_dynamic_libs, collect_submodules
 
 block_cipher = None
@@ -37,11 +36,12 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='gray_boxing_input',
+    name='backend',
     debug=False,
     strip=False,
     upx=False,
     console=False,
+    contents_directory='lib',
 )
 
 coll = COLLECT(
