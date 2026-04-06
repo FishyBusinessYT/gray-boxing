@@ -7,6 +7,8 @@ const EXPECTED_BYTES = EXPECTED_FLOATS * 4  # 32-bit floats
 var udp := PacketPeerUDP.new()
 var directions := {}
 
+var process_id := -1
+
 const DIRECTION_KEYS = [
 	"neck_head",
 	"l_shoulder_shoulder", "l_shoulder_elbow", "l_elbow_wrist", "l_wrist_hand",
@@ -18,7 +20,13 @@ const DIRECTION_KEYS = [
 
 func _ready():
 	udp.bind(PORT, '127.0.0.1')
-	var py_path := OS.get_executable_path().get_base_dir().path_join('')
+	var exe_name := "gray_boxing_input.exe" if OS.get_name() == "Windows" else "gray_boxing_input"
+	var py_path := OS.get_executable_path().get_base_dir().path_join(exe_name)
+
+	if OS.has_feature('editor'):
+		py_path = ProjectSettings.globalize_path('res://').path_join('gray_boxing_input')
+
+	process_id = OS.create_process(py_path, [], true)
 
 func _process(_delta):
 	if udp.get_available_packet_count() == 0:
@@ -37,3 +45,8 @@ func _process(_delta):
 		)
 	
 	$Label.text = str(directions)
+
+func _exit_tree() -> void:
+	if process_id != -1:
+		OS.kill(process_id)
+	udp.close()
