@@ -18,6 +18,7 @@ const DIRECTION_KEYS = [
 
 func _ready():
 	udp.bind(PORT, '127.0.0.1')
+	var py_path := OS.get_executable_path().get_base_dir().path_join('')
 
 func _process(_delta):
 	if udp.get_available_packet_count() == 0:
