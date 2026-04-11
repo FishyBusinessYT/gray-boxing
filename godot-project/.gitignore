@@ -3,4 +3,4 @@
 /android/
 
 # Exclude symlink from version control
-gray_boxing_input
+backend
