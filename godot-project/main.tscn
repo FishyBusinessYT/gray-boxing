@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://q60m6jv2pmb1"]
+
+[ext_resource type="PackedScene" uid="uid://cl176wve2asiy" path="res://character.tscn" id="1_ig7tw"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0xm2m"]
+
+[node name="Main" type="Node3D" unique_id=1968842158]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1587748164]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1727783277]
+shape = SubResource("WorldBoundaryShape3D_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1449104252]
+transform = Transform3D(0.25881907, -0.25, 0.93301266, -7.71341e-09, 0.9659258, 0.25881904, -0.9659259, -0.066987306, 0.25, 0, 0, 0)
+metadata/_edit_lock_ = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1958275940]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.1456884e-07, 2.845549, -2.0240355)
+metadata/_edit_lock_ = true
+
+[node name="Character" parent="." unique_id=748320195 instance=ExtResource("1_ig7tw")]
