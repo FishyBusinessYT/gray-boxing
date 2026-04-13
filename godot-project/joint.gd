@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends Generic6DOFJoint3D
 
 @export var direction_key: String
 @export var controller: PlayerController
@@ -15,5 +15,8 @@ func _physics_process(delta: float) -> void:
         # Convert quaternion to axis-angle, then to angular velocity
         var axis: Vector3 = correction.get_axis()
         var angle: float = correction.get_angle()
+        var angular_velocity = axis * angle * 0.25 / delta
 
-        angular_velocity = axis * angle * 0.5 / delta
+        set('angular_motor_x/target_velocity', angular_velocity.x)
+        set('angular_motor_y/target_velocity', angular_velocity.y)
+        set('angular_motor_z/target_velocity', angular_velocity.z)

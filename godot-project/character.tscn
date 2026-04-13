@@ -7,7 +7,7 @@
 radius = 0.25
 height = 0.5
 
-[sub_resource type="SphereMesh" id="SphereMesh_pjt0s"]
+[sub_resource type="PrismMesh" id="PrismMesh_pjt0s"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wa5vi"]
 
@@ -31,17 +31,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.2, 0)
 visible = false
 mesh = SubResource("SphereMesh_vu45j")
 
-[node name="Head" type="RigidBody3D" parent="." unique_id=1189297850 node_paths=PackedStringArray("controller")]
+[node name="Head" type="RigidBody3D" parent="." unique_id=1189297850]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
-constant_force = Vector3(0.09, 0.08, 0)
-constant_torque = Vector3(0, 0, 0.5)
-script = ExtResource("1_pjt0s")
-direction_key = "neck_head"
-controller = NodePath("../PlayerController")
+gravity_scale = 0.0
 metadata/_edit_group_ = true
 
 [node name="Model" type="MeshInstance3D" parent="Head" unique_id=493794960]
-mesh = SubResource("SphereMesh_pjt0s")
+mesh = SubResource("PrismMesh_pjt0s")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head" unique_id=982440156]
 shape = SubResource("SphereShape3D_wa5vi")
@@ -57,13 +53,22 @@ shape = SubResource("CylinderShape3D_vu45j")
 [node name="Model" type="MeshInstance3D" parent="Neck" unique_id=1031170832]
 mesh = SubResource("CylinderMesh_glpr6")
 
-[node name="NeckHead" type="Generic6DOFJoint3D" parent="." unique_id=1682805825]
+[node name="NeckHead" type="Generic6DOFJoint3D" parent="." unique_id=1682805825 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 node_a = NodePath("../Head")
 node_b = NodePath("../Neck")
-angular_limit_x/enabled = false
-angular_limit_y/enabled = false
-angular_limit_z/enabled = false
+angular_limit_x/upper_angle = 0.87266463
+angular_limit_x/lower_angle = -0.87266463
+angular_limit_y/upper_angle = 1.5707964
+angular_limit_y/lower_angle = -1.5707964
+angular_limit_z/upper_angle = 0.87266463
+angular_limit_z/lower_angle = -0.87266463
+angular_motor_x/enabled = true
+angular_motor_y/enabled = true
+angular_motor_z/enabled = true
+script = ExtResource("1_pjt0s")
+direction_key = "neck_head"
+controller = NodePath("../PlayerController")
 
 [node name="PlayerController" type="Node" parent="." unique_id=1449580231]
 script = ExtResource("1_glpr6")
