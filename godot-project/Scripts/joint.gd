@@ -2,10 +2,12 @@ extends Generic6DOFJoint3D
 
 @export var direction_key: String
 @export var controller: PlayerController
-
+@export var disable: bool
 
 
 func _physics_process(delta: float) -> void:
+    if disable: return
+
     if controller.directions.has(direction_key) and controller.directions[direction_key] != Vector3.ZERO:
         var current_dir: Vector3 = global_transform.basis * Vector3(0, 1, 0)
         var target_dir: Vector3 = controller.directions[direction_key]
