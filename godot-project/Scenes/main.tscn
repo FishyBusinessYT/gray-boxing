@@ -21,25 +21,3 @@ metadata/_edit_lock_ = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -4.7683716e-07, 2.845549, -5.0240355)
 
 [node name="Character" parent="." unique_id=748320195 instance=ExtResource("1_ig7tw")]
-
-[node name="Control" type="Control" parent="." unique_id=1088918766]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DebugLabel1" type="Label" parent="Control" unique_id=998504755]
-layout_mode = 0
-offset_left = 148.0
-offset_top = 116.0
-offset_right = 355.0
-offset_bottom = 197.0
-
-[node name="DebugLabel2" type="Label" parent="Control" unique_id=1152450114]
-layout_mode = 0
-offset_left = 144.0
-offset_top = 334.0
-offset_right = 351.0
-offset_bottom = 415.0
