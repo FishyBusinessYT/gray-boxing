@@ -1,6 +1,26 @@
 extends RigidBody3D
 
-@export var direction_key: String
+@export_enum(
+    "neck_head",
+    "l_shoulder_shoulder",
+    "l_shoulder_elbow",
+    "l_elbow_wrist",
+    "l_wrist_hand",
+    "r_shoulder_elbow",
+    "r_elbow_wrist",
+    "r_wrist_hand",
+    "l_shoulder_hip",
+    "r_shoulder_hip",
+    "l_hip_hip",
+    "l_hip_knee",
+    "l_knee_ankle",
+    "l_ankle_heel",
+    "l_ankle_toe",
+    "r_hip_knee",
+    "r_knee_ankle",
+    "r_ankle_heel",
+    "r_ankle_toe",
+    ) var direction_key: String
 @export var controller: PlayerController
 @export var disable: bool
 

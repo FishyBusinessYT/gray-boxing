@@ -44,5 +44,8 @@ func _process(_delta):
         var key = directions.keys()[i]
         directions[key] = Vector3(raw[i * 3], raw[i * 3 + 1], raw[i * 3 + 2])
 
+    $'../../Control/DebugLabel1'.text = str(directions['neck_head'])
+    $'../../Control/DebugLabel2'.text = str(directions['l_shoulder_shoulder'])
+
 func _exit_tree() -> void:
     udp.close()
