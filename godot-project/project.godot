@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Gray Boxing"
-run/main_scene="uid://hpscg2qqbetj"
+run/main_scene="uid://q60m6jv2pmb1"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+BackendManager="uid://dbytswah2ssfr"
 
 [physics]
 

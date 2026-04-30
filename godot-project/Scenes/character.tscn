@@ -1,0 +1,359 @@
+[gd_scene format=3 uid="uid://cl176wve2asiy"]
+
+[ext_resource type="Script" uid="uid://v8y62hdu0poi" path="res://Scripts/player_controller.gd" id="1_glpr6"]
+[ext_resource type="Script" uid="uid://2h46uiwswgtp" path="res://Scripts/segment.gd" id="1_wa5vi"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ushfy"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_owm7s"]
+top_radius = 0.0
+bottom_radius = 0.05
+height = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_owm7s"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ejsiy"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_2mse5"]
+size = Vector3(1, 1, 0.7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ushfy"]
+size = Vector3(1.5, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ushfy"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_reotu"]
+material = SubResource("StandardMaterial3D_ushfy")
+size = Vector3(1, 0.6, 0.6)
+
+[sub_resource type="SphereMesh" id="SphereMesh_owm7s"]
+material = SubResource("StandardMaterial3D_ushfy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owm7s"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ejsiy"]
+material = SubResource("StandardMaterial3D_owm7s")
+size = Vector3(1, 0.6, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nytcm"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2mse5"]
+material = SubResource("StandardMaterial3D_nytcm")
+
+[sub_resource type="BoxMesh" id="BoxMesh_a5ess"]
+material = SubResource("StandardMaterial3D_ushfy")
+size = Vector3(0.6, 1, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kq7hj"]
+material = SubResource("StandardMaterial3D_ushfy")
+size = Vector3(0.4, 1, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l1rcp"]
+material = SubResource("StandardMaterial3D_ushfy")
+size = Vector3(0.8, 0.5, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_le1tg"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wbia7"]
+material = SubResource("StandardMaterial3D_le1tg")
+size = Vector3(0.6, 1, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2daya"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mvyft"]
+material = SubResource("StandardMaterial3D_2daya")
+size = Vector3(0.4, 1, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7iw6i"]
+material = SubResource("StandardMaterial3D_2daya")
+size = Vector3(0.8, 0.5, 1.2)
+
+[node name="Character" type="Node3D" unique_id=748320195]
+
+[node name="PlayerController" type="Node" parent="." unique_id=1449580231]
+script = ExtResource("1_glpr6")
+
+[node name="Segments" type="Node3D" parent="." unique_id=259303738]
+
+[node name="Head" type="RigidBody3D" parent="Segments" unique_id=1213832999 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8999999, 0)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_wa5vi")
+direction_key = "neck_head"
+controller = NodePath("../../PlayerController")
+metadata/_edit_group_ = true
+
+[node name="HeadModel" type="MeshInstance3D" parent="Segments/Head" unique_id=1363100732]
+mesh = SubResource("SphereMesh_ushfy")
+
+[node name="NoseModel" type="MeshInstance3D" parent="Segments/Head" unique_id=13996556]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.5)
+mesh = SubResource("CylinderMesh_owm7s")
+
+[node name="Torso" type="RigidBody3D" parent="Segments" unique_id=437619094 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "l_shoulder_shoulder"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="RChestModel" type="MeshInstance3D" parent="Segments/Torso" unique_id=881498682]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, -0.25000024, 0)
+mesh = SubResource("BoxMesh_owm7s")
+
+[node name="LChestModel" type="MeshInstance3D" parent="Segments/Torso" unique_id=1975350603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, -0.25000024, 0)
+mesh = SubResource("BoxMesh_owm7s")
+
+[node name="RShoulderModel" type="MeshInstance3D" parent="Segments/Torso" unique_id=809959829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000001, -2.3841858e-07, 0)
+mesh = SubResource("SphereMesh_ejsiy")
+
+[node name="LShoulderModel" type="MeshInstance3D" parent="Segments/Torso" unique_id=1487645818]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2999998, -2.3841858e-07, 0)
+mesh = SubResource("SphereMesh_ejsiy")
+
+[node name="AbdomenModel" type="MeshInstance3D" parent="Segments/Torso" unique_id=1623971374]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3, 0)
+mesh = SubResource("BoxMesh_2mse5")
+
+[node name="Hips" type="RigidBody3D" parent="Segments" unique_id=1352187730 node_paths=PackedStringArray("controller")]
+script = ExtResource("1_wa5vi")
+direction_key = "l_hip_hip"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="HipsModel" type="MeshInstance3D" parent="Segments/Hips" unique_id=173318187]
+mesh = SubResource("BoxMesh_ushfy")
+
+[node name="LUpperArm" type="RigidBody3D" parent="Segments" unique_id=1861165917 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05, 2.0999997, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "l_shoulder_elbow"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="LUpperArmModel" type="MeshInstance3D" parent="Segments/LUpperArm" unique_id=1440757376]
+mesh = SubResource("BoxMesh_reotu")
+
+[node name="LForearm" type="RigidBody3D" parent="Segments" unique_id=1996565810 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1, 2.0999997, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "l_elbow_wrist"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="LForearmModel" type="MeshInstance3D" parent="Segments/LForearm" unique_id=5170311]
+mesh = SubResource("BoxMesh_reotu")
+
+[node name="LHand" type="RigidBody3D" parent="Segments" unique_id=1940076551 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15, 2.0999997, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "l_wrist_hand"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="LHandModel" type="MeshInstance3D" parent="Segments/LHand" unique_id=1569172138]
+mesh = SubResource("SphereMesh_owm7s")
+
+[node name="RUpperArm" type="RigidBody3D" parent="Segments" unique_id=1124756544 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05, 2.0999997, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "r_shoulder_elbow"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(-1, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="RUpperArmModel" type="MeshInstance3D" parent="Segments/RUpperArm" unique_id=1354867209]
+mesh = SubResource("BoxMesh_ejsiy")
+
+[node name="RForearm" type="RigidBody3D" parent="Segments" unique_id=1193457002 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 2.0999997, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "r_elbow_wrist"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(-1, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="RForearmModel" type="MeshInstance3D" parent="Segments/RForearm" unique_id=874370783]
+mesh = SubResource("BoxMesh_ejsiy")
+
+[node name="RHand" type="RigidBody3D" parent="Segments" unique_id=104607931 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15, 2.0999997, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "r_wrist_hand"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(-1, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="RHandModel" type="MeshInstance3D" parent="Segments/RHand" unique_id=233596825]
+mesh = SubResource("SphereMesh_2mse5")
+
+[node name="LThigh" type="RigidBody3D" parent="Segments" unique_id=1683040861 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.8000002, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "l_hip_knee"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
+metadata/_edit_group_ = true
+
+[node name="LThighModel" type="MeshInstance3D" parent="Segments/LThigh" unique_id=861101371]
+mesh = SubResource("BoxMesh_a5ess")
+
+[node name="LShin" type="RigidBody3D" parent="Segments" unique_id=1489066690 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1.8500001, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "l_knee_ankle"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
+metadata/_edit_group_ = true
+
+[node name="LShinModel" type="MeshInstance3D" parent="Segments/LShin" unique_id=268433233]
+mesh = SubResource("BoxMesh_kq7hj")
+
+[node name="LFoot" type="RigidBody3D" parent="Segments" unique_id=502406071 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -2.65, 0.2)
+script = ExtResource("1_wa5vi")
+direction_key = "l_ankle_toe"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, 0, 1)
+metadata/_edit_group_ = true
+
+[node name="LFootModel" type="MeshInstance3D" parent="Segments/LFoot" unique_id=794399182]
+mesh = SubResource("BoxMesh_l1rcp")
+
+[node name="RThigh" type="RigidBody3D" parent="Segments" unique_id=207028315 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.8000002, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "r_hip_knee"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
+metadata/_edit_group_ = true
+
+[node name="RThighModel" type="MeshInstance3D" parent="Segments/RThigh" unique_id=1060998354]
+mesh = SubResource("BoxMesh_wbia7")
+
+[node name="RShin" type="RigidBody3D" parent="Segments" unique_id=607904848 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.8500001, 0)
+script = ExtResource("1_wa5vi")
+direction_key = "r_knee_ankle"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
+metadata/_edit_group_ = true
+
+[node name="RShinModel" type="MeshInstance3D" parent="Segments/RShin" unique_id=2005011111]
+mesh = SubResource("BoxMesh_mvyft")
+
+[node name="RFoot" type="RigidBody3D" parent="Segments" unique_id=1392305266 node_paths=PackedStringArray("controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2.65, 0.2)
+script = ExtResource("1_wa5vi")
+direction_key = "r_ankle_toe"
+controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, 0, 1)
+metadata/_edit_group_ = true
+
+[node name="RFootModel" type="MeshInstance3D" parent="Segments/RFoot" unique_id=1381319950]
+mesh = SubResource("BoxMesh_7iw6i")
+
+[node name="Joints" type="Node3D" parent="." unique_id=2022156844]
+
+[node name="Neck" type="PinJoint3D" parent="Joints" unique_id=1081222941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+node_a = NodePath("../../Segments/Torso")
+node_b = NodePath("../../Segments/Head")
+exclude_nodes_from_collision = false
+
+[node name="LShoulder" type="PinJoint3D" parent="Joints" unique_id=704626451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, 2.1, 0)
+node_a = NodePath("../../Segments/Torso")
+node_b = NodePath("../../Segments/LUpperArm")
+exclude_nodes_from_collision = false
+
+[node name="LElbow" type="PinJoint3D" parent="Joints" unique_id=1933914774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 2.1, 0)
+node_a = NodePath("../../Segments/LUpperArm")
+node_b = NodePath("../../Segments/LForearm")
+exclude_nodes_from_collision = false
+
+[node name="LWrist" type="PinJoint3D" parent="Joints" unique_id=1254791521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.65, 2.1, 0)
+node_a = NodePath("../../Segments/LForearm")
+node_b = NodePath("../../Segments/LHand")
+exclude_nodes_from_collision = false
+
+[node name="RShoulder" type="PinJoint3D" parent="Joints" unique_id=1833789135]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 2.1, 0)
+node_a = NodePath("../../Segments/Torso")
+node_b = NodePath("../../Segments/RUpperArm")
+exclude_nodes_from_collision = false
+
+[node name="RElbow" type="PinJoint3D" parent="Joints" unique_id=1421301953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 2.1, 0)
+node_a = NodePath("../../Segments/RUpperArm")
+node_b = NodePath("../../Segments/RForearm")
+exclude_nodes_from_collision = false
+
+[node name="RWrist" type="PinJoint3D" parent="Joints" unique_id=132179710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.65, 2.1, 0)
+node_a = NodePath("../../Segments/RForearm")
+node_b = NodePath("../../Segments/RHand")
+exclude_nodes_from_collision = false
+
+[node name="Lumbar" type="PinJoint3D" parent="Joints" unique_id=598688321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+node_a = NodePath("../../Segments/Torso")
+node_b = NodePath("../../Segments/Hips")
+exclude_nodes_from_collision = false
+
+[node name="LHip" type="PinJoint3D" parent="Joints" unique_id=248407489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.3, 0)
+node_a = NodePath("../../Segments/Hips")
+node_b = NodePath("../../Segments/LThigh")
+exclude_nodes_from_collision = false
+
+[node name="RHip" type="PinJoint3D" parent="Joints" unique_id=166425172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.3, 0)
+node_a = NodePath("../../Segments/Hips")
+node_b = NodePath("../../Segments/RThigh")
+exclude_nodes_from_collision = false
+
+[node name="LKnee" type="PinJoint3D" parent="Joints" unique_id=418807213]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1.3, 0)
+node_a = NodePath("../../Segments/LThigh")
+node_b = NodePath("../../Segments/LShin")
+exclude_nodes_from_collision = false
+
+[node name="RKnee" type="PinJoint3D" parent="Joints" unique_id=1937158850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.3, 0)
+node_a = NodePath("../../Segments/RThigh")
+node_b = NodePath("../../Segments/RShin")
+exclude_nodes_from_collision = false
+
+[node name="LAnkle" type="PinJoint3D" parent="Joints" unique_id=1797185281]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -2.35, 0)
+node_a = NodePath("../../Segments/LShin")
+node_b = NodePath("../../Segments/LFoot")
+exclude_nodes_from_collision = false
+
+[node name="RAnkle" type="PinJoint3D" parent="Joints" unique_id=988962825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2.35, 0)
+node_a = NodePath("../../Segments/RShin")
+node_b = NodePath("../../Segments/RFoot")
+exclude_nodes_from_collision = false
+
+[node name="PinJoint3D" type="PinJoint3D" parent="." unique_id=1234989031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9546204, 0)
+node_a = NodePath("../Segments/Head")
