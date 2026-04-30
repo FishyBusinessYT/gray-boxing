@@ -12,8 +12,6 @@ height = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_owm7s"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_nytcm"]
-
 [sub_resource type="SphereMesh" id="SphereMesh_ejsiy"]
 radius = 0.25
 height = 0.5
@@ -24,24 +22,57 @@ size = Vector3(1, 1, 0.7)
 [sub_resource type="BoxMesh" id="BoxMesh_ushfy"]
 size = Vector3(1.5, 0.5, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_reotu"]
-size = Vector3(1, 0.6, 0.6)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ushfy"]
+albedo_color = Color(0, 0, 1, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_a5ess"]
+[sub_resource type="BoxMesh" id="BoxMesh_reotu"]
+material = SubResource("StandardMaterial3D_ushfy")
 size = Vector3(1, 0.6, 0.6)
 
 [sub_resource type="SphereMesh" id="SphereMesh_owm7s"]
+material = SubResource("StandardMaterial3D_ushfy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owm7s"]
+albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ejsiy"]
+material = SubResource("StandardMaterial3D_owm7s")
 size = Vector3(1, 0.6, 0.6)
 
-[sub_resource type="BoxMesh" id="BoxMesh_wbia7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nytcm"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2mse5"]
+material = SubResource("StandardMaterial3D_nytcm")
+
+[sub_resource type="BoxMesh" id="BoxMesh_a5ess"]
+material = SubResource("StandardMaterial3D_ushfy")
 size = Vector3(0.6, 1, 0.6)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kq7hj"]
+material = SubResource("StandardMaterial3D_ushfy")
+size = Vector3(0.4, 1, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l1rcp"]
+material = SubResource("StandardMaterial3D_ushfy")
+size = Vector3(0.8, 0.5, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_le1tg"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wbia7"]
+material = SubResource("StandardMaterial3D_le1tg")
+size = Vector3(0.6, 1, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2daya"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mvyft"]
+material = SubResource("StandardMaterial3D_2daya")
 size = Vector3(0.4, 1, 0.4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7iw6i"]
+material = SubResource("StandardMaterial3D_2daya")
 size = Vector3(0.8, 0.5, 1.2)
 
 [node name="Character" type="Node3D" unique_id=748320195]
@@ -81,7 +112,7 @@ mesh = SubResource("BoxMesh_owm7s")
 
 [node name="LChestModel" type="MeshInstance3D" parent="Segments/Torso" unique_id=1975350603]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, -0.25000024, 0)
-mesh = SubResource("BoxMesh_nytcm")
+mesh = SubResource("BoxMesh_owm7s")
 
 [node name="RShoulderModel" type="MeshInstance3D" parent="Segments/Torso" unique_id=809959829]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000001, -2.3841858e-07, 0)
@@ -125,7 +156,7 @@ bone_axis = Vector3(1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="LForearmModel" type="MeshInstance3D" parent="Segments/LForearm" unique_id=5170311]
-mesh = SubResource("BoxMesh_a5ess")
+mesh = SubResource("BoxMesh_reotu")
 
 [node name="LHand" type="RigidBody3D" parent="Segments" unique_id=1940076551 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15, 2.0999997, 0)
@@ -143,7 +174,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05, 2.0999997, 0)
 script = ExtResource("1_wa5vi")
 direction_key = "r_shoulder_elbow"
 controller = NodePath("../../PlayerController")
-bone_axis = Vector3(1, 0, 0)
+bone_axis = Vector3(-1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="RUpperArmModel" type="MeshInstance3D" parent="Segments/RUpperArm" unique_id=1354867209]
@@ -154,38 +185,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 2.0999997, 0)
 script = ExtResource("1_wa5vi")
 direction_key = "r_elbow_wrist"
 controller = NodePath("../../PlayerController")
-bone_axis = Vector3(1, 0, 0)
+bone_axis = Vector3(-1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="RForearmModel" type="MeshInstance3D" parent="Segments/RForearm" unique_id=874370783]
-mesh = SubResource("BoxMesh_a5ess")
+mesh = SubResource("BoxMesh_ejsiy")
 
 [node name="RHand" type="RigidBody3D" parent="Segments" unique_id=104607931 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15, 2.0999997, 0)
 script = ExtResource("1_wa5vi")
 direction_key = "r_wrist_hand"
 controller = NodePath("../../PlayerController")
-bone_axis = Vector3(1, 0, 0)
+bone_axis = Vector3(-1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="RHandModel" type="MeshInstance3D" parent="Segments/RHand" unique_id=233596825]
-mesh = SubResource("SphereMesh_owm7s")
+mesh = SubResource("SphereMesh_2mse5")
 
 [node name="LThigh" type="RigidBody3D" parent="Segments" unique_id=1683040861 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.8000002, 0)
 script = ExtResource("1_wa5vi")
 direction_key = "l_hip_knee"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
 metadata/_edit_group_ = true
 
 [node name="LThighModel" type="MeshInstance3D" parent="Segments/LThigh" unique_id=861101371]
-mesh = SubResource("BoxMesh_wbia7")
+mesh = SubResource("BoxMesh_a5ess")
 
 [node name="LShin" type="RigidBody3D" parent="Segments" unique_id=1489066690 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1.8500001, 0)
 script = ExtResource("1_wa5vi")
 direction_key = "l_knee_ankle"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
 metadata/_edit_group_ = true
 
 [node name="LShinModel" type="MeshInstance3D" parent="Segments/LShin" unique_id=268433233]
@@ -200,13 +233,14 @@ bone_axis = Vector3(0, 0, 1)
 metadata/_edit_group_ = true
 
 [node name="LFootModel" type="MeshInstance3D" parent="Segments/LFoot" unique_id=794399182]
-mesh = SubResource("BoxMesh_7iw6i")
+mesh = SubResource("BoxMesh_l1rcp")
 
 [node name="RThigh" type="RigidBody3D" parent="Segments" unique_id=207028315 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.8000002, 0)
 script = ExtResource("1_wa5vi")
 direction_key = "r_hip_knee"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
 metadata/_edit_group_ = true
 
 [node name="RThighModel" type="MeshInstance3D" parent="Segments/RThigh" unique_id=1060998354]
@@ -217,10 +251,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.8500001, 0)
 script = ExtResource("1_wa5vi")
 direction_key = "r_knee_ankle"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
 metadata/_edit_group_ = true
 
 [node name="RShinModel" type="MeshInstance3D" parent="Segments/RShin" unique_id=2005011111]
-mesh = SubResource("BoxMesh_kq7hj")
+mesh = SubResource("BoxMesh_mvyft")
 
 [node name="RFoot" type="RigidBody3D" parent="Segments" unique_id=1392305266 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2.65, 0.2)
