@@ -55,7 +55,6 @@ script = ExtResource("1_glpr6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8999999, 0)
 collision_layer = 0
 collision_mask = 0
-gravity_scale = 0.0
 script = ExtResource("1_wa5vi")
 direction_key = "neck_head"
 controller = NodePath("../../PlayerController")
@@ -70,7 +69,6 @@ mesh = SubResource("CylinderMesh_owm7s")
 
 [node name="Torso" type="RigidBody3D" parent="Segments" unique_id=437619094 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
-gravity_scale = 0.0
 script = ExtResource("1_wa5vi")
 direction_key = "l_shoulder_shoulder"
 controller = NodePath("../../PlayerController")
@@ -110,7 +108,9 @@ mesh = SubResource("BoxMesh_ushfy")
 [node name="RUpperArm" type="RigidBody3D" parent="Segments" unique_id=1124756544 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05, 2.0999997, 0)
 script = ExtResource("1_wa5vi")
+direction_key = "r_shoulder_elbow"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="RUpperArmModel" type="MeshInstance3D" parent="Segments/RUpperArm" unique_id=1354867209]
@@ -119,7 +119,9 @@ mesh = SubResource("BoxMesh_ejsiy")
 [node name="LUpperArm" type="RigidBody3D" parent="Segments" unique_id=1861165917 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05, 2.0999997, 0)
 script = ExtResource("1_wa5vi")
+direction_key = "l_shoulder_elbow"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="LUpperArmModel" type="MeshInstance3D" parent="Segments/LUpperArm" unique_id=1440757376]
@@ -128,7 +130,9 @@ mesh = SubResource("BoxMesh_reotu")
 [node name="RForearm" type="RigidBody3D" parent="Segments" unique_id=1193457002 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 2.0999997, 0)
 script = ExtResource("1_wa5vi")
+direction_key = "r_elbow_wrist"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="RForearmModel" type="MeshInstance3D" parent="Segments/RForearm" unique_id=874370783]
@@ -137,7 +141,9 @@ mesh = SubResource("BoxMesh_a5ess")
 [node name="LForearm" type="RigidBody3D" parent="Segments" unique_id=1996565810 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1, 2.0999997, 0)
 script = ExtResource("1_wa5vi")
+direction_key = "l_elbow_wrist"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="LForearmModel" type="MeshInstance3D" parent="Segments/LForearm" unique_id=5170311]
@@ -146,7 +152,9 @@ mesh = SubResource("BoxMesh_a5ess")
 [node name="RHand" type="RigidBody3D" parent="Segments" unique_id=104607931 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15, 2.0999997, 0)
 script = ExtResource("1_wa5vi")
+direction_key = "r_wrist_hand"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="RHandModel" type="MeshInstance3D" parent="Segments/RHand" unique_id=233596825]
@@ -155,7 +163,9 @@ mesh = SubResource("SphereMesh_owm7s")
 [node name="LHand" type="RigidBody3D" parent="Segments" unique_id=1940076551 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15, 2.0999997, 0)
 script = ExtResource("1_wa5vi")
+direction_key = "l_wrist_hand"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="LHandModel" type="MeshInstance3D" parent="Segments/LHand" unique_id=1569172138]
@@ -164,6 +174,7 @@ mesh = SubResource("SphereMesh_owm7s")
 [node name="RThigh" type="RigidBody3D" parent="Segments" unique_id=207028315 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.8000002, 0)
 script = ExtResource("1_wa5vi")
+direction_key = "r_hip_knee"
 controller = NodePath("../../PlayerController")
 metadata/_edit_group_ = true
 
@@ -173,6 +184,7 @@ mesh = SubResource("BoxMesh_wbia7")
 [node name="LThigh" type="RigidBody3D" parent="Segments" unique_id=1683040861 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.8000002, 0)
 script = ExtResource("1_wa5vi")
+direction_key = "l_hip_knee"
 controller = NodePath("../../PlayerController")
 metadata/_edit_group_ = true
 
@@ -182,6 +194,7 @@ mesh = SubResource("BoxMesh_wbia7")
 [node name="RShin" type="RigidBody3D" parent="Segments" unique_id=607904848 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.8500001, 0)
 script = ExtResource("1_wa5vi")
+direction_key = "r_knee_ankle"
 controller = NodePath("../../PlayerController")
 metadata/_edit_group_ = true
 
@@ -191,6 +204,7 @@ mesh = SubResource("BoxMesh_kq7hj")
 [node name="LShin" type="RigidBody3D" parent="Segments" unique_id=1489066690 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1.8500001, 0)
 script = ExtResource("1_wa5vi")
+direction_key = "l_knee_ankle"
 controller = NodePath("../../PlayerController")
 metadata/_edit_group_ = true
 
@@ -200,7 +214,9 @@ mesh = SubResource("BoxMesh_kq7hj")
 [node name="RFoot" type="RigidBody3D" parent="Segments" unique_id=1392305266 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2.65, 0.2)
 script = ExtResource("1_wa5vi")
+direction_key = "r_ankle_toe"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, 0, 1)
 metadata/_edit_group_ = true
 
 [node name="RFootModel" type="MeshInstance3D" parent="Segments/RFoot" unique_id=1381319950]
@@ -209,7 +225,9 @@ mesh = SubResource("BoxMesh_7iw6i")
 [node name="LFoot" type="RigidBody3D" parent="Segments" unique_id=502406071 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -2.65, 0.2)
 script = ExtResource("1_wa5vi")
+direction_key = "l_ankle_toe"
 controller = NodePath("../../PlayerController")
+bone_axis = Vector3(0, 0, 1)
 metadata/_edit_group_ = true
 
 [node name="LFootModel" type="MeshInstance3D" parent="Segments/LFoot" unique_id=794399182]
