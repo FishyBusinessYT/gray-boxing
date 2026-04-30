@@ -1,0 +1,137 @@
+<mujoco model="mi_personaje_completo">
+  <default>
+    <default class="wall">
+      <geom type="box" rgba="0.8 0.8 0.8 0.1" />
+    </default>
+  </default>
+
+  <include file="./suite/common/skybox.xml"/>
+  <include file="./suite/common/visual.xml"/>
+  <include file="./suite/common/materials.xml"/>
+  <compiler meshdir="../assets/exports" angle="degree"/>
+
+  <default>
+    <!-- Configuraciones físicas base para estabilidad -->
+    <joint damping="2" armature="0.02" limited="true"/>
+    <geom condim="3" friction="0.8 0.1 0.1"/>
+  </default>
+
+  <worldbody>
+    <geom name="floor" pos="0 0 0" size="0 0 .05" type="plane" material="grid"/>
+    <geom class="wall" name="wall_north" size="6 0.1 5" pos="0 6 1" />
+    <geom class="wall" name="wall_south" size="6 0.1 5" pos="0 -6 1" />
+    <geom class="wall" name="wall_east"  size="0.1 6 5" pos="6 0 1" />
+    <geom class="wall" name="wall_west"  size="0.1 6 5" pos="-6 0 1" />
+
+    <!-- TORSO ORIGINAL -->
+    <body name="torso" pos="0 0 3.7">
+      <freejoint name="root"/>
+      <geom type="box" size="0.5 0.35 0.5" name="abdominal"/>
+      <geom type="box" size="0.5 0.5 0.5" name="chest-l" pos="0.55 0 1.05"/>
+      <geom type="box" size="0.5 0.5 0.5" name="chest-r" pos="-0.55 0 1.05"/>
+      <geom type="sphere" size="0.25 0.25 0.25" name="shoulder-l" pos="1.3 0 1.3"/>
+      <geom type="sphere" size="0.25 0.25 0.25" name="shoulder-r" pos="-1.3 0 1.3"/>
+
+      <!-- CABEZA -->
+      <body name="head" pos="0 0 2.1">
+        <joint name="neck" type="ball" range="0 60"/>
+        <geom type="sphere" size="0.5 0.5 0.5" name="head" pos="0 0 0.2"/>
+      </body>
+
+      <!-- BRAZO IZQUIERDO -->
+      <body name="arm-l" pos="2.05 0 1.3">
+        <joint name="shoulder-joint-l" type="ball" range="0 90"/>
+        <geom type="box" size="0.5 0.3 0.3"/>
+        
+        <body name="forearm-l" pos="1.05 0 0">
+          <joint name="elbow-joint-l" type="hinge" axis="0 1 0" range="0 145"/>
+          <geom type="box" size="0.5 0.3 0.3"/>
+          
+          <body name="hand-l" pos="1.05 0 0">
+            <joint name="wrist-joint-l" type="ball" range="0 45"/>
+            <geom type="sphere" size="0.5 0.5 0.5"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- BRAZO DERECHO -->
+      <body name="arm-r" pos="-2.05 0 1.3">
+        <joint name="shoulder-joint-r" type="ball" range="0 90"/>
+        <geom type="box" size="0.5 0.3 0.3"/>
+
+        <body name="forearm-r" pos="-1.05 0 0">
+          <joint name="elbow-joint-r" type="hinge" axis="0 1 0" range="0 145"/>
+          <geom type="box" size="0.5 0.3 0.3"/>
+
+          <body name="hand-r" pos="-1.05 0 0">
+            <joint name="wrist-joint-r" type="ball" range="0 45"/>
+            <geom type="sphere" size="0.5 0.5 0.5"/>
+          </body>
+        </body>
+      </body>
+
+      <body name="hip" pos="0 0 -0.8">
+        <joint name="pelvis" type="ball" range="0 70"/>
+        <geom type="box" size="0.75 0.5 0.25"/>
+
+        <body name="leg-l" pos="0.5 0 -0.8">
+          <joint name="leg-joint-l" type="ball" range="0 70"/>
+          <geom type="box" size="0.3 0.3 0.5"/>
+
+          <body name="calf-l" pos="0 0 -1.05">
+            <joint name="knee-joint-l" type="hinge" axis="0 1 0" range="0 140"/>
+            <geom type="box" size="0.2 0.2 0.5"/>
+
+            <body name="foot-l" pos="0 -0.2 -0.8">
+              <joint name="ankle-joint-l" type="hinge" axis="0 1 0" range="-20 45"/>
+              <geom type="box" size="0.4 0.6 0.25"/>
+            </body>
+          </body>
+        </body>
+
+        <body name="leg-r" pos="-0.5 0 -0.8">
+          <joint name="leg-joint-r" type="ball" range="0 70"/>
+          <geom type="box" size="0.3 0.3 0.5"/>
+          
+          <body name="calf-r" pos="0 0 -1.05">
+            <joint name="knee-joint-r" type="hinge" axis="0 1 0" range="0 140"/>
+            <geom type="box" size="0.2 0.2 0.5"/>
+            
+            <body name="foot-r" pos="0 -0.2 -0.8">
+              <joint name="ankle-joint-r" type="hinge" axis="0 1 0" range="-20 45"/>
+              <geom type="box" size="0.4 0.6 0.25"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <!-- Head and Neck -->
+    <position name="act_neck" joint="neck" kp="20" ctrlrange="-60 60"/>
+
+    <!-- Left Arm -->
+    <position name="act_shoulder_l" joint="shoulder-joint-l" ctrlrange="-90 90"/>
+    <position name="act_elbow_l" joint="elbow-joint-l" ctrlrange="0 145"/>
+    <position name="act_wrist_l" joint="wrist-joint-l" kp="10" ctrlrange="-45 45"/>
+
+    <!-- Right Arm -->
+    <position name="act_shoulder_r" joint="shoulder-joint-r" ctrlrange="-90 90"/>
+    <position name="act_elbow_r" joint="elbow-joint-r" ctrlrange="0 145"/>
+    <position name="act_wrist_r" joint="wrist-joint-r" kp="10" ctrlrange="-45 45"/>
+
+    <!-- Pelvis/Hip -->
+    <position name="act_pelvis" joint="pelvis" kp="150" ctrlrange="-70 70"/>
+
+    <!-- Left Leg -->
+    <position name="act_hip_l" joint="leg-joint-l" kp="200" ctrlrange="-70 70"/>
+    <position name="act_knee_l" joint="knee-joint-l" kp="150" ctrlrange="0 140"/>
+    <position name="act_ankle_l" joint="ankle-joint-l" kp="100" ctrlrange="-20 45"/>
+
+    <!-- Right Leg -->
+    <position name="act_hip_r" joint="leg-joint-r" kp="200" ctrlrange="-70 70"/>
+    <position name="act_knee_r" joint="knee-joint-r" kp="150" ctrlrange="0 140"/>
+    <position name="act_ankle_r" joint="ankle-joint-r" kp="100" ctrlrange="-20 45"/>
+  </actuator>
+</mujoco>
