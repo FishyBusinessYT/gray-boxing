@@ -8,6 +8,7 @@ class CaptureController:
         self.fps = self.capture.get(cv2.CAP_PROP_FPS)
         self.current_frame = 0
 
+        # TODO REMOVE THIS WINDOW LATER
         cv2.namedWindow("window")
         cv2.moveWindow("window", 550, 200)
 
@@ -18,7 +19,6 @@ class CaptureController:
         success, img = self.capture.read()
 
         # We flip the image to make the preview look natural
-        # Could need to remove it later
         img = cv2.flip(img, 1)
         mp_image = mp.Image(
             image_format=mp.ImageFormat.SRGB,
