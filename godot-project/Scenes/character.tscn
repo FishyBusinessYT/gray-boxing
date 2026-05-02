@@ -103,7 +103,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
 script = ExtResource("1_wa5vi")
 direction_key = "l_shoulder_shoulder"
 controller = NodePath("../../PlayerController")
-bone_axis = Vector3(1, 0, 0)
+bone_axis = Vector3(-1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="RChestModel" type="MeshInstance3D" parent="Segments/Torso" unique_id=881498682]
@@ -130,7 +130,7 @@ mesh = SubResource("BoxMesh_2mse5")
 script = ExtResource("1_wa5vi")
 direction_key = "l_hip_hip"
 controller = NodePath("../../PlayerController")
-bone_axis = Vector3(1, 0, 0)
+bone_axis = Vector3(-1, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="HipsModel" type="MeshInstance3D" parent="Segments/Hips" unique_id=173318187]
