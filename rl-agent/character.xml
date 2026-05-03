@@ -34,14 +34,12 @@
 
       <!-- CABEZA -->
       <body name="head" pos="0 0 2.1">
-        <!-- El pivote baja 0.3 en Z para conectar con la base de la esfera desplazada -->
         <joint name="neck" type="ball" pos="0 0 -0.3" range="0 60"/>
         <geom type="sphere" size="0.5 0.5 0.5" name="head" pos="0 0 0.2"/>
       </body>
 
       <!-- BRAZO IZQUIERDO -->
       <body name="arm-l" pos="2.05 0 1.3">
-        <!-- El pivote va al borde interno (izquierdo respecto al brazo) -->
         <joint name="shoulder-joint-l" type="ball" pos="-0.5 0 0" range="0 90"/>
         <geom type="box" size="0.5 0.3 0.3"/>
 
@@ -58,7 +56,6 @@
 
       <!-- BRAZO DERECHO -->
       <body name="arm-r" pos="-2.05 0 1.3">
-        <!-- El pivote va al borde interno (derecho respecto al brazo) -->
         <joint name="shoulder-joint-r" type="ball" pos="0.5 0 0" range="0 90"/>
         <geom type="box" size="0.5 0.3 0.3"/>
 
@@ -75,7 +72,6 @@
 
       <!-- CADERA -->
       <body name="hip" pos="0 0 -0.8">
-        <!-- Pivote en la parte superior del box -->
         <joint name="pelvis" type="ball" pos="0 0 0.25" range="0 70"/>
         <geom type="box" size="0.75 0.5 0.25"/>
 
@@ -89,7 +85,6 @@
             <geom type="box" size="0.2 0.2 0.5"/>
 
             <body name="foot-l" pos="0 -0.2 -0.8">
-              <!-- Compensamos el desplazamiento en Y y ponemos el pivote en el borde superior Z -->
               <joint name="ankle-joint-l" type="hinge" pos="0 0.2 0.25" axis="0 1 0" range="-20 45"/>
               <geom type="box" size="0.4 0.6 0.25"/>
             </body>
@@ -116,30 +111,30 @@
   </worldbody>
 
   <actuator>
-    <!-- Head and Neck -->
-    <position name="act_neck" joint="neck" ctrlrange="-60 60" kp="200"/>
+    <!-- Head and Neck — cede ante impactos, knockback convincente -->
+    <position name="act_neck"       joint="neck"           ctrlrange="-60 60"   kp="100"/>
 
-    <!-- Left Arm -->
+    <!-- Left Arm — gradiente proximal→distal: hombro medio, codo rápido, muñeca muy flexible -->
     <position name="act_shoulder_l" joint="shoulder-joint-l" ctrlrange="-90 90" kp="200"/>
-    <position name="act_elbow_l" joint="elbow-joint-l" ctrlrange="0 145" kp="200"/>
-    <position name="act_wrist_l" joint="wrist-joint-l" ctrlrange="-45 45" kp="200"/>
+    <position name="act_elbow_l"    joint="elbow-joint-l"    ctrlrange="0 145"  kp="240"/>
+    <position name="act_wrist_l"    joint="wrist-joint-l"    ctrlrange="-45 45" kp="60"/>
 
     <!-- Right Arm -->
     <position name="act_shoulder_r" joint="shoulder-joint-r" ctrlrange="-90 90" kp="200"/>
-    <position name="act_elbow_r" joint="elbow-joint-r" ctrlrange="0 145" kp="200"/>
-    <position name="act_wrist_r" joint="wrist-joint-r" ctrlrange="-45 45" kp="200"/>
+    <position name="act_elbow_r"    joint="elbow-joint-r"    ctrlrange="0 145"  kp="240"/>
+    <position name="act_wrist_r"    joint="wrist-joint-r"    ctrlrange="-45 45" kp="60"/>
 
-    <!-- Pelvis/Hip -->
-    <position name="act_pelvis" joint="pelvis" ctrlrange="-70 70" kp="200"/>
+    <!-- Pelvis/Hip — fuente de potencia del golpe, debe ser firme -->
+    <position name="act_pelvis"     joint="pelvis"           ctrlrange="-70 70"  kp="425"/>
 
-    <!-- Left Leg -->
-    <position name="act_hip_l" joint="leg-joint-l" ctrlrange="-70 70" kp="400"/>
-    <position name="act_knee_l" joint="knee-joint-l" ctrlrange="0 140" kp="400"/>
-    <position name="act_ankle_l" joint="ankle-joint-l" ctrlrange="-20 45" kp="400"/>
+    <!-- Left Leg — base estable; rodillas altas para soportar peso -->
+    <position name="act_hip_l"      joint="leg-joint-l"      ctrlrange="-70 70"  kp="500"/>
+    <position name="act_knee_l"     joint="knee-joint-l"     ctrlrange="0 140"   kp="600"/>
+    <position name="act_ankle_l"    joint="ankle-joint-l"    ctrlrange="-20 45"  kp="375"/>
 
     <!-- Right Leg -->
-    <position name="act_hip_r" joint="leg-joint-r" ctrlrange="-70 70" kp="400"/>
-    <position name="act_knee_r" joint="knee-joint-r" ctrlrange="0 140" kp="400"/>
-    <position name="act_ankle_r" joint="ankle-joint-r" ctrlrange="-20 45" kp="400"/>
+    <position name="act_hip_r"      joint="leg-joint-r"      ctrlrange="-70 70"  kp="500"/>
+    <position name="act_knee_r"     joint="knee-joint-r"     ctrlrange="0 140"   kp="600"/>
+    <position name="act_ankle_r"    joint="ankle-joint-r"    ctrlrange="-20 45"  kp="375"/>
   </actuator>
 </mujoco>
