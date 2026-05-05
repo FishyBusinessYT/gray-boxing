@@ -20,7 +20,7 @@ while True:
         landmarks = dtr.get_landmarks(mp_image, timestamp).pose_landmarks[0]
         node_directions = calculate_directions(landmarks)
 
-        data = struct.pack('57f', *node_directions)
+        data = struct.pack('51f', *node_directions)
 
         failed_frames = 0
 

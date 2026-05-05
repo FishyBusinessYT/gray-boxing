@@ -97,10 +97,8 @@ def calculate_directions(landmarks):
         *get_direction(nodes['l_hi'], nodes['r_hi']),  # l_hip_hip
         *get_direction(nodes['l_hi'], nodes['l_kn']),  # l_hip_knee
         *get_direction(nodes['l_kn'], nodes['l_an']),  # l_knee_ankle
-        *get_direction(nodes['l_an'], nodes['l_he']),  # l_ankle_heel
-        *get_direction(nodes['l_an'], nodes['l_to']),  # l_ankle_toe
+        *get_direction(nodes['l_he'], nodes['l_to']),  # l_heel_toe
         *get_direction(nodes['r_hi'], nodes['r_kn']),  # r_hip_knee
         *get_direction(nodes['r_kn'], nodes['r_an']),  # r_knee_ankle
-        *get_direction(nodes['r_an'], nodes['r_he']),  # r_ankle_heel
-        *get_direction(nodes['r_an'], nodes['r_to']),  # r_ankle_toe
+        *get_direction(nodes['r_he'], nodes['r_to']),  # r_heel_toe
         ]
