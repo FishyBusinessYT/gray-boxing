@@ -1,4 +1,3 @@
-import cv2
 import struct
 import socket
 
@@ -33,9 +32,6 @@ while True:
             print(f'Lost sight of player (f#{failed_frames}).')
 
     server_socket.sendto(data, ('127.0.0.1', 52346))
-
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
 
 server_socket.close()
 dtr.cleanup()
