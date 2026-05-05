@@ -1,6 +1,7 @@
 import numpy as np
 from gymnasium.envs.mujoco import MujocoEnv
 from gymnasium.spaces import Box
+from gymnasium import utils
 import mujoco
 from pathlib import Path
 
@@ -12,7 +13,12 @@ def mass_center(model, data):
     xpos = data.xipos
     return (np.sum(mass * xpos, axis=0) / np.sum(mass))[0:2].copy()
 
-class HumanoidBaseEnv(MujocoEnv):
+class BaseHumanoidEnv(MujocoEnv):
+    metadata = {
+        "render_modes": ["human", "rgb_array"],
+        "render_fps": 100
+    }
+
     def __init__(self,
             frame_skip=5,  # 2ms * = 10ms. 100 actions per second
             exclude_torso_horizontal_position=True,
@@ -22,11 +28,11 @@ class HumanoidBaseEnv(MujocoEnv):
         ):
         super().__init__(str(ROOT_DIR / "character.xml"), frame_skip, None, **kwargs) # None observation space
 
+        self.observation_space = Box(low=-np.inf, high=np.inf, shape=(444,), dtype=np.float32)
+
         self.exclude_torso_horizontal_position = exclude_torso_horizontal_position
         self.healthy_reward = healthy_reward
         self.reset_noise_scale = reset_noise_scale
-
-        self.observation_space = Box(low=-np.inf, high=np.inf, shape=(444,), dtype=np.float32)
 
     # Separation used for future environments where the obs will also contain the other agent's obs
     def _get_obs(self):
@@ -53,17 +59,18 @@ class HumanoidBaseEnv(MujocoEnv):
         raise Exception("Not implemented yet.")
 
     def step(self, action):
-        ctrl_cost = self.control_cost(action)
-        reward = self.healthy_reward - ctrl_cost
+        self.do_simulation(action, self.frame_skip)
 
         observation = self._get_obs()
+        ctrl_cost = self.control_cost(action)
+        reward = self.healthy_reward - ctrl_cost
+        terminated = self.has_terminated()
         info = {
             "ctrl_cost": ctrl_cost,
         }
-        terminated = self.has_terminated()
 
-        if self.render_mode == "human":
-            self.render()
+        #if self.render_mode == "human":
+        #    self.render()
         return observation, reward, terminated, False, info # obs, reward, terminated, truncated, info
 
     def reset_model(self):

@@ -3,7 +3,6 @@ from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import EvalCallback, CheckpointCallback
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv, VecNormalize
-from .standing_humanoid_env import StandingHumanoidEnv
 from gymnasium.envs.registration import register
 
 register(
@@ -14,7 +13,7 @@ register(
 
 if __name__ == "__main__":
     # ===== 1. ENTRENAMIENTO =====
-    env = make_vec_env("StandingHumanoid", n_envs=16, vec_env_cls=SubprocVecEnv)
+    env = make_vec_env("StandingHumanoid", n_envs=12, vec_env_cls=SubprocVecEnv)
 
     # Normalización
     env = VecNormalize(env, norm_obs=True, norm_reward=True, clip_obs=10.0)
@@ -29,13 +28,12 @@ if __name__ == "__main__":
     # MUY IMPORTANTE: compartir estadísticas
     eval_env.obs_rms = env.obs_rms
 
-
     # ===== 3. CALLBACKS =====
     eval_callback = EvalCallback(
         eval_env,
         best_model_save_path="./logs/best_model",
         log_path="./logs/results",
-        eval_freq=100_000 // env.num_envs,
+        eval_freq=10_000 // env.num_envs,
         render=True,
         n_eval_episodes=8,
         deterministic=True
