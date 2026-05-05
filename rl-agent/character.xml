@@ -12,7 +12,7 @@
 
     <default>
         <!-- Configuraciones físicas base para estabilidad -->
-        <joint damping="2" armature="0.02" limited="true"/>
+        <joint damping="20" armature="1.0" limited="true"/>
         <geom condim="3" friction="0.8 0.1 0.1"/>
     </default>
 

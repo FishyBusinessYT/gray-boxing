@@ -7,7 +7,7 @@ from gymnasium.envs.registration import register
 
 register(
     id="StandingHumanoid",
-    entry_point="experiments.walking.standing_humanoid_env:StandingHumanoidEnv",
+    entry_point="experiments.walking.openai-humanoid:HumanoidEnv",
     max_episode_steps=1000,
 )
 
@@ -33,7 +33,7 @@ if __name__ == "__main__":
         eval_env,
         best_model_save_path="./logs/best_model",
         log_path="./logs/results",
-        eval_freq=10_000 // env.num_envs,
+        eval_freq=1_000_000 // env.num_envs,
         render=True,
         n_eval_episodes=8,
         deterministic=True
