@@ -127,47 +127,47 @@
     </worldbody>
 
     <actuator>
-        <!-- Head / Neck — 2 ejes; TODO: Actualizar los rangos -->
+        <!-- Head / Neck -->
         <position name="act_neck_x" joint="neck_x" ctrlrange="-60 60" kp="100"/>
         <position name="act_neck_y" joint="neck_y" ctrlrange="-60 60" kp="100"/>
 
-        <!-- Left Shoulder — 3 ejes -->
-        <position name="act_shoulder_l_x" joint="shoulder_l_x" ctrlrange="-90 90" kp="200"/>
+        <!-- Left Shoulder -->
+        <position name="act_shoulder_l_x" joint="shoulder_l_x" ctrlrange="-180 0" kp="200"/>
         <position name="act_shoulder_l_y" joint="shoulder_l_y" ctrlrange="-90 90" kp="200"/>
         <position name="act_shoulder_l_z" joint="shoulder_l_z" ctrlrange="-90 90" kp="200"/>
 
-        <!-- Left Elbow — sin cambios -->
+        <!-- Left Elbow -->
         <position name="act_elbow_l" joint="elbow-joint-l" ctrlrange="0 145" kp="240"/>
 
-        <!-- Right Shoulder — 3 ejes -->
-        <position name="act_shoulder_r_x" joint="shoulder_r_x" ctrlrange="-90 90" kp="200"/>
+        <!-- Right Shoulder -->
+        <position name="act_shoulder_r_x" joint="shoulder_r_x" ctrlrange="-180 0" kp="200"/>
         <position name="act_shoulder_r_y" joint="shoulder_r_y" ctrlrange="-90 90" kp="200"/>
         <position name="act_shoulder_r_z" joint="shoulder_r_z" ctrlrange="-90 90" kp="200"/>
 
-        <!-- Right Elbow — sin cambios -->
-        <position name="act_elbow_r" joint="elbow-joint-r" ctrlrange="0 145" kp="240"/>
+        <!-- Right Elbow -->
+        <position name="act_elbow_r" joint="elbow-joint-r" ctrlrange="-145 0" kp="240"/>
 
-        <!-- Pelvis — 3 ejes -->
-        <position name="act_pelvis_x" joint="pelvis_x" ctrlrange="-70 70" kp="425"/>
-        <position name="act_pelvis_y" joint="pelvis_y" ctrlrange="-70 70" kp="425"/>
-        <position name="act_pelvis_z" joint="pelvis_z" ctrlrange="-70 70" kp="425"/>
+        <!-- Pelvis -->
+        <position name="act_pelvis_x" joint="pelvis_x" ctrlrange="-30 70" kp="425"/>
+        <position name="act_pelvis_y" joint="pelvis_y" ctrlrange="-35 35" kp="425"/>
+        <position name="act_pelvis_z" joint="pelvis_z" ctrlrange="-50 50" kp="425"/>
 
-        <!-- Left Hip — 3 ejes -->
+        <!-- Left Hip -->
         <position name="act_hip_l_x" joint="hip_l_x" ctrlrange="-70 70" kp="500"/>
         <position name="act_hip_l_y" joint="hip_l_y" ctrlrange="-70 70" kp="500"/>
         <position name="act_hip_l_z" joint="hip_l_z" ctrlrange="-70 70" kp="500"/>
 
-        <!-- Left Knee / Ankle — sin cambios -->
+        <!-- Left Knee / Ankle -->
         <position name="act_knee_l" joint="knee-joint-l" ctrlrange="0 140" kp="600"/>
-        <position name="act_ankle_l_x" joint="ankle-l-x" ctrlrange="-20 45" kp="375"/>
-        <position name="act_ankle_l_y" joint="ankle-l-y" ctrlrange="-30 30" kp="375"/>
+        <position name="act_ankle_l_x" joint="ankle-l-x" ctrlrange="-30 30" kp="375"/>
+        <position name="act_ankle_l_y" joint="ankle-l-y" ctrlrange="-20 45" kp="375"/>
 
-        <!-- Right Hip — 3 ejes -->
+        <!-- Right Hip -->
         <position name="act_hip_r_x" joint="hip_r_x" ctrlrange="-70 70" kp="500"/>
         <position name="act_hip_r_y" joint="hip_r_y" ctrlrange="-70 70" kp="500"/>
         <position name="act_hip_r_z" joint="hip_r_z" ctrlrange="-70 70" kp="500"/>
 
-        <!-- Right Knee / Ankle — sin cambios -->
+        <!-- Right Knee / Ankle -->
         <position name="act_knee_r" joint="knee-joint-r" ctrlrange="0 140" kp="600"/>
         <position name="act_ankle_r_x" joint="ankle-r-x" ctrlrange="-30 30" kp="375"/>
         <position name="act_ankle_r_y" joint="ankle-r-y" ctrlrange="-20 45" kp="375"/>
