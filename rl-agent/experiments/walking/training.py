@@ -7,7 +7,7 @@ from gymnasium.envs.registration import register
 
 register(
     id="StandingHumanoid",
-    entry_point="experiments.walking.openai-humanoid:HumanoidEnv",
+    entry_point="experiments.walking.standing_humanoid_env:StandingHumanoidEnv",
     max_episode_steps=1000,
 )
 

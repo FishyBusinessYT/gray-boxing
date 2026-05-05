@@ -2,16 +2,30 @@ import numpy as np
 from src.base_humanoid_env import BaseHumanoidEnv
 
 class StandingHumanoidEnv(BaseHumanoidEnv):
-    def __init__(self, *args, healthy_z_height=(3.3, 3.9), control_cost_weight=0.1,  **kwargs):
+    def __init__(self, *args, healthy_z_height=(1.0, 5.0), control_cost_weight=0.1,  **kwargs):
         super().__init__(*args, **kwargs)
         self.healthy_z_height = healthy_z_height
         self.control_cost_weight = control_cost_weight
 
-    def _get_obs(self):
-        return self._get_self_obs() # Just return self's stuff
-
     def has_terminated(self):
-        return not (self.healthy_z_height[0]  < self.data.qpos[2] < self.healthy_z_height[1])
+        # Using relaxed Z range for stability
+        z_pos = self.data.qpos[2]
+        return not (self.healthy_z_height[0] < z_pos < self.healthy_z_height[1])
 
-    def control_cost(self, action):
-        return self.control_cost_weight * np.sum(np.square(self.data.ctrl))
+    def calculate_reward(self, action):
+        # 1. Healthy reward (positive)
+        is_healthy = not self.has_terminated()
+        reward = self.healthy_reward if is_healthy else 0.0
+
+        # 2. Control cost (negative, based on normalized actions [-1, 1])
+        ctrl_cost = self.control_cost_weight * np.sum(np.square(action))
+
+        reward -= ctrl_cost
+
+        info = {
+            "reward_survive": self.healthy_reward if is_healthy else 0.0,
+            "reward_ctrl": -ctrl_cost,
+            "z_height": self.data.qpos[2]
+        }
+
+        return reward, info
