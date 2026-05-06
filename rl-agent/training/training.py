@@ -4,7 +4,11 @@ from stable_baselines3.common.callbacks import EvalCallback, CheckpointCallback
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv, VecNormalize
 from stable_baselines3.common.vec_env import sync_envs_normalization
+from pathlib import Path
 
+CURRENT_PATH = Path(__file__).parent.resolve()
+
+# TODO: If I'll use SB3, I'll need to change the storage checkpoints so that they also store the .pkl
 if __name__ == "__main__": # Needed for multi-process running
     env = make_vec_env("Humanoid-v5", n_envs=12, vec_env_cls=SubprocVecEnv) # Parallel envs
     env = VecNormalize(env, norm_obs=True, norm_reward=True) # Normalize observations and rewards
@@ -21,7 +25,7 @@ if __name__ == "__main__": # Needed for multi-process running
     # Callbacks
     eval_callback = EvalCallback(
         eval_env,
-        best_model_save_path="./training_results/best_model",
+        best_model_save_path=str(CURRENT_PATH / "training_results"),
         eval_freq=100_000 // env.num_envs,
         render=True,
         n_eval_episodes=8,
@@ -29,7 +33,7 @@ if __name__ == "__main__": # Needed for multi-process running
     )
     checkpoint_callback = CheckpointCallback(
         save_freq=1_000_000 // env.num_envs,
-        save_path="./training_results/checkpoints",
+        save_path=str(CURRENT_PATH / "training_results/checkpoints"),
         name_prefix="ppo_humanoid"
     )
 

@@ -5,9 +5,9 @@
         </default>
     </default>
 
-    <include file="./mujoco-commons/skybox.xml"/>
-    <include file="./mujoco-commons/visual.xml"/>
-    <include file="./mujoco-commons/materials.xml"/>
+    <include file="./commons/skybox.xml"/>
+    <include file="./commons/visual.xml"/>
+    <include file="./commons/materials.xml"/>
     <compiler meshdir="../assets/exports" angle="degree"/>
 
     <default>
