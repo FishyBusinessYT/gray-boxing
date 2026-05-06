@@ -23,6 +23,9 @@ func _physics_process(_delta: float) -> void:
     var target_dir: Vector3 = controller.directions[direction_key]
     var correction: Quaternion = Quaternion(current_dir, target_dir)
 
+    DebugDraw3D.draw_arrow(global_position, global_position+target_dir, Color.RED, 0.01)
+    DebugDraw3D.draw_arrow(global_position, global_position+bone_axis, Color.BLUE, 0.01)
+
     # Convert quaternion to axis-angle, then to angular velocity
     var axis: Vector3 = correction.get_axis()
     var angle: float = correction.get_angle()
