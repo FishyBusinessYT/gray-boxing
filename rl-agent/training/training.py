@@ -21,8 +21,7 @@ if __name__ == "__main__": # Needed for multi-process running
     # Callbacks
     eval_callback = EvalCallback(
         eval_env,
-        best_model_save_path="./logs/best_model",
-        log_path="./logs/results",
+        best_model_save_path="./training_results/best_model",
         eval_freq=100_000 // env.num_envs,
         render=True,
         n_eval_episodes=8,
@@ -30,7 +29,7 @@ if __name__ == "__main__": # Needed for multi-process running
     )
     checkpoint_callback = CheckpointCallback(
         save_freq=1_000_000 // env.num_envs,
-        save_path="./checkpoints",
+        save_path="./training_results/checkpoints",
         name_prefix="ppo_humanoid"
     )
 

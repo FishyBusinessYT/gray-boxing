@@ -1,0 +1,157 @@
+<mujoco model="mi_personaje_completo">
+    <default>
+        <default class="wall">
+            <geom type="box" rgba="0.8 0.8 0.8 0.1"/>
+        </default>
+    </default>
+
+    <include file="./mujoco-commons/skybox.xml"/>
+    <include file="./mujoco-commons/visual.xml"/>
+    <include file="./mujoco-commons/materials.xml"/>
+    <compiler meshdir="../assets/exports" angle="degree"/>
+
+    <default>
+        <joint damping="20" armature="1.0" limited="true"/>
+        <geom condim="3" friction="0.8 0.1 0.1"/>
+    </default>
+
+    <worldbody>
+        <geom name="floor" pos="0 0 0" size="0 0 .05" type="plane" material="grid"/>
+        <geom class="wall" name="wall_north" size="6 0.1 5" pos="0 6 1"/>
+        <geom class="wall" name="wall_south" size="6 0.1 5" pos="0 -6 1"/>
+        <geom class="wall" name="wall_east"  size="0.1 6 5" pos="6 0 1"/>
+        <geom class="wall" name="wall_west"  size="0.1 6 5" pos="-6 0 1"/>
+
+        <!-- TORSO+HIP: único rigidbody raíz.
+             Origen en la posición original de hip (z=2.9).
+             Los geoms del torso original llevan +0.8 en Z. -->
+        <body name="torso" pos="0 0 2.9">
+            <freejoint name="root"/>
+
+            <!-- Geoms de cadera -->
+            <geom type="box" size="0.75 0.5 0.25" name="hip"/>
+
+            <!-- Geoms de torso (+0.8 en Z respecto al origen de este body) -->
+            <geom type="box"    size="0.5 0.35 0.5" name="abdominal"  pos="0     0  0.8"/>
+            <geom type="box"    size="0.5 0.5  0.5" name="chest-l"    pos=" 0.55 0  1.85"/>
+            <geom type="box"    size="0.5 0.5  0.5" name="chest-r"    pos="-0.55 0  1.85"/>
+            <geom type="sphere" size="0.25"          name="shoulder-l" pos=" 1.3  0  2.1"/>
+            <geom type="sphere" size="0.25"          name="shoulder-r" pos="-1.3  0  2.1"/>
+
+            <!-- CABEZA (pos original relativa a torso: 0 0 2.1 → +0.8 = 0 0 2.9) -->
+            <body name="head" pos="0 0 2.9">
+                <joint name="neck_x" type="hinge" pos="0 0 -0.3" axis="1 0 0" range="-60 60"/>
+                <joint name="neck_y" type="hinge" pos="0 0 -0.3" axis="0 1 0" range="-60 60"/>
+                <geom type="sphere" size="0.5" name="head_geom" pos="0 0 0.2"/>
+            </body>
+
+            <!-- BRAZO IZQUIERDO (pos original 2.05 0 1.3 → +0.8 = 2.05 0 2.1) -->
+            <body name="arm-l" pos="2.05 0 2.1">
+                <joint name="shoulder_l_x" type="hinge" pos="-0.5 0 0" axis="1 0 0" range="-180 0"/>
+                <joint name="shoulder_l_y" type="hinge" pos="-0.5 0 0" axis="0 1 0" range="-90 90"/>
+                <joint name="shoulder_l_z" type="hinge" pos="-0.5 0 0" axis="0 0 1" range="-90 90"/>
+                <geom type="box" size="0.5 0.3 0.3"/>
+                <body name="forearm-l" pos="1.05 0 0">
+                    <joint name="elbow-joint-l" type="hinge" pos="-0.5 0 0" axis="0 1 0" range="0 145"/>
+                    <geom type="box" size="0.5 0.3 0.3"/>
+                    <body name="hand-l" pos="1.05 0 0">
+                        <geom type="sphere" size="0.3"/>
+                    </body>
+                </body>
+            </body>
+
+            <!-- BRAZO DERECHO (pos original -2.05 0 1.3 → +0.8 = -2.05 0 2.1) -->
+            <body name="arm-r" pos="-2.05 0 2.1">
+                <joint name="shoulder_r_x" type="hinge" pos="0.5 0 0" axis="1 0 0" range="-180 0"/>
+                <joint name="shoulder_r_y" type="hinge" pos="0.5 0 0" axis="0 1 0" range="-90 90"/>
+                <joint name="shoulder_r_z" type="hinge" pos="0.5 0 0" axis="0 0 1" range="-90 90"/>
+                <geom type="box" size="0.5 0.3 0.3"/>
+                <body name="forearm-r" pos="-1.05 0 0">
+                    <joint name="elbow-joint-r" type="hinge" pos="0.5 0 0" axis="0 1 0" range="-145 0"/>
+                    <geom type="box" size="0.5 0.3 0.3"/>
+                    <body name="hand-r" pos="-1.05 0 0">
+                        <geom type="sphere" size="0.3"/>
+                    </body>
+                </body>
+            </body>
+
+            <!-- PIERNA IZQUIERDA (posición relativa a hip: sin cambios) -->
+            <body name="leg-l" pos="0.5 0 -0.8">
+                <joint name="hip_l_x" type="hinge" pos="0 0 0.5" axis="1 0 0" range="-70 70"/>
+                <joint name="hip_l_y" type="hinge" pos="0 0 0.5" axis="0 1 0" range="-70 70"/>
+                <joint name="hip_l_z" type="hinge" pos="0 0 0.5" axis="0 0 1" range="-70 70"/>
+                <geom type="box" size="0.3 0.3 0.5"/>
+                <body name="calf-l" pos="0 0 -1.05">
+                    <joint name="knee-joint-l" type="hinge" pos="0 0 0.5" axis="1 0 0" range="0 140"/>
+                    <geom type="box" size="0.2 0.2 0.5"/>
+                    <body name="foot-l" pos="0 -0.2 -0.8">
+                        <joint name="ankle-l-x" type="hinge" pos="0 0.2 0.25" axis="1 0 0" range="-30 30"/>
+                        <joint name="ankle-l-y" type="hinge" pos="0 0.2 0.25" axis="0 1 0" range="-20 45"/>
+                        <geom type="box" size="0.4 0.6 0.25"/>
+                    </body>
+                </body>
+            </body>
+
+            <!-- PIERNA DERECHA (posición relativa a hip: sin cambios) -->
+            <body name="leg-r" pos="-0.5 0 -0.8">
+                <joint name="hip_r_x" type="hinge" pos="0 0 0.5" axis="1 0 0" range="-70 70"/>
+                <joint name="hip_r_y" type="hinge" pos="0 0 0.5" axis="0 1 0" range="-70 70"/>
+                <joint name="hip_r_z" type="hinge" pos="0 0 0.5" axis="0 0 1" range="-70 70"/>
+                <geom type="box" size="0.3 0.3 0.5"/>
+                <body name="calf-r" pos="0 0 -1.05">
+                    <joint name="knee-joint-r" type="hinge" pos="0 0 0.5" axis="1 0 0" range="0 140"/>
+                    <geom type="box" size="0.2 0.2 0.5"/>
+                    <body name="foot-r" pos="0 -0.2 -0.8">
+                        <joint name="ankle-r-x" type="hinge" pos="0 0.2 0.25" axis="1 0 0" range="-30 30"/>
+                        <joint name="ankle-r-y" type="hinge" pos="0 0.2 0.25" axis="0 1 0" range="-20 45"/>
+                        <geom type="box" size="0.4 0.6 0.25"/>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <!-- Head / Neck -->
+        <position name="act_neck_x" joint="neck_x" ctrlrange="-60 60" kp="100"/>
+        <position name="act_neck_y" joint="neck_y" ctrlrange="-60 60" kp="100"/>
+
+        <!-- Left Shoulder / Elbow -->
+        <position name="act_shoulder_l_x" joint="shoulder_l_x" ctrlrange="-180 0"  kp="200"/>
+        <position name="act_shoulder_l_y" joint="shoulder_l_y" ctrlrange="-90 90"  kp="200"/>
+        <position name="act_shoulder_l_z" joint="shoulder_l_z" ctrlrange="-90 90"  kp="200"/>
+        <position name="act_elbow_l"      joint="elbow-joint-l" ctrlrange="0 145"  kp="240"/>
+
+        <!-- Right Shoulder / Elbow -->
+        <position name="act_shoulder_r_x" joint="shoulder_r_x" ctrlrange="-180 0"  kp="200"/>
+        <position name="act_shoulder_r_y" joint="shoulder_r_y" ctrlrange="-90 90"  kp="200"/>
+        <position name="act_shoulder_r_z" joint="shoulder_r_z" ctrlrange="-90 90"  kp="200"/>
+        <position name="act_elbow_r"      joint="elbow-joint-r" ctrlrange="-145 0" kp="240"/>
+
+        <!-- Left Hip / Knee / Ankle -->
+        <position name="act_hip_l_x"   joint="hip_l_x"      ctrlrange="-70 70"  kp="500"/>
+        <position name="act_hip_l_y"   joint="hip_l_y"      ctrlrange="-70 70"  kp="500"/>
+        <position name="act_hip_l_z"   joint="hip_l_z"      ctrlrange="-70 70"  kp="500"/>
+        <position name="act_knee_l"    joint="knee-joint-l" ctrlrange="0 140"   kp="600"/>
+        <position name="act_ankle_l_x" joint="ankle-l-x"    ctrlrange="-30 30"  kp="375"/>
+        <position name="act_ankle_l_y" joint="ankle-l-y"    ctrlrange="-20 45"  kp="375"/>
+
+        <!-- Right Hip / Knee / Ankle -->
+        <position name="act_hip_r_x"   joint="hip_r_x"      ctrlrange="-70 70"  kp="500"/>
+        <position name="act_hip_r_y"   joint="hip_r_y"      ctrlrange="-70 70"  kp="500"/>
+        <position name="act_hip_r_z"   joint="hip_r_z"      ctrlrange="-70 70"  kp="500"/>
+        <position name="act_knee_r"    joint="knee-joint-r" ctrlrange="0 140"   kp="600"/>
+        <position name="act_ankle_r_x" joint="ankle-r-x"    ctrlrange="-30 30"  kp="375"/>
+        <position name="act_ankle_r_y" joint="ankle-r-y"    ctrlrange="-20 45"  kp="375"/>
+    </actuator>
+
+    <!--
+        qpos (29 DOF): freejoint(7) + neck(2) + sh_l(3)+elbow_l(1)
+                       + sh_r(3)+elbow_r(1) + hip_l(3)+knee_l+ankle_l(2)
+                       + hip_r(3)+knee_r+ankle_r(2)
+        Los 3 valores de pelvis fueron eliminados.
+    -->
+    <keyframe>
+        <key qpos="0 0 2.89969 0.999989 0.000571983 0.00393799 0.00267458 -0.00933086 -0.0272609 -1.60767 0.736647 0.994209 1.64298 -2.58328 -0.917591 -1.36925 -1.37761 -0.0055916 -0.00244486 -1.37145e-05 0.000249113 -0.000216259 0.00245041 -0.00558297 -0.00244486 -1.36941e-05 0.000243375 -0.000220602 0.00245042"/>
+    </keyframe>
+</mujoco>
