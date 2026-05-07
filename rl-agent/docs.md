@@ -12,11 +12,15 @@ A los 10M
 - ep_len_mean: 244
 - ep_rew_mean: 2.11e+03
 ### LrScheduler - MLP
-En un momento tuvo un reward de 3.5e+03, el problema es que parece haber tenido una explosion de gradiente por culpa de un mal clipping
-
-| rollout/           |          |
-|    ep_len_mean     | 258      |
-|    ep_rew_mean     | 2.35e+03 |
+En un momento tuvo un reward > 3.0e+03, el problema es que parece haber tenido una explosion de gradiente por culpa de un mal clipping
+ep_len_mean 258
+ep_rew_mean 2.35e+03
 Quizas tenga que haber reducido el lr mas veces. Solo se redujo 1 vez
+
 ### LSTMPolicy
 Entrena ~10 veces mas lento que la MlpPolicy, y en el episodio 500k, si hubiera valido mas la pena, hubiera tenido un reward equivalente al de 5M en la MlpPolicy
+
+# TODOs
+### Training
+TODO: If I'll use SB3, I'll need to change the storage checkpoints so that they also store the .pkl
+TODO: More frecuent storage of the best model

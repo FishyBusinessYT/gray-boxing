@@ -7,6 +7,7 @@ from stable_baselines3.common.vec_env import sync_envs_normalization
 from pathlib import Path
 import torch.nn as nn
 from stable_baselines3.common.monitor import Monitor
+import envs
 
 CURRENT_PATH = Path(__file__).parent.resolve()
 
@@ -52,25 +53,23 @@ class ReduceLROnPlateauCallback(BaseCallback):
 
         return True
 
-# TODO: If I'll use SB3, I'll need to change the storage checkpoints so that they also store the .pkl
-# TODO: More frecuent storage of the best model
 if __name__ == "__main__": # Needed for multi-process running
     ######################
     # Environments
     ######################
-
+    ENV_NAME = "StandingHumanoid"
     # Training env
-    env = make_vec_env("Humanoid-v5", n_envs=16, vec_env_cls=SubprocVecEnv) # Parallel envs
+    env = make_vec_env(ENV_NAME, n_envs=16, vec_env_cls=SubprocVecEnv) # Parallel envs
     env = VecNormalize(env, norm_obs=True, norm_reward=True, clip_obs=5.0) # Normalize observations and rewards
 
     # GUI Eval env
     gui_eval_env = DummyVecEnv([
-        lambda: gym.make("Humanoid-v5", render_mode="human") # Monitor to have accurate values for rewards. Not needed here
+        lambda: gym.make(ENV_NAME, render_mode="human") # Monitor to have accurate values for rewards. Not needed here
     ])
     gui_eval_env = VecNormalize(gui_eval_env, norm_obs=True, norm_reward=False, clip_obs=5.0)
 
     # Lr scheduler eval env
-    lr_eval_env = DummyVecEnv([lambda: Monitor(gym.make("Humanoid-v5"))]) # Monitor needed here
+    lr_eval_env = DummyVecEnv([lambda: Monitor(gym.make(ENV_NAME))]) # Monitor needed here
     lr_eval_env = VecNormalize(lr_eval_env, norm_obs=True, norm_reward=False, clip_obs=5.0)
 
     # Share normalizations across training and eval envs
@@ -97,7 +96,7 @@ if __name__ == "__main__": # Needed for multi-process running
     gui_eval_callback = EvalCallback(
         gui_eval_env,
         best_model_save_path=str(CURRENT_PATH / "training_results"),
-        eval_freq=1_000_000 // env.num_envs,
+        eval_freq=100_000 // env.num_envs,
         render=True,
         n_eval_episodes=5,
         deterministic=True,
@@ -141,8 +140,8 @@ if __name__ == "__main__": # Needed for multi-process running
 
     # Training
     model.learn(
-        total_timesteps=10_000_000,
-        callback=[checkpoint_callback, gui_eval_callback, lr_eval_callback],
+        total_timesteps=1_000_000,
+        callback=[checkpoint_callback, gui_eval_callback], # TODO: Add lr callback
         progress_bar=True
     )
 

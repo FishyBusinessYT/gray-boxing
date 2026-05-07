@@ -1,5 +1,5 @@
 import numpy as np
-from base_humanoid_env import BaseHumanoidEnv
+from .base_humanoid_env import BaseHumanoidEnv
 
 class StandingHumanoidEnv(BaseHumanoidEnv):
     def __init__(self, *args,
@@ -14,6 +14,9 @@ class StandingHumanoidEnv(BaseHumanoidEnv):
         self.upright_weight = upright_weight
         self.height_weight = height_weight
         self.target_height = 3.7 # From XML torso position
+
+    def _get_obs(self):
+        return self._get_self_obs()
 
     def has_terminated(self):
         z_pos = self.data.qpos[2]
