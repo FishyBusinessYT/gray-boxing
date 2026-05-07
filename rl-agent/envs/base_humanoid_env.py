@@ -26,7 +26,7 @@ class BaseHumanoidEnv(MujocoEnv):
             reset_noise_scale=1e-2,
             **kwargs
         ):
-        super().__init__(str(ROOT_DIR / "assets/mujoco_envs/old_agent.xml"), frame_skip, None, **kwargs) # None observation space
+        super().__init__(str(ROOT_DIR / "assets/mujoco_envs/openai_humanoid.xml"), frame_skip, None, **kwargs) # None observation space
 
         # Action space: normalized [-1, 1] for RL stability
         action_size = self.model.nu
@@ -34,7 +34,7 @@ class BaseHumanoidEnv(MujocoEnv):
 
         # Exclude torso horizontal position if requested
         self.exclude_torso_horizontal_position = exclude_torso_horizontal_position
-        
+
         # Calculate dynamic observation size
         obs_size = self._get_self_obs().size
         self.observation_space = Box(low=-np.inf, high=np.inf, shape=(obs_size,), dtype=np.float32)
@@ -46,15 +46,15 @@ class BaseHumanoidEnv(MujocoEnv):
         # Position and Velocity
         position = self.data.qpos.flat.copy()
         velocity = self.data.qvel.flat.copy()
-        
+
         # Com inertia and velocity (cinert is 10-dim, cvel is 6-dim per body)
         # Exclude worldbody (index 0)
         com_inertia = self.data.cinert[1:].flat.copy()
         com_velocity = self.data.cvel[1:].flat.copy()
-        
+
         # Actuator forces (exclude freejoint DOF: first 6)
         actuator_forces = self.data.qfrc_actuator[6:].flat.copy()
-        
+
         # External contact forces (exclude worldbody)
         external_contact_forces = self.data.cfrc_ext[1:].flat.copy()
 
@@ -62,11 +62,11 @@ class BaseHumanoidEnv(MujocoEnv):
             position = position[2:] # Exclude xy
 
         return np.concatenate([
-            position, 
-            velocity, 
-            com_inertia, 
-            com_velocity, 
-            actuator_forces, 
+            position,
+            velocity,
+            com_inertia,
+            com_velocity,
+            actuator_forces,
             external_contact_forces
         ]).astype(np.float32)
 
@@ -83,10 +83,10 @@ class BaseHumanoidEnv(MujocoEnv):
         # 3. Gather state
         observation = self._get_obs()
         terminated = self.has_terminated()
-        
+
         # 4. Calculate rewards (delegated to child classes)
         reward, info = self.calculate_reward(action)
-        
+
         return observation, reward, terminated, False, info
 
     def _get_obs(self):

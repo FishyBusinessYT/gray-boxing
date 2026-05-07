@@ -3,7 +3,8 @@ from .base_humanoid_env import BaseHumanoidEnv
 
 class StandingHumanoidEnv(BaseHumanoidEnv):
     def __init__(self, *args,
-                 healthy_z_height=(2.5, 10.0),
+                 healthy_z_height=(1.0, 1.7),
+                 target_height=1.4,
                  control_cost_weight=0.001,
                  upright_weight=10.0,
                  height_weight=5.0,
@@ -13,7 +14,7 @@ class StandingHumanoidEnv(BaseHumanoidEnv):
         self.control_cost_weight = control_cost_weight
         self.upright_weight = upright_weight
         self.height_weight = height_weight
-        self.target_height = 3.7 # From XML torso position
+        self.target_height = target_height
 
     def _get_obs(self):
         return self._get_self_obs()

@@ -20,6 +20,9 @@ Quizas tenga que haber reducido el lr mas veces. Solo se redujo 1 vez
 ### LSTMPolicy
 Entrena ~10 veces mas lento que la MlpPolicy, y en el episodio 500k, si hubiera valido mas la pena, hubiera tenido un reward equivalente al de 5M en la MlpPolicy
 
+# Diseño de entornos en mujoco
+- Ponerle un poco de friccion al plano del piso, con 1 parece alcanzar
+- Parece que cuando el actuador intenta superar al limite del joint(como lo que hacia con el -140,140 en las rodillas del old_agent), explota numericamente o la gradiente se satura ya que todos los valores entre 0 y -140 no producen un cambio en la posicion
 # TODOs
 ### Training
 TODO: If I'll use SB3, I'll need to change the storage checkpoints so that they also store the .pkl
