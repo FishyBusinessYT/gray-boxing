@@ -120,19 +120,19 @@
         <position name="act_shoulder_l_x" joint="shoulder_l_x" ctrlrange="-180 0"  kp="200"/>
         <position name="act_shoulder_l_y" joint="shoulder_l_y" ctrlrange="-90 90"  kp="200"/>
         <position name="act_shoulder_l_z" joint="shoulder_l_z" ctrlrange="-90 90"  kp="200"/>
-        <position name="act_elbow_l"      joint="elbow-joint-l" ctrlrange="0 145"  kp="240"/>
+        <position name="act_elbow_l"      joint="elbow-joint-l" ctrlrange="-145 145"  kp="240"/>
 
         <!-- Right Shoulder / Elbow -->
         <position name="act_shoulder_r_x" joint="shoulder_r_x" ctrlrange="-180 0"  kp="200"/>
         <position name="act_shoulder_r_y" joint="shoulder_r_y" ctrlrange="-90 90"  kp="200"/>
         <position name="act_shoulder_r_z" joint="shoulder_r_z" ctrlrange="-90 90"  kp="200"/>
-        <position name="act_elbow_r"      joint="elbow-joint-r" ctrlrange="-145 0" kp="240"/>
+        <position name="act_elbow_r"      joint="elbow-joint-r" ctrlrange="-145 145" kp="240"/>
 
         <!-- Left Hip / Knee / Ankle -->
         <position name="act_hip_l_x"   joint="hip_l_x"      ctrlrange="-70 70"  kp="500"/>
         <position name="act_hip_l_y"   joint="hip_l_y"      ctrlrange="-70 70"  kp="500"/>
         <position name="act_hip_l_z"   joint="hip_l_z"      ctrlrange="-70 70"  kp="500"/>
-        <position name="act_knee_l"    joint="knee-joint-l" ctrlrange="0 140"   kp="600"/>
+        <position name="act_knee_l"    joint="knee-joint-l" ctrlrange="-140 140"   kp="600"/>
         <position name="act_ankle_l_x" joint="ankle-l-x"    ctrlrange="-30 30"  kp="375"/>
         <position name="act_ankle_l_y" joint="ankle-l-y"    ctrlrange="-20 45"  kp="375"/>
 
@@ -140,7 +140,7 @@
         <position name="act_hip_r_x"   joint="hip_r_x"      ctrlrange="-70 70"  kp="500"/>
         <position name="act_hip_r_y"   joint="hip_r_y"      ctrlrange="-70 70"  kp="500"/>
         <position name="act_hip_r_z"   joint="hip_r_z"      ctrlrange="-70 70"  kp="500"/>
-        <position name="act_knee_r"    joint="knee-joint-r" ctrlrange="0 140"   kp="600"/>
+        <position name="act_knee_r"    joint="knee-joint-r" ctrlrange="-140 140"   kp="600"/>
         <position name="act_ankle_r_x" joint="ankle-r-x"    ctrlrange="-30 30"  kp="375"/>
         <position name="act_ankle_r_y" joint="ankle-r-y"    ctrlrange="-20 45"  kp="375"/>
     </actuator>
