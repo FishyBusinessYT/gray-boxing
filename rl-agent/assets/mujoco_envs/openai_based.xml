@@ -13,12 +13,12 @@
         <geom name="floor" pos="0 0 0" size="0 0 .05" type="plane" material="grid" friction="1 0.005 0.0001"/>
         <body name="torso" pos="0 0 1.425" euler="0 0 180">
             <joint armature="0" damping="0" limited="false" name="root" pos="0 0 0" stiffness="0" type="free"/>
-            <geom name="chest_left" pos="0 0.165 0" size="0.15 0.15 0.15" type="box" density="100"/>
-            <geom name="shoulder_left" pos="0 0.39 0.075" size="0.075" type="sphere" density="100"/>
-            <geom name="chest_right" pos="0 -0.165 0" size="0.15 0.15 0.15" type="box" density="100"/>
-            <geom name="shoulder_right" pos="0 -0.39 0.075" size="0.075" type="sphere" density="100"/>
-            <geom name="head" pos="0 0 0.315" size="0.15" type="sphere" density="100"/>
-            <geom name="waist" pos="0 0 -0.315" size="0.1 0.15 0.15" type="box" density="100"/>
+            <geom name="chest_left" pos="0 0.165 0" size="0.15 0.15 0.15" type="box" density="200"/>
+            <geom name="shoulder_left" pos="0 0.39 0.075" size="0.075" type="sphere" density="200"/>
+            <geom name="chest_right" pos="0 -0.165 0" size="0.15 0.15 0.15" type="box" density="200"/>
+            <geom name="shoulder_right" pos="0 -0.39 0.075" size="0.075" type="sphere" density="200"/>
+            <geom name="head" pos="0 0 0.315" size="0.15" type="sphere" density="200"/>
+            <geom name="waist" pos="0 0 -0.315" size="0.1 0.15 0.15" type="box" density="200"/>
 
             <body name="hip" pos="0 0 -0.555">
                 <joint armature="0.02" axis="0 0 1" damping="5" name="abdomen_z" pos="0 0 0.0825" range="-45 45"
@@ -28,7 +28,7 @@
                 <joint armature="0.02" axis="1 0 0" damping="5" name="abdomen_x" pos="0 0 0" range="-35 35"
                        stiffness="10" type="hinge"/>
 
-                <geom name="hip" pos="0 0 0" size="0.15 0.225 0.075" type="box" density="500"/>
+                <geom name="hip" pos="0 0 0" size="0.15 0.225 0.075" type="box" density="1000"/>
 
                 <body name="left_thigh" pos="0 0.15 -0.09">
                     <joint armature="0.01" axis="1 0 0" damping="5" name="left_hip_x" pos="0 0 0.0075" range="-25 5"
@@ -38,14 +38,14 @@
                     <joint armature="0.0080" axis="0 1 0" damping="5" name="left_hip_y" pos="0 0 0.0075" range="-110 20"
                            stiffness="20" type="hinge"/>
 
-                    <geom name="left_thigh" pos="0 0 -0.15" size="0.09 0.09 0.15" type="box" density="500"/>
+                    <geom name="left_thigh" pos="0 0 -0.15" size="0.09 0.09 0.15" type="box" density="1000"/>
                     <body name="left_shin" pos="0 0 -0.315">
                         <joint armature="0.0060" axis="0 -1 0" name="left_knee" pos="0 0 0.0075" range="-160 -2" type="hinge"/>
 
-                        <geom name="left_shin" pos="0 0 -0.15" size="0.06 0.06 0.15" type="box" density="500"/>
+                        <geom name="left_shin" pos="0 0 -0.15" size="0.06 0.06 0.15" type="box" density="1000"/>
                         <body name="left_foot" pos="0 0 -0.315">
                             <joint name="left_ankle_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-50 30" armature="0.0040" damping="3"/>
-                            <geom name="left_foot" pos="0.05 0 -0.075" size="0.18 0.12 0.075" type="box" density="250"/>
+                            <geom name="left_foot" pos="0.05 0 -0.075" size="0.18 0.12 0.075" type="box" density="500"/>
                         </body>
                     </body>
                 </body>
@@ -58,14 +58,14 @@
                     <joint armature="0.0080" axis="0 1 0" damping="5" name="right_hip_y" pos="0 0 0.0075" range="-110 20"
                            stiffness="20" type="hinge"/>
 
-                    <geom name="right_thigh" pos="0 0 -0.15" size="0.09 0.09 0.15" type="box" density="500"/>
+                    <geom name="right_thigh" pos="0 0 -0.15" size="0.09 0.09 0.15" type="box" density="1000"/>
                     <body name="right_shin" pos="0 0 -0.315">
                         <joint armature="0.0060" axis="0 -1 0" name="right_knee" pos="0 0 0.0075" range="-160 -2" type="hinge"/>
 
-                        <geom name="right_shin" pos="0 0 -0.15" size="0.06 0.06 0.15" type="box" density="500"/>
+                        <geom name="right_shin" pos="0 0 -0.15" size="0.06 0.06 0.15" type="box" density="1000"/>
                         <body name="right_foot" pos="0 0 -0.315">
                             <joint name="right_ankle_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-50 30" armature="0.0040" damping="3"/>
-                            <geom name="right_foot" pos="0.05 0 -0.075" size="0.18 0.12 0.075" type="box" density="250"/>
+                            <geom name="right_foot" pos="0.05 0 -0.075" size="0.18 0.12 0.075" type="box" density="500"/>
                         </body>
                     </body>
                 </body>
@@ -112,17 +112,17 @@
     </contact>
 
     <actuator>
-        <motor gear="100" joint="abdomen_y" name="abdomen_y"/>
-        <motor gear="100" joint="abdomen_z" name="abdomen_z"/>
-        <motor gear="100" joint="abdomen_x" name="abdomen_x"/>
-        <motor gear="100" joint="right_hip_x" name="right_hip_x"/>
-        <motor gear="100" joint="right_hip_z" name="right_hip_z"/>
-        <motor gear="300" joint="right_hip_y" name="right_hip_y"/>
-        <motor gear="200" joint="right_knee" name="right_knee"/>
-        <motor gear="100" joint="left_hip_x" name="left_hip_x"/>
-        <motor gear="100" joint="left_hip_z" name="left_hip_z"/>
-        <motor gear="300" joint="left_hip_y" name="left_hip_y"/>
-        <motor gear="200" joint="left_knee" name="left_knee"/>
+        <motor gear="200" joint="abdomen_y" name="abdomen_y"/>
+        <motor gear="200" joint="abdomen_z" name="abdomen_z"/>
+        <motor gear="200" joint="abdomen_x" name="abdomen_x"/>
+        <motor gear="200" joint="right_hip_x" name="right_hip_x"/>
+        <motor gear="200" joint="right_hip_z" name="right_hip_z"/>
+        <motor gear="600" joint="right_hip_y" name="right_hip_y"/>
+        <motor gear="400" joint="right_knee" name="right_knee"/>
+        <motor gear="200" joint="left_hip_x" name="left_hip_x"/>
+        <motor gear="200" joint="left_hip_z" name="left_hip_z"/>
+        <motor gear="600" joint="left_hip_y" name="left_hip_y"/>
+        <motor gear="400" joint="left_knee" name="left_knee"/>
         <motor gear="25" joint="right_shoulder1" name="right_shoulder1"/>
         <motor gear="25" joint="right_shoulder2" name="right_shoulder2"/>
         <motor gear="25" joint="right_elbow" name="right_elbow"/>

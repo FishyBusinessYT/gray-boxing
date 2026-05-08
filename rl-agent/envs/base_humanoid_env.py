@@ -26,7 +26,7 @@ class BaseHumanoidEnv(MujocoEnv):
             reset_noise_scale=1e-2,
             **kwargs
         ):
-        super().__init__(str(ROOT_DIR / "assets/mujoco_envs/openai_humanoid.xml"), frame_skip, None, **kwargs) # None observation space
+        super().__init__(str(ROOT_DIR / "assets/mujoco_envs/openai_based.xml"), frame_skip, None, **kwargs) # None observation space
 
         # Action space: normalized [-1, 1] for RL stability
         action_size = self.model.nu

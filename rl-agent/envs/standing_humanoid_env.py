@@ -4,7 +4,7 @@ from .base_humanoid_env import BaseHumanoidEnv
 class StandingHumanoidEnv(BaseHumanoidEnv):
     def __init__(self, *args,
                  healthy_z_height=(1.0, 1.7),
-                 target_height=1.4,
+                 target_height=1.425,
                  control_cost_weight=0.001,
                  upright_weight=10.0,
                  height_weight=5.0,
