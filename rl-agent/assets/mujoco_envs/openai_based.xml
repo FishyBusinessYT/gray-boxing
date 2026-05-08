@@ -1,0 +1,105 @@
+<mujoco model="humanoid-openai-based">
+    <default>
+        <joint armature="1" damping="1" limited="true"/>
+        <geom conaffinity="1" condim="1" contype="1" margin="0.001" rgba="0.8 0.6 .4 1"/>
+        <motor ctrllimited="true" ctrlrange="-.4 .4"/>
+    </default>
+
+    <include file="./commons/skybox.xml"/>
+    <include file="./commons/visual.xml"/>
+    <include file="./commons/materials.xml"/>
+
+    <worldbody>
+        <geom name="floor" pos="0 0 0" size="0 0 .05" type="plane" material="grid" friction="1 0.005 0.0001"/>
+        <body name="torso" pos="0 0 1.425" euler="0 0 180">
+            <joint armature="0" damping="0" limited="false" name="root" pos="0 0 0" stiffness="0" type="free"/>
+            <geom name="chest_left" pos="0 0.165 0" size="0.15 0.15 0.15" type="box"/>
+            <geom name="shoulder_left" pos="0 0.39 0.075" size="0.075" type="sphere"/>
+            <geom name="chest_right" pos="0 -0.165 0" size="0.15 0.15 0.15" type="box"/>
+            <geom name="shoulder_right" pos="0 -0.39 0.075" size="0.075" type="sphere"/>
+            <geom name="head" pos="0 0 0.315" size="0.15" type="sphere"/>
+            <geom name="hip" pos="0 0 -0.315" size="0.1 0.15 0.15" type="box"/>
+
+            <body name="waist" pos="0 0 -0.555">
+                <joint armature="0.02" axis="0 0 1" damping="5" name="abdomen_z" pos="0 0 0.0825" range="-45 45"
+                       stiffness="20" type="hinge"/>
+                <joint armature="0.02" axis="0 1 0" damping="5" name="abdomen_y" pos="0 0 0.0825" range="-75 30"
+                       stiffness="10" type="hinge"/>
+                <joint armature="0.02" axis="1 0 0" damping="5" name="abdomen_x" pos="0 0 0" range="-35 35"
+                       stiffness="10" type="hinge"/>
+
+                <geom name="waist" pos="0 0 0" size="0.15 0.225 0.075" type="box"/>
+
+                <body name="left_thigh" pos="0 0.15 -0.09">
+                    <joint armature="0.01" axis="1 0 0" damping="5" name="left_hip_x" pos="0 0 0.0075" range="-25 5"
+                           stiffness="10" type="hinge"/>
+                    <joint armature="0.01" axis="0 0 1" damping="5" name="left_hip_z" pos="0 0 0.0075" range="-60 35"
+                           stiffness="10" type="hinge"/>
+                    <joint armature="0.0080" axis="0 1 0" damping="5" name="left_hip_y" pos="0 0 0.0075" range="-110 20"
+                           stiffness="20" type="hinge"/>
+
+                    <geom name="left_thigh" pos="0 0 -0.15" size="0.09 0.09 0.15" type="box"/>
+                    <body name="left_shin" pos="0 0 -0.315">
+                        <joint armature="0.0060" axis="0 -1 0" name="left_knee" pos="0 0 0.0075" range="-160 -2" type="hinge"/>
+
+                        <geom name="left_shin" pos="0 0 -0.15" size="0.06 0.06 0.15" type="box"/>
+                        <body name="left_foot" pos="0 0 -0.315">
+                            <joint name="left_ankle_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-50 30" armature="0.0040" damping="3"/>
+                            <geom name="left_foot" pos="0.05 0 -0.075" size="0.18 0.12 0.075" type="box"/>
+                        </body>
+                    </body>
+                </body>
+
+                <body name="right_thigh" pos="0 -0.15 -0.09">
+                    <joint armature="0.01" axis="1 0 0" damping="5" name="right_hip_x" pos="0 0 0.0075" range="-25 5"
+                           stiffness="10" type="hinge"/>
+                    <joint armature="0.01" axis="0 0 1" damping="5" name="right_hip_z" pos="0 0 0.0075" range="-60 35"
+                           stiffness="10" type="hinge"/>
+                    <joint armature="0.0080" axis="0 1 0" damping="5" name="right_hip_y" pos="0 0 0.0075" range="-110 20"
+                           stiffness="20" type="hinge"/>
+
+                    <geom name="right_thigh" pos="0 0 -0.15" size="0.09 0.09 0.15" type="box"/>
+                    <body name="right_shin" pos="0 0 -0.315">
+                        <joint armature="0.0060" axis="0 -1 0" name="right_knee" pos="0 0 0.0075" range="-160 -2" type="hinge"/>
+
+                        <geom name="right_shin" pos="0 0 -0.15" size="0.06 0.06 0.15" type="box"/>
+                        <body name="right_foot" pos="0 0 -0.315">
+                            <joint name="right_ankle_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-50 30" armature="0.0040" damping="3"/>
+                            <geom name="right_foot" pos="0.05 0 -0.075" size="0.18 0.12 0.075" type="box"/>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <!-- Helps the agent walk by making the hip move the knee -->
+    <tendon>
+        <fixed name="left_hipknee">
+            <joint coef="-1" joint="left_hip_y"/>
+            <joint coef="1" joint="left_knee"/>
+        </fixed>
+        <fixed name="right_hipknee">
+            <joint coef="-1" joint="right_hip_y"/>
+            <joint coef="1" joint="right_knee"/>
+        </fixed>
+    </tendon>
+
+    <contact>
+        <exclude body1="torso" body2="waist"/>
+    </contact>
+
+    <actuator>
+        <motor gear="100" joint="abdomen_y" name="abdomen_y"/>
+        <motor gear="100" joint="abdomen_z" name="abdomen_z"/>
+        <motor gear="100" joint="abdomen_x" name="abdomen_x"/>
+        <motor gear="100" joint="right_hip_x" name="right_hip_x"/>
+        <motor gear="100" joint="right_hip_z" name="right_hip_z"/>
+        <motor gear="300" joint="right_hip_y" name="right_hip_y"/>
+        <motor gear="200" joint="right_knee" name="right_knee"/>
+        <motor gear="100" joint="left_hip_x" name="left_hip_x"/>
+        <motor gear="100" joint="left_hip_z" name="left_hip_z"/>
+        <motor gear="300" joint="left_hip_y" name="left_hip_y"/>
+        <motor gear="200" joint="left_knee" name="left_knee"/>
+    </actuator>
+</mujoco>
