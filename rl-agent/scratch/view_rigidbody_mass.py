@@ -3,7 +3,7 @@ from pathlib import Path
 
 ROOT_DIR = Path(__file__).parents[1].resolve()
 
-model = mujoco.MjModel.from_xml_path(str(ROOT_DIR / "assets/mujoco_envs/openai_based.xml"))
+model = mujoco.MjModel.from_xml_path(str(ROOT_DIR / "assets/mujoco_envs/openai_humanoid.xml"))
 
 # 1. Ver todas las masas con sus nombres
 for i in range(model.nbody):
