@@ -27,6 +27,16 @@ Entrena ~10 veces mas lento que la MlpPolicy, y en el episodio 500k, si hubiera 
 Escale al modelo de 4.75 a 1.425
 
 abs_z y abs_y estan arriba, abs_x esta abajo
+
+Evaluacion
+- Manteniendo todo como esta, 260 despues de 1M de epochs
+- Duplicando la fuerza de brazos, 160 despues de 1M de epochs
+- Duplicando la fuerza de cadera, 420 despues de 1M de epochs
+- Duplicando la fuerza en todos, 360 despues de 1M de epochs
+
+---
+- Duplicando el peso del torso y piernas, 160 despues de 1M de epochs
+- Duplicando el peso del torso y piernas, y duplicando la fuerza de torso, 
 # TODOs
 ### Training
 TODO: If I'll use SB3, I'll need to change the storage checkpoints so that they also store the .pkl
