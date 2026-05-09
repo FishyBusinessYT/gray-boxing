@@ -7,6 +7,7 @@ from stable_baselines3.common.vec_env import sync_envs_normalization
 from pathlib import Path
 import torch.nn as nn
 from stable_baselines3.common.monitor import Monitor
+from stable_baselines3.common.utils import safe_mean
 import envs
 
 CURRENT_PATH = Path(__file__).parent.resolve()
@@ -53,13 +54,36 @@ class ReduceLROnPlateauCallback(BaseCallback):
 
         return True
 
+# TODO: Remove or improve performance. Possible overhead in mean calculation
+class MaxStatsCallback(BaseCallback):
+    def __init__(self):
+        super().__init__()
+        self.global_max_mean_reward = -float('inf')
+        self.global_max_mean_length = 0
+
+    def _on_rollout_end(self) -> None:
+        buf = self.model.ep_info_buffer
+        if not buf:
+            return
+        mean_reward = safe_mean([ep["r"] for ep in buf])
+        mean_length = safe_mean([ep["l"] for ep in buf])
+        self.global_max_mean_reward = max(self.global_max_mean_reward, mean_reward)
+        self.global_max_mean_length = max(self.global_max_mean_length, mean_length)
+
+    def _on_step(self) -> bool:
+        return True
+
+    def _on_training_end(self) -> None:
+        print(f"\n[MaxStats] Best mean reward: {self.global_max_mean_reward:.2f}")
+        print(f"[MaxStats] Best mean ep length: {self.global_max_mean_length:.1f}")
+
 if __name__ == "__main__": # Needed for multi-process running
     ######################
     # Environments
     ######################
     ENV_NAME = "StandingHumanoid"
     # Training env
-    env = make_vec_env(ENV_NAME, n_envs=16, vec_env_cls=SubprocVecEnv) # Parallel envs
+    env = make_vec_env(ENV_NAME, n_envs=16, vec_env_cls=SubprocVecEnv, wrapper_class=Monitor) # Parallel envs. Monitor needed for the max stats
     env = VecNormalize(env, norm_obs=True, norm_reward=True, clip_obs=5.0) # Normalize observations and rewards
 
     # GUI Eval env
@@ -96,7 +120,7 @@ if __name__ == "__main__": # Needed for multi-process running
     gui_eval_callback = EvalCallback(
         gui_eval_env,
         best_model_save_path=str(CURRENT_PATH / "training_results"),
-        eval_freq=100_000 // env.num_envs,
+        eval_freq=1_000_000 // env.num_envs, # TODO
         render=True,
         n_eval_episodes=5,
         deterministic=True,
@@ -141,7 +165,7 @@ if __name__ == "__main__": # Needed for multi-process running
     # Training
     model.learn(
         total_timesteps=1_000_000,
-        callback=[checkpoint_callback, gui_eval_callback], # TODO: Add lr callback
+        callback=[checkpoint_callback, gui_eval_callback, MaxStatsCallback()], # TODO: Add lr callback
         progress_bar=True
     )
 

@@ -29,14 +29,11 @@ Escale al modelo de 4.75 a 1.425
 abs_z y abs_y estan arriba, abs_x esta abajo
 
 Evaluacion
-- Manteniendo todo como esta, 260 despues de 1M de epochs
-- Duplicando la fuerza de brazos, 160 despues de 1M de epochs
-- Duplicando la fuerza de cadera, 420 despues de 1M de epochs
-- Duplicando la fuerza en todos, 360 despues de 1M de epochs
-
----
-- Duplicando el peso del torso y piernas, 160 despues de 1M de epochs
-- Duplicando el peso del torso y piernas, y duplicando la fuerza de torso, 
+Los evaluo corriendolos 1M de epochs y viendo su max reward y ep length:
+- OpenAI original: 719.2 pero creo que se midio mal y deberian ser 500
+- Modelo basal: 147
+- Modelo con doble de fuerza excepto en brazos: 376
+- Modelo con triple de fuerza excepto en brazos: 752
 # TODOs
 ### Training
 TODO: If I'll use SB3, I'll need to change the storage checkpoints so that they also store the .pkl
