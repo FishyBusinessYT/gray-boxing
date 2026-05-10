@@ -7,12 +7,6 @@ from pathlib import Path
 
 ROOT_DIR = Path(__file__).parent.parent
 
-# self.data.cinert gives center of mass positions and inertia
-def mass_center(model, data):
-    mass = np.expand_dims(model.body_mass, axis=1)
-    xpos = data.xipos
-    return (np.sum(mass * xpos, axis=0) / np.sum(mass))[0:2].copy()
-
 class BaseHumanoidEnv(MujocoEnv):
     metadata = {
         "render_modes": ["human", "rgb_array"],
