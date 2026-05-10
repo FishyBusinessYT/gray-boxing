@@ -1,11 +1,11 @@
 import xmltodict
 from pathlib import Path
 
-CABLE_LENGTH = 2.9
+CABLE_LENGTH = 2.83
 CABLE_WIDTH = 0.05
-STIFFNESS = 800
-DAMPING = 5
-ARMATURE = 0.01
+STIFFNESS = 400 # Angular resistance to bending, main control
+DAMPING = 5 # Energy dissipation to avoid indefinite bouncing
+ARMATURE = 0.01 # For numerical stability
 
 ROPE_TEMPLATE = """<composite type="cable" curve="s" count="16 1 1" size="{cable_length}" prefix="{prefix}" initial="free" offset="{offset}" quat="{rotation}">
     <geom type="capsule" size="{cable_width}" contype="2" conaffinity="1"/>
@@ -29,7 +29,7 @@ for body in data["mujoco"]["worldbody"]["body"]:
 composite_list = []
 connection_list = []
 
-def create_ropes(pole_name, rotated_prefix, quat_rotation):
+def create_ropes(pole_name, rotated_prefix, quat_rotation, identity_rotation):
     global composite_list
     global connection_list
     global poles
@@ -42,7 +42,7 @@ def create_ropes(pole_name, rotated_prefix, quat_rotation):
         if dest_pole == rotated_prefix:
             rotation = quat_rotation
         else:
-            rotation = "1 0 0 0"
+            rotation = identity_rotation
 
         pole_pos = [float(x) for x in poles[pole_name]["@pos"].split(" ")]
         site_pos = [float(x) for x in site["@pos"].split(" ")]
@@ -66,8 +66,9 @@ def create_ropes(pole_name, rotated_prefix, quat_rotation):
         connection_list.append({"@site1": f"{cable_prefix}S_first", "@site2": site["@name"]})
         connection_list.append({"@site1": f"{cable_prefix}S_last", "@site2": dest_site})
 
-create_ropes("pole_bottom_left", "tl", "0.7071 0 0 0.7071")
-create_ropes("pole_top_right", "br", "0.7071 0 0 -0.7071")
+create_ropes("pole_bottom_left", "tl", "0.7071 0 0 0.7071", "1 0 0 0")
+# Cable goes in opposite direction
+create_ropes("pole_top_right", "br", "0.7071 0 0 -0.7071", "0 0 1 0")
 
 # Store the XML
 data["mujoco"]["worldbody"]["composite"] = composite_list
