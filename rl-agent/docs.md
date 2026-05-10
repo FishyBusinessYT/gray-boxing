@@ -23,8 +23,9 @@ Entrena ~10 veces mas lento que la MlpPolicy, y en el episodio 500k, si hubiera 
 # Diseño de entornos en mujoco
 - Ponerle un poco de friccion al plano del piso, con 1 parece alcanzar
 - Parece que cuando el actuador intenta superar al limite del joint(como lo que hacia con el -140,140 en las rodillas del old_agent), explota numericamente o la gradiente se satura ya que todos los valores entre 0 y -140 no producen un cambio en la posicion
+- Que los agentes esten posicionados en +1/-1 
 
-Escale al modelo de 4.75 a 1.425
+- **Escale al modelo de 4.75 a 1.425**
 
 abs_z y abs_y estan arriba, abs_x esta abajo
 
