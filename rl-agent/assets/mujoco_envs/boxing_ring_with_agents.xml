@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco model="humanoid-openai-based">
+	<include file="./commons/skybox.xml"/>
+	<include file="./commons/visual.xml"/>
+	<include file="./commons/materials.xml"/>
+	<default>
+		<joint armature="1" damping="1" limited="true"/>
+		<geom conaffinity="1" condim="1" contype="1" margin="0.001" rgba="0.8 0.6 .4 1"/>
+		<motor ctrllimited="true" ctrlrange="-.4 .4"/>
+	</default>
+	<worldbody>
+		<geom name="floor" pos="0 0 0" size="0 0 .05" type="plane" material="grid" friction="1 0.005 0.0001" rgba="0 0 0 1"/>
+		<geom name="ring_floor" pos="0 0 0.1" size="1.6 1.6 0.1" type="box" rgba="0.5 0.5 0.5 1" friction="1 1 1"/>
+		<body name="pole_bottom_left" pos="-1.5 -1.5 0.1">
+			<geom type="cylinder" size="0.1 0.7" pos="0 0 0.7" rgba="1 1 0.5 1" contype="2" conaffinity="1"/>
+			<site name="bl-tl-1" pos="0 0.1 1.3"/>
+			<site name="bl-tl-2" pos="0 0.1 0.9"/>
+			<site name="bl-tl-3" pos="0 0.1 0.5"/>
+			<site name="bl-br-1" pos="0.1 0 1.3"/>
+			<site name="bl-br-2" pos="0.1 0 0.9"/>
+			<site name="bl-br-3" pos="0.1 0 0.5"/>
+		</body>
+		<body name="pole_top_left" pos="-1.5 1.5 0.1">
+			<geom type="cylinder" size="0.1 0.7" pos="0 0 0.7" rgba="1 0.5 0.5 1" contype="2" conaffinity="1"/>
+			<site name="tl-bl-1" pos="0 -0.1 1.3"/>
+			<site name="tl-bl-2" pos="0 -0.1 0.9"/>
+			<site name="tl-bl-3" pos="0 -0.1 0.5"/>
+			<site name="tl-tr-1" pos="0.1 0 1.3"/>
+			<site name="tl-tr-2" pos="0.1 0 0.9"/>
+			<site name="tl-tr-3" pos="0.1 0 0.5"/>
+		</body>
+		<body name="pole_bottom_right" pos="1.5 -1.5 0.1">
+			<geom type="cylinder" size="0.1 0.7" pos="0 0 0.7" rgba="1 0.5 0.5 1" contype="2" conaffinity="1"/>
+			<site name="br-bl-1" pos="-0.1 0 1.3"/>
+			<site name="br-bl-2" pos="-0.1 0 0.9"/>
+			<site name="br-bl-3" pos="-0.1 0 0.5"/>
+			<site name="br-tr-1" pos="0 0.1 1.3"/>
+			<site name="br-tr-2" pos="0 0.1 0.9"/>
+			<site name="br-tr-3" pos="0 0.1 0.5"/>
+		</body>
+		<body name="pole_top_right" pos="1.5 1.5 0.1">
+			<geom type="cylinder" size="0.1 0.7" pos="0 0 0.7" rgba="1 0.5 0.5 1" contype="2" conaffinity="1"/>
+			<site name="tr-tl-1" pos="-0.1 0 1.3"/>
+			<site name="tr-tl-2" pos="-0.1 0 0.9"/>
+			<site name="tr-tl-3" pos="-0.1 0 0.5"/>
+			<site name="tr-br-1" pos="0 -0.1 1.3"/>
+			<site name="tr-br-2" pos="0 -0.1 0.9"/>
+			<site name="tr-br-3" pos="0 -0.1 0.5"/>
+		</body>
+		<body name="a1_torso" pos="1 0 1.625" euler="0 0 180">
+			<joint armature="0" damping="0" limited="false" name="a1_root" pos="0 0 0" stiffness="0" type="free"/>
+			<geom name="a1_chest_left" pos="0 0.165 0" size="0.15 0.15 0.15" type="box" density="100"/>
+			<geom name="a1_shoulder_left" pos="0 0.39 0.075" size="0.075" type="sphere" density="100"/>
+			<geom name="a1_chest_right" pos="0 -0.165 0" size="0.15 0.15 0.15" type="box" density="100"/>
+			<geom name="a1_shoulder_right" pos="0 -0.39 0.075" size="0.075" type="sphere" density="100"/>
+			<geom name="a1_head" pos="0 0 0.315" size="0.15" type="sphere" density="100"/>
+			<geom name="a1_waist" pos="0 0 -0.315" size="0.1 0.15 0.15" type="box" density="100"/>
+			<body name="a1_hip" pos="0 0 -0.555">
+				<joint armature="0.02" axis="0 0 1" damping="5" name="a1_abdomen_z" pos="0 0 0.0825" range="-45 45" stiffness="20" type="hinge"/>
+				<joint armature="0.02" axis="0 1 0" damping="5" name="a1_abdomen_y" pos="0 0 0.0825" range="-75 30" stiffness="10" type="hinge"/>
+				<joint armature="0.02" axis="1 0 0" damping="5" name="a1_abdomen_x" pos="0 0 0" range="-35 35" stiffness="10" type="hinge"/>
+				<geom name="a1_hip" pos="0 0 0" size="0.15 0.225 0.075" type="box" density="500"/>
+				<body name="a1_left_thigh" pos="0 0.15 -0.09">
+					<joint armature="0.01" axis="1 0 0" damping="5" name="a1_left_hip_x" pos="0 0 0.0075" range="-25 5" stiffness="10" type="hinge"/>
+					<joint armature="0.01" axis="0 0 1" damping="5" name="a1_left_hip_z" pos="0 0 0.0075" range="-60 35" stiffness="10" type="hinge"/>
+					<joint armature="0.0080" axis="0 1 0" damping="5" name="a1_left_hip_y" pos="0 0 0.0075" range="-110 20" stiffness="20" type="hinge"/>
+					<geom name="a1_left_thigh" pos="0 0 -0.15" size="0.09 0.09 0.15" type="box" density="500"/>
+					<body name="a1_left_shin" pos="0 0 -0.315">
+						<joint armature="0.0060" axis="0 -1 0" name="a1_left_knee" pos="0 0 0.0075" range="-160 -2" type="hinge"/>
+						<geom name="a1_left_shin" pos="0 0 -0.15" size="0.06 0.06 0.15" type="box" density="500"/>
+						<body name="a1_left_foot" pos="0 0 -0.315">
+							<joint name="a1_left_ankle_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-50 30" armature="0.0040" damping="3"/>
+							<geom name="a1_left_foot" pos="0.05 0 -0.075" size="0.18 0.12 0.075" type="box" density="250"/>
+						</body>
+					</body>
+				</body>
+				<body name="a1_right_thigh" pos="0 -0.15 -0.09">
+					<joint armature="0.01" axis="1 0 0" damping="5" name="a1_right_hip_x" pos="0 0 0.0075" range="-25 5" stiffness="10" type="hinge"/>
+					<joint armature="0.01" axis="0 0 1" damping="5" name="a1_right_hip_z" pos="0 0 0.0075" range="-60 35" stiffness="10" type="hinge"/>
+					<joint armature="0.0080" axis="0 1 0" damping="5" name="a1_right_hip_y" pos="0 0 0.0075" range="-110 20" stiffness="20" type="hinge"/>
+					<geom name="a1_right_thigh" pos="0 0 -0.15" size="0.09 0.09 0.15" type="box" density="500"/>
+					<body name="a1_right_shin" pos="0 0 -0.315">
+						<joint armature="0.0060" axis="0 -1 0" name="a1_right_knee" pos="0 0 0.0075" range="-160 -2" type="hinge"/>
+						<geom name="a1_right_shin" pos="0 0 -0.15" size="0.06 0.06 0.15" type="box" density="500"/>
+						<body name="a1_right_foot" pos="0 0 -0.315">
+							<joint name="a1_right_ankle_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-50 30" armature="0.0040" damping="3"/>
+							<geom name="a1_right_foot" pos="0.05 0 -0.075" size="0.18 0.12 0.075" type="box" density="250"/>
+						</body>
+					</body>
+				</body>
+			</body>
+			<body name="a1_left_arm" pos="0 0.465 0.075">
+				<joint armature="0.0068" axis="2 1 1" name="a1_left_shoulder1" pos="0 0 0" range="-85 60" stiffness="1" type="hinge"/>
+				<joint armature="0.0051" axis="0 -1 1" name="a1_left_shoulder2" pos="0 0 0" range="-85 60" stiffness="1" type="hinge"/>
+				<geom name="a1_left_arm" pos="0 0.15 0" size="0.09 0.15 0.09" type="box" density="150"/>
+				<body name="a1_left_forearm" pos="0 0.315 0">
+					<joint armature="0.0028" axis="0 0 1" name="a1_left_elbow" pos="0 -0.0075 0" range="-140 -2" stiffness="0" type="hinge"/>
+					<geom name="a1_left_forearm" pos="0 0.15 0" size="0.09 0.15 0.09" type="box" density="50"/>
+					<geom name="a1_left_hand" pos="0 0.465 0" size="0.15" type="sphere" density="50"/>
+				</body>
+			</body>
+			<body name="a1_right_arm" pos="0 -0.465 0.075">
+				<joint armature="0.0068" axis="2 1 1" name="a1_right_shoulder1" pos="0 0 0" range="-85 60" stiffness="1" type="hinge"/>
+				<joint armature="0.0051" axis="0 -1 1" name="a1_right_shoulder2" pos="0 0 0" range="-85 60" stiffness="1" type="hinge"/>
+				<geom name="a1_right_arm" pos="0 -0.15 0" size="0.09 0.15 0.09" type="box" density="150"/>
+				<body name="a1_right_forearm" pos="0 -0.315 0">
+					<joint armature="0.0028" axis="0 0 -1" name="a1_right_elbow" pos="0 0.0075 0" range="-140 -2" stiffness="0" type="hinge"/>
+					<geom name="a1_right_forearm" pos="0 -0.15 0" size="0.09 0.15 0.09" type="box" density="50"/>
+					<geom name="a1_right_hand" pos="0 -0.465 0" size="0.15" type="sphere" density="50"/>
+				</body>
+			</body>
+		</body>
+		<body name="a2_torso" pos="-1 0 1.625" euler="0 0 0">
+			<joint armature="0" damping="0" limited="false" name="a2_root" pos="0 0 0" stiffness="0" type="free"/>
+			<geom name="a2_chest_left" pos="0 0.165 0" size="0.15 0.15 0.15" type="box" density="100"/>
+			<geom name="a2_shoulder_left" pos="0 0.39 0.075" size="0.075" type="sphere" density="100"/>
+			<geom name="a2_chest_right" pos="0 -0.165 0" size="0.15 0.15 0.15" type="box" density="100"/>
+			<geom name="a2_shoulder_right" pos="0 -0.39 0.075" size="0.075" type="sphere" density="100"/>
+			<geom name="a2_head" pos="0 0 0.315" size="0.15" type="sphere" density="100"/>
+			<geom name="a2_waist" pos="0 0 -0.315" size="0.1 0.15 0.15" type="box" density="100"/>
+			<body name="a2_hip" pos="0 0 -0.555">
+				<joint armature="0.02" axis="0 0 1" damping="5" name="a2_abdomen_z" pos="0 0 0.0825" range="-45 45" stiffness="20" type="hinge"/>
+				<joint armature="0.02" axis="0 1 0" damping="5" name="a2_abdomen_y" pos="0 0 0.0825" range="-75 30" stiffness="10" type="hinge"/>
+				<joint armature="0.02" axis="1 0 0" damping="5" name="a2_abdomen_x" pos="0 0 0" range="-35 35" stiffness="10" type="hinge"/>
+				<geom name="a2_hip" pos="0 0 0" size="0.15 0.225 0.075" type="box" density="500"/>
+				<body name="a2_left_thigh" pos="0 0.15 -0.09">
+					<joint armature="0.01" axis="1 0 0" damping="5" name="a2_left_hip_x" pos="0 0 0.0075" range="-25 5" stiffness="10" type="hinge"/>
+					<joint armature="0.01" axis="0 0 1" damping="5" name="a2_left_hip_z" pos="0 0 0.0075" range="-60 35" stiffness="10" type="hinge"/>
+					<joint armature="0.0080" axis="0 1 0" damping="5" name="a2_left_hip_y" pos="0 0 0.0075" range="-110 20" stiffness="20" type="hinge"/>
+					<geom name="a2_left_thigh" pos="0 0 -0.15" size="0.09 0.09 0.15" type="box" density="500"/>
+					<body name="a2_left_shin" pos="0 0 -0.315">
+						<joint armature="0.0060" axis="0 -1 0" name="a2_left_knee" pos="0 0 0.0075" range="-160 -2" type="hinge"/>
+						<geom name="a2_left_shin" pos="0 0 -0.15" size="0.06 0.06 0.15" type="box" density="500"/>
+						<body name="a2_left_foot" pos="0 0 -0.315">
+							<joint name="a2_left_ankle_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-50 30" armature="0.0040" damping="3"/>
+							<geom name="a2_left_foot" pos="0.05 0 -0.075" size="0.18 0.12 0.075" type="box" density="250"/>
+						</body>
+					</body>
+				</body>
+				<body name="a2_right_thigh" pos="0 -0.15 -0.09">
+					<joint armature="0.01" axis="1 0 0" damping="5" name="a2_right_hip_x" pos="0 0 0.0075" range="-25 5" stiffness="10" type="hinge"/>
+					<joint armature="0.01" axis="0 0 1" damping="5" name="a2_right_hip_z" pos="0 0 0.0075" range="-60 35" stiffness="10" type="hinge"/>
+					<joint armature="0.0080" axis="0 1 0" damping="5" name="a2_right_hip_y" pos="0 0 0.0075" range="-110 20" stiffness="20" type="hinge"/>
+					<geom name="a2_right_thigh" pos="0 0 -0.15" size="0.09 0.09 0.15" type="box" density="500"/>
+					<body name="a2_right_shin" pos="0 0 -0.315">
+						<joint armature="0.0060" axis="0 -1 0" name="a2_right_knee" pos="0 0 0.0075" range="-160 -2" type="hinge"/>
+						<geom name="a2_right_shin" pos="0 0 -0.15" size="0.06 0.06 0.15" type="box" density="500"/>
+						<body name="a2_right_foot" pos="0 0 -0.315">
+							<joint name="a2_right_ankle_y" type="hinge" pos="0 0 0" axis="0 1 0" range="-50 30" armature="0.0040" damping="3"/>
+							<geom name="a2_right_foot" pos="0.05 0 -0.075" size="0.18 0.12 0.075" type="box" density="250"/>
+						</body>
+					</body>
+				</body>
+			</body>
+			<body name="a2_left_arm" pos="0 0.465 0.075">
+				<joint armature="0.0068" axis="2 1 1" name="a2_left_shoulder1" pos="0 0 0" range="-85 60" stiffness="1" type="hinge"/>
+				<joint armature="0.0051" axis="0 -1 1" name="a2_left_shoulder2" pos="0 0 0" range="-85 60" stiffness="1" type="hinge"/>
+				<geom name="a2_left_arm" pos="0 0.15 0" size="0.09 0.15 0.09" type="box" density="150"/>
+				<body name="a2_left_forearm" pos="0 0.315 0">
+					<joint armature="0.0028" axis="0 0 1" name="a2_left_elbow" pos="0 -0.0075 0" range="-140 -2" stiffness="0" type="hinge"/>
+					<geom name="a2_left_forearm" pos="0 0.15 0" size="0.09 0.15 0.09" type="box" density="50"/>
+					<geom name="a2_left_hand" pos="0 0.465 0" size="0.15" type="sphere" density="50"/>
+				</body>
+			</body>
+			<body name="a2_right_arm" pos="0 -0.465 0.075">
+				<joint armature="0.0068" axis="2 1 1" name="a2_right_shoulder1" pos="0 0 0" range="-85 60" stiffness="1" type="hinge"/>
+				<joint armature="0.0051" axis="0 -1 1" name="a2_right_shoulder2" pos="0 0 0" range="-85 60" stiffness="1" type="hinge"/>
+				<geom name="a2_right_arm" pos="0 -0.15 0" size="0.09 0.15 0.09" type="box" density="150"/>
+				<body name="a2_right_forearm" pos="0 -0.315 0">
+					<joint armature="0.0028" axis="0 0 -1" name="a2_right_elbow" pos="0 0.0075 0" range="-140 -2" stiffness="0" type="hinge"/>
+					<geom name="a2_right_forearm" pos="0 -0.15 0" size="0.09 0.15 0.09" type="box" density="50"/>
+					<geom name="a2_right_hand" pos="0 -0.465 0" size="0.15" type="sphere" density="50"/>
+				</body>
+			</body>
+		</body>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-bl-tl-1_" initial="free" offset="-1.5 -1.4 1.4" quat="0.7071 0 0 0.7071">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-bl-tl-2_" initial="free" offset="-1.5 -1.4 1.0" quat="0.7071 0 0 0.7071">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-bl-tl-3_" initial="free" offset="-1.5 -1.4 0.6" quat="0.7071 0 0 0.7071">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-bl-br-1_" initial="free" offset="-1.4 -1.5 1.4" quat="1 0 0 0">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-bl-br-2_" initial="free" offset="-1.4 -1.5 1.0" quat="1 0 0 0">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-bl-br-3_" initial="free" offset="-1.4 -1.5 0.6" quat="1 0 0 0">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-tr-tl-1_" initial="free" offset="1.4 1.5 1.4" quat="0 0 1 0">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-tr-tl-2_" initial="free" offset="1.4 1.5 1.0" quat="0 0 1 0">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-tr-tl-3_" initial="free" offset="1.4 1.5 0.6" quat="0 0 1 0">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-tr-br-1_" initial="free" offset="1.5 1.4 1.4" quat="0.7071 0 0 -0.7071">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-tr-br-2_" initial="free" offset="1.5 1.4 1.0" quat="0.7071 0 0 -0.7071">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+		<composite type="cable" curve="s" count="16 1 1" size="2.83" prefix="c-tr-br-3_" initial="free" offset="1.5 1.4 0.6" quat="0.7071 0 0 -0.7071">
+			<geom type="capsule" size="0.05" contype="2" conaffinity="1"/>
+			<joint stiffness="400" damping="5" armature="0.01" kind="main"/>
+			<site/>
+		</composite>
+	</worldbody>
+	<equality>
+		<connect site1="c-bl-tl-1_S_first" site2="bl-tl-1"/>
+		<connect site1="c-bl-tl-1_S_last" site2="tl-bl-1"/>
+		<connect site1="c-bl-tl-2_S_first" site2="bl-tl-2"/>
+		<connect site1="c-bl-tl-2_S_last" site2="tl-bl-2"/>
+		<connect site1="c-bl-tl-3_S_first" site2="bl-tl-3"/>
+		<connect site1="c-bl-tl-3_S_last" site2="tl-bl-3"/>
+		<connect site1="c-bl-br-1_S_first" site2="bl-br-1"/>
+		<connect site1="c-bl-br-1_S_last" site2="br-bl-1"/>
+		<connect site1="c-bl-br-2_S_first" site2="bl-br-2"/>
+		<connect site1="c-bl-br-2_S_last" site2="br-bl-2"/>
+		<connect site1="c-bl-br-3_S_first" site2="bl-br-3"/>
+		<connect site1="c-bl-br-3_S_last" site2="br-bl-3"/>
+		<connect site1="c-tr-tl-1_S_first" site2="tr-tl-1"/>
+		<connect site1="c-tr-tl-1_S_last" site2="tl-tr-1"/>
+		<connect site1="c-tr-tl-2_S_first" site2="tr-tl-2"/>
+		<connect site1="c-tr-tl-2_S_last" site2="tl-tr-2"/>
+		<connect site1="c-tr-tl-3_S_first" site2="tr-tl-3"/>
+		<connect site1="c-tr-tl-3_S_last" site2="tl-tr-3"/>
+		<connect site1="c-tr-br-1_S_first" site2="tr-br-1"/>
+		<connect site1="c-tr-br-1_S_last" site2="br-tr-1"/>
+		<connect site1="c-tr-br-2_S_first" site2="tr-br-2"/>
+		<connect site1="c-tr-br-2_S_last" site2="br-tr-2"/>
+		<connect site1="c-tr-br-3_S_first" site2="tr-br-3"/>
+		<connect site1="c-tr-br-3_S_last" site2="br-tr-3"/>
+	</equality>
+	<tendon>
+		<fixed name="a1_left_hipknee">
+			<joint coef="-1" joint="a1_left_hip_y"/>
+			<joint coef="1" joint="a1_left_knee"/>
+		</fixed>
+		<fixed name="a1_right_hipknee">
+			<joint coef="-1" joint="a1_right_hip_y"/>
+			<joint coef="1" joint="a1_right_knee"/>
+		</fixed>
+	</tendon>
+	<tendon>
+		<fixed name="a2_left_hipknee">
+			<joint coef="-1" joint="a2_left_hip_y"/>
+			<joint coef="1" joint="a2_left_knee"/>
+		</fixed>
+		<fixed name="a2_right_hipknee">
+			<joint coef="-1" joint="a2_right_hip_y"/>
+			<joint coef="1" joint="a2_right_knee"/>
+		</fixed>
+	</tendon>
+	<contact>
+		<exclude body1="a1_torso" body2="a1_hip"/>
+	</contact>
+	<contact>
+		<exclude body1="a2_torso" body2="a2_hip"/>
+	</contact>
+	<actuator>
+		<motor gear="300" joint="a1_abdomen_y" name="a1_abdomen_y"/>
+		<motor gear="300" joint="a1_abdomen_z" name="a1_abdomen_z"/>
+		<motor gear="300" joint="a1_abdomen_x" name="a1_abdomen_x"/>
+		<motor gear="300" joint="a1_right_hip_x" name="a1_right_hip_x"/>
+		<motor gear="300" joint="a1_right_hip_z" name="a1_right_hip_z"/>
+		<motor gear="900" joint="a1_right_hip_y" name="a1_right_hip_y"/>
+		<motor gear="600" joint="a1_right_knee" name="a1_right_knee"/>
+		<motor gear="300" joint="a1_left_hip_x" name="a1_left_hip_x"/>
+		<motor gear="300" joint="a1_left_hip_z" name="a1_left_hip_z"/>
+		<motor gear="900" joint="a1_left_hip_y" name="a1_left_hip_y"/>
+		<motor gear="600" joint="a1_left_knee" name="a1_left_knee"/>
+		<motor gear="25" joint="a1_right_shoulder1" name="a1_right_shoulder1"/>
+		<motor gear="25" joint="a1_right_shoulder2" name="a1_right_shoulder2"/>
+		<motor gear="25" joint="a1_right_elbow" name="a1_right_elbow"/>
+		<motor gear="25" joint="a1_left_shoulder1" name="a1_left_shoulder1"/>
+		<motor gear="25" joint="a1_left_shoulder2" name="a1_left_shoulder2"/>
+		<motor gear="25" joint="a1_left_elbow" name="a1_left_elbow"/>
+	</actuator>
+	<actuator>
+		<motor gear="300" joint="a2_abdomen_y" name="a2_abdomen_y"/>
+		<motor gear="300" joint="a2_abdomen_z" name="a2_abdomen_z"/>
+		<motor gear="300" joint="a2_abdomen_x" name="a2_abdomen_x"/>
+		<motor gear="300" joint="a2_right_hip_x" name="a2_right_hip_x"/>
+		<motor gear="300" joint="a2_right_hip_z" name="a2_right_hip_z"/>
+		<motor gear="900" joint="a2_right_hip_y" name="a2_right_hip_y"/>
+		<motor gear="600" joint="a2_right_knee" name="a2_right_knee"/>
+		<motor gear="300" joint="a2_left_hip_x" name="a2_left_hip_x"/>
+		<motor gear="300" joint="a2_left_hip_z" name="a2_left_hip_z"/>
+		<motor gear="900" joint="a2_left_hip_y" name="a2_left_hip_y"/>
+		<motor gear="600" joint="a2_left_knee" name="a2_left_knee"/>
+		<motor gear="25" joint="a2_right_shoulder1" name="a2_right_shoulder1"/>
+		<motor gear="25" joint="a2_right_shoulder2" name="a2_right_shoulder2"/>
+		<motor gear="25" joint="a2_right_elbow" name="a2_right_elbow"/>
+		<motor gear="25" joint="a2_left_shoulder1" name="a2_left_shoulder1"/>
+		<motor gear="25" joint="a2_left_shoulder2" name="a2_left_shoulder2"/>
+		<motor gear="25" joint="a2_left_elbow" name="a2_left_elbow"/>
+	</actuator>
+</mujoco>

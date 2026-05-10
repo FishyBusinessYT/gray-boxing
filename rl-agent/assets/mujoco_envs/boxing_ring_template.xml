@@ -1,13 +1,13 @@
 <mujoco model="humanoid-openai-based">
+    <include file="./commons/skybox.xml"/>
+    <include file="./commons/visual.xml"/>
+    <include file="./commons/materials.xml"/>
+
     <default>
         <joint armature="1" damping="1" limited="true"/>
         <geom conaffinity="1" condim="1" contype="1" margin="0.001" rgba="0.8 0.6 .4 1"/>
         <motor ctrllimited="true" ctrlrange="-.4 .4"/>
     </default>
-
-    <include file="./commons/skybox.xml"/>
-    <include file="./commons/visual.xml"/>
-    <include file="./commons/materials.xml"/>
 
     <worldbody>
         <geom name="floor" pos="0 0 0" size="0 0 .05" type="plane" material="grid" friction="1 0.005 0.0001" rgba="0 0 0 1"/>
@@ -58,44 +58,4 @@
             <site name="tr-br-3" pos="0 -0.1 0.5"/>
         </body>
     </worldbody>
-
-    <equality>
-
-    </equality>
-
-    <!-- Helps the agent walk by making the hip move the knee -->
-    <tendon>
-        <fixed name="left_hipknee">
-            <joint coef="-1" joint="left_hip_y"/>
-            <joint coef="1" joint="left_knee"/>
-        </fixed>
-        <fixed name="right_hipknee">
-            <joint coef="-1" joint="right_hip_y"/>
-            <joint coef="1" joint="right_knee"/>
-        </fixed>
-    </tendon>
-
-    <contact>
-        <exclude body1="torso" body2="hip"/>
-    </contact>
-
-    <actuator>
-        <motor gear="300" joint="abdomen_y" name="abdomen_y"/>
-        <motor gear="300" joint="abdomen_z" name="abdomen_z"/>
-        <motor gear="300" joint="abdomen_x" name="abdomen_x"/>
-        <motor gear="300" joint="right_hip_x" name="right_hip_x"/>
-        <motor gear="300" joint="right_hip_z" name="right_hip_z"/>
-        <motor gear="900" joint="right_hip_y" name="right_hip_y"/>
-        <motor gear="600" joint="right_knee" name="right_knee"/>
-        <motor gear="300" joint="left_hip_x" name="left_hip_x"/>
-        <motor gear="300" joint="left_hip_z" name="left_hip_z"/>
-        <motor gear="900" joint="left_hip_y" name="left_hip_y"/>
-        <motor gear="600" joint="left_knee" name="left_knee"/>
-        <motor gear="25" joint="right_shoulder1" name="right_shoulder1"/>
-        <motor gear="25" joint="right_shoulder2" name="right_shoulder2"/>
-        <motor gear="25" joint="right_elbow" name="right_elbow"/>
-        <motor gear="25" joint="left_shoulder1" name="left_shoulder1"/>
-        <motor gear="25" joint="left_shoulder2" name="left_shoulder2"/>
-        <motor gear="25" joint="left_elbow" name="left_elbow"/>
-    </actuator>
 </mujoco>
