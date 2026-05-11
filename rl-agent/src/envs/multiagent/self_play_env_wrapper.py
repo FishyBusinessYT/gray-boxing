@@ -16,9 +16,10 @@ class SelfPlayWrapper(gym.Env):
 
     def __init__(self, base_env, controlled: str = "a1_"):
         super().__init__()
-        assert controlled in base_env.PREFIXES, f"Prefijo inválido: {controlled}"
+        unwrapped = base_env.unwrapped
+        assert controlled in unwrapped.PREFIXES, f"Prefijo inválido: {controlled}"
 
-        self.env = base_env
+        self.env = unwrapped
         self.controlled = controlled
         self.opponent = "a2_" if controlled == "a1_" else "a1_"
 
@@ -26,13 +27,13 @@ class SelfPlayWrapper(gym.Env):
         self._opponent_policy = None
 
         # Espacios
-        own_size = base_env.agent_obs_space.shape[0]
+        own_size = unwrapped.agent_obs_space.shape[0]
         self.observation_space = Box(
             low=-np.inf, high=np.inf,
             shape=(own_size * 2,),   # [own_obs | opponent_obs]
             dtype=np.float32,
         )
-        self.action_space = base_env.agent_action_spaces[controlled]
+        self.action_space = unwrapped.agent_action_spaces[controlled]
 
         # Estado interno
         self._last_obs: dict | None = None

@@ -1,7 +1,7 @@
 import gymnasium as gym
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import EvalCallback, CheckpointCallback, BaseCallback
-from stable_baselines3.common.env_util import make_vec_env
+from stable_baselines3.common.env_util import SubprocVecEnv
 from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv, VecNormalize
 from stable_baselines3.common.vec_env import sync_envs_normalization
 from pathlib import Path
@@ -9,6 +9,7 @@ import torch.nn as nn
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.utils import safe_mean
 import src.envs
+from src.envs.multiagent.self_play_env_wrapper import SelfPlayWrapper
 
 CURRENT_PATH = Path(__file__).parent.resolve()
 
@@ -18,6 +19,7 @@ class PerformanceLR:
 
     def __call__(self, progress_remaining: float) -> float:
         return self.current_lr
+
 
 class ReduceLROnPlateauCallback(BaseCallback):
     def __init__(self, lr_controller, patience: int = 3, factor: float = 0.5, verbose: int = 1):
@@ -80,19 +82,21 @@ if __name__ == "__main__": # Needed for multi-process running
     ######################
     # Environments
     ######################
-    ENV_NAME = "StandingHumanoid"
+    def make_env():
+        base = gym.make("MultiHumanoidStanding")
+        return Monitor(SelfPlayWrapper(base))
+
     # Training env
-    env = make_vec_env(ENV_NAME, n_envs=16, vec_env_cls=SubprocVecEnv, wrapper_class=Monitor) # Parallel envs. Monitor needed for the max stats
+    n_envs = 16
+    env = SubprocVecEnv([make_env for _ in range(n_envs)])
     env = VecNormalize(env, norm_obs=True, norm_reward=True, clip_obs=5.0) # Normalize observations and rewards
 
     # GUI Eval env
-    gui_eval_env = DummyVecEnv([
-        lambda: gym.make(ENV_NAME, render_mode="human") # Monitor to have accurate values for rewards. Not needed here
-    ])
+    gui_eval_env = DummyVecEnv([lambda: Monitor(SelfPlayWrapper(gym.make("MultiHumanoidStanding", render_mode="human")))])
     gui_eval_env = VecNormalize(gui_eval_env, norm_obs=True, norm_reward=False, clip_obs=5.0)
 
     # Lr scheduler eval env
-    lr_eval_env = DummyVecEnv([lambda: Monitor(gym.make(ENV_NAME))]) # Monitor needed here
+    lr_eval_env = DummyVecEnv([make_env]) # Monitor needed here
     lr_eval_env = VecNormalize(lr_eval_env, norm_obs=True, norm_reward=False, clip_obs=5.0)
 
     # Share normalizations across training and eval envs
@@ -108,7 +112,7 @@ if __name__ == "__main__": # Needed for multi-process running
     reduce_lr_cb = ReduceLROnPlateauCallback(lr_controller, patience=8, factor=0.5)
     lr_eval_callback = EvalCallback(
         lr_eval_env,
-        eval_freq=100_000 // env.num_envs,
+        eval_freq=100_000 // n_envs,
         render=False,
         n_eval_episodes=10,
         deterministic=True,
@@ -119,7 +123,7 @@ if __name__ == "__main__": # Needed for multi-process running
     gui_eval_callback = EvalCallback(
         gui_eval_env,
         best_model_save_path=str(CURRENT_PATH / "training_results"),
-        eval_freq=1_000_000 // env.num_envs, # TODO
+        eval_freq=1_000 // n_envs,
         render=True,
         n_eval_episodes=5,
         deterministic=True,
@@ -127,7 +131,7 @@ if __name__ == "__main__": # Needed for multi-process running
 
     # Checkpointing
     checkpoint_callback = CheckpointCallback(
-        save_freq=1_000_000 // env.num_envs,
+        save_freq=1_000_000 // n_envs,
         save_path=str(CURRENT_PATH / "training_results/checkpoints"),
         name_prefix="ppo_humanoid"
     )
@@ -143,7 +147,7 @@ if __name__ == "__main__": # Needed for multi-process running
         verbose=1,
         device="cpu", # Runs faster on CPU because of the small net size
         batch_size=256,
-        n_steps=2048 // env.num_envs, # The original yml uses 1 env, which means a 512 step buffer
+        n_steps=2048 // n_envs, # The original yml uses 1 env, which means a 512 step buffer
         gamma=0.95, # Discount factor
         learning_rate=lr_controller, # Expects a function or a number for the lr
         ent_coef=0.00238306, # Controls exploration/exploitation
@@ -163,8 +167,8 @@ if __name__ == "__main__": # Needed for multi-process running
 
     # Training
     model.learn(
-        total_timesteps=1_000_000,
-        callback=[checkpoint_callback, gui_eval_callback, MaxStatsCallback()], # TODO: Add lr callback
+        total_timesteps=5_000_000,
+        callback=[checkpoint_callback, gui_eval_callback], # TODO: Add lr callback
         progress_bar=True
     )
 

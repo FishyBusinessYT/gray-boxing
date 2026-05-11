@@ -5,7 +5,7 @@ from gymnasium import utils
 import mujoco
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).parent.parent
+ROOT_DIR = Path(__file__).parents[3]
 
 _JNT_NPOS = {0: 7, 1: 4, 2: 1, 3: 1}  # free, ball, slide, hinge
 _JNT_NDOF = {0: 6, 1: 3, 2: 1, 3: 1}
@@ -78,7 +78,7 @@ class MultiAgentEnv(MujocoEnv):
             **kwargs
         ):
         self.reset_noise_scale = reset_noise_scale
-        super().__init__(str(ROOT_DIR / "assets/mujoco_envs/agent.xml"), frame_skip, None, **kwargs) # None observation space
+        super().__init__(str(ROOT_DIR / "assets/mujoco_envs/boxing_ring_with_agents.xml"), frame_skip, None, **kwargs) # None observation space
 
         # Agent obs spaces and action spaces, wrapper handles concat
         self._agents = {p: _build_agent_indices(self.model, p) for p in self.PREFIXES}
@@ -113,7 +113,7 @@ class MultiAgentEnv(MujocoEnv):
         return np.concatenate([
             position, velocity, com_inertia, com_velocity,
             actuator_forces, external_contact_forces,
-            self._hp[prefix].values(), # Maybe will throw non sub error
+            [*self._hp[prefix].values()], # Maybe will throw non sub error
         ]).astype(np.float32)
 
     def _get_all_obs(self) -> dict[str, np.ndarray]:
@@ -187,4 +187,4 @@ class MultiAgentEnv(MujocoEnv):
     # Interface
     ######################
 
-    # TODO: set_hp
+    # TODO: set_hp interface
