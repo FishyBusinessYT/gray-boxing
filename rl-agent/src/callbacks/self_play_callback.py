@@ -17,7 +17,7 @@ class SelfPlayCallback(BaseCallback):
 
     def __init__(
         self,
-        update_freq:   int   = 10_000, # TODO
+        update_freq:   int   = 100_000,
         pool_size:     int   = 5,
         sample_recent: float = 0.5,
         verbose:       int   = 0,

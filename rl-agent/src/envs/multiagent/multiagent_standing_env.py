@@ -20,10 +20,9 @@ class MultiHumanoidStandingEnv(MultiAgentEnv):
 
     # Check if any of the agents has terminated
     def has_terminated(self) -> bool:
-        for prefix, g in self._agents.items():
-            torso_z = self.data.qpos[g["qpos_ids"][2]]  # z del freejoint
-            if torso_z < self.healthy_z_height[0]:  # cayó
-                return True
+        g = self._agents["a1_"]
+        torso_z = self.data.qpos[g["qpos_ids"][2]]  # z del freejoint
+        return not (self.healthy_z_height[0] < torso_z < self.healthy_z_height[1])
 
     def calculate_rewards(self) -> dict[str, float]:
         rewards = {}
@@ -36,6 +35,6 @@ class MultiHumanoidStandingEnv(MultiAgentEnv):
             torso_z = self.data.qpos[g["qpos_ids"][2]]
             alive = self.healthy_reward if torso_z > self.healthy_z_height[0] else 0.0
 
-            rewards[prefix] = alive + - ctrl_cost
+            rewards[prefix] = alive - ctrl_cost
 
         return rewards

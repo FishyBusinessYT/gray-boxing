@@ -57,10 +57,11 @@ class ReduceLROnPlateauCallback(BaseCallback):
 
 # TODO: Remove or improve performance. Possible overhead in mean calculation
 class MaxStatsCallback(BaseCallback):
-    def __init__(self):
+    def __init__(self, vec_normalize_env=None):
         super().__init__()
         self.global_max_mean_reward = -float('inf')
         self.global_max_mean_length = 0
+        self.vec_normalize_env = vec_normalize_env
 
     def _on_rollout_end(self) -> None:
         buf = self.model.ep_info_buffer
@@ -68,6 +69,12 @@ class MaxStatsCallback(BaseCallback):
             return
         mean_reward = safe_mean([ep["r"] for ep in buf])
         mean_length = safe_mean([ep["l"] for ep in buf])
+
+        if mean_reward > self.global_max_mean_reward:
+            self.model.save(CURRENT_PATH / "training_results/best/ppo_humanoid")
+            if self.vec_normalize_env:
+                self.vec_normalize_env.save(CURRENT_PATH / "training_results/best/vecnormalize.pkl")
+
         self.global_max_mean_reward = max(self.global_max_mean_reward, mean_reward)
         self.global_max_mean_length = max(self.global_max_mean_length, mean_length)
 
@@ -123,7 +130,7 @@ if __name__ == "__main__": # Needed for multi-process running
     gui_eval_callback = EvalCallback(
         gui_eval_env,
         best_model_save_path=str(CURRENT_PATH / "training_results"),
-        eval_freq=1_000 // n_envs,
+        eval_freq=1_000_000 // n_envs,
         render=True,
         n_eval_episodes=5,
         deterministic=True,
@@ -168,10 +175,10 @@ if __name__ == "__main__": # Needed for multi-process running
     # Training
     model.learn(
         total_timesteps=5_000_000,
-        callback=[checkpoint_callback, gui_eval_callback], # TODO: Add lr callback
+        callback=[checkpoint_callback, gui_eval_callback, MaxStatsCallback(vec_normalize_env=env)], # TODO: Add lr callback
         progress_bar=True
     )
 
     # Parameter storage
-    model.save("results/ppo_humanoid_final")
-    env.save("results/vecnormalize.pkl") # Store the obs_rms for use in future testing envs
+    model.save("training_results/ppo_humanoid_final")
+    env.save("training_results/vecnormalize_final.pkl") # Store the obs_rms for use in future testing envs

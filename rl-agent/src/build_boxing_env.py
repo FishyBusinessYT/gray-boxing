@@ -6,7 +6,7 @@ ROOT_DIR = Path(__file__).parent.parent
 with open(ROOT_DIR / "assets/mujoco_envs/boxing_ring_template.xml", "r") as f:
     data = xmltodict.parse(f.read())
 
-boxing_env = create_ropes(data)
+#boxing_env = create_ropes(data)
 boxing_env = add_agents(data, ROOT_DIR / "assets/mujoco_envs/agent.xml")
 
 with open(ROOT_DIR / "assets/mujoco_envs/boxing_ring_with_agents.xml", "w") as f:
