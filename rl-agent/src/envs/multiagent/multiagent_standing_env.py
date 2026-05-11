@@ -27,14 +27,33 @@ class MultiHumanoidStandingEnv(MultiAgentEnv):
     def calculate_rewards(self) -> dict[str, float]:
         rewards = {}
         for prefix, g in self._agents.items():
-            # 2. Penalización por esfuerzo de actuadores
+            torso_body_id = g["body_ids"][0]  # a1_torso o a2_torso
+
+            # Uprightness: componente Z del eje Z local del torso en frame global
+            torso_z_axis = self.data.xmat[torso_body_id, 8]
+
+            # Z position (ya usas g["qpos_ids"][2] en has_terminated, igual aquí)
+            torso_z = self.data.qpos[g["qpos_ids"][2]]
+            is_healthy = self.healthy_z_height[0] < torso_z < self.healthy_z_height[1]
+
+            reward = self.healthy_reward if is_healthy else 0.0
+
+            if is_healthy:
+                upright_reward = self.upright_weight * max(0, torso_z_axis)
+                reward += upright_reward
+
+                height_error = abs(torso_z - self.target_height) / self.target_height
+                height_reward = self.height_weight * np.exp(-10.0 * height_error)
+                reward += height_reward
+
+                ctrl = self.data.ctrl[g["actuator_ids"]]
+                joint_dist = np.mean(np.square(ctrl))
+                reward -= 0.1 * joint_dist
+
             ctrl = self.data.ctrl[g["actuator_ids"]]
             ctrl_cost = self.control_cost_weight * np.sum(ctrl ** 2)
+            reward -= ctrl_cost
 
-            # 3. Premio por estar vivo y upright
-            torso_z = self.data.qpos[g["qpos_ids"][2]]
-            alive = self.healthy_reward if torso_z > self.healthy_z_height[0] else 0.0
-
-            rewards[prefix] = alive - ctrl_cost
+            rewards[prefix] = reward
 
         return rewards
