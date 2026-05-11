@@ -1,7 +1,6 @@
 import gymnasium as gym
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import EvalCallback, CheckpointCallback, BaseCallback
-from stable_baselines3.common.env_util import SubprocVecEnv
 from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv, VecNormalize
 from stable_baselines3.common.vec_env import sync_envs_normalization
 from pathlib import Path
@@ -10,6 +9,7 @@ from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.utils import safe_mean
 import src.envs
 from src.envs.multiagent.self_play_env_wrapper import SelfPlayWrapper
+from src.callbacks.self_play_callback import SelfPlayCallback
 
 CURRENT_PATH = Path(__file__).parent.resolve()
 
@@ -175,7 +175,12 @@ if __name__ == "__main__": # Needed for multi-process running
     # Training
     model.learn(
         total_timesteps=5_000_000,
-        callback=[checkpoint_callback, gui_eval_callback, MaxStatsCallback(vec_normalize_env=env)], # TODO: Add lr callback
+        callback=[
+            checkpoint_callback,
+            gui_eval_callback,
+            MaxStatsCallback(vec_normalize_env=env),
+            SelfPlayCallback()
+        ], # TODO: Add lr callback
         progress_bar=True
     )
 
