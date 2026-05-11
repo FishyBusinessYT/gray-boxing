@@ -75,10 +75,12 @@ class MultiAgentEnv(MujocoEnv):
     def __init__(self,
             frame_skip=5,  # 2ms * 5 = 10ms. 100 actions per second
             reset_noise_scale=1e-2,
+            exclude_torso_horizontal_position=True,
             **kwargs
         ):
-        self.reset_noise_scale = reset_noise_scale
         super().__init__(str(ROOT_DIR / "assets/mujoco_envs/boxing_ring_with_agents.xml"), frame_skip, None, **kwargs) # None observation space
+        self.reset_noise_scale = reset_noise_scale
+        self.exclude_torso_horizontal_position = exclude_torso_horizontal_position
 
         # Agent obs spaces and action spaces, wrapper handles concat
         self._agents = {p: _build_agent_indices(self.model, p) for p in self.PREFIXES}
@@ -108,7 +110,8 @@ class MultiAgentEnv(MujocoEnv):
         actuator_forces = self.data.qfrc_actuator[g["dof_ids"]].copy()
         external_contact_forces = self.data.cfrc_ext[g["body_ids"]].flat.copy()
 
-        # Don't exclude torso position
+        if self.exclude_torso_horizontal_position:
+            position = position[2:] # Exclude xy
 
         return np.concatenate([
             position, velocity, com_inertia, com_velocity,
