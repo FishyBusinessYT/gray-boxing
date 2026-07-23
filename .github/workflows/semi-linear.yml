@@ -1,0 +1,21 @@
+# From: https://github.com/cytario/enforce-semi-linear-history
+
+name: Enforce Semi-Linear History
+description: >
+  Ensures a pull request branch has no merge commits and is rebased on top of
+  the base branch, enforcing a semi-linear (rebase) workflow.
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-linear-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: cytario/enforce-semi-linear-history@v1
