@@ -14,7 +14,7 @@ server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 failed_frames = 0
 
-while True:
+while True: # TODO handle exit properly
     timestamp, mp_image = captcont.get_frame()
     try:
         landmarks = dtr.get_landmarks(mp_image, timestamp).pose_landmarks[0]
