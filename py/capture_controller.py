@@ -8,10 +8,6 @@ class CaptureController:
         self.fps = self.capture.get(cv2.CAP_PROP_FPS)
         self.current_frame = 0
 
-        # TODO REMOVE THIS WINDOW LATER
-        cv2.namedWindow("window")
-        cv2.moveWindow("window", 550, 200)
-
     def get_frame(self):
         timestamp = int(self.current_frame/self.fps*1000)
         self.current_frame += 1

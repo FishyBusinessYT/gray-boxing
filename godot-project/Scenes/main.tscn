@@ -17,7 +17,7 @@ transform = Transform3D(0.25881907, -0.25, 0.93301266, -7.71341e-09, 0.9659258, 
 metadata/_edit_lock_ = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1958275940]
-transform = Transform3D(-1, 2.6750882e-08, -8.3229395e-08, 0, 0.9520333, 0.30599442, 8.742278e-08, 0.30599442, -0.9520333, 0, 7.063589, -6.028656)
+transform = Transform3D(0.24647468, 0, -0.96914923, 0, 0.99999994, 0, 0.96914923, 0, 0.24647465, -9.506714, 6.1490993, 2.9884334)
 
 [node name="Character" parent="." unique_id=748320195 instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.713928, 0)

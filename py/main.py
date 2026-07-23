@@ -1,4 +1,3 @@
-import cv2
 import struct
 import socket
 
@@ -15,13 +14,13 @@ server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 failed_frames = 0
 
-while True:
+while True: # TODO handle exit properly
     timestamp, mp_image = captcont.get_frame()
     try:
         landmarks = dtr.get_landmarks(mp_image, timestamp).pose_landmarks[0]
         node_directions = calculate_directions(landmarks)
 
-        data = struct.pack('57f', *node_directions)
+        data = struct.pack('51f', *node_directions)
 
         failed_frames = 0
 
@@ -33,9 +32,6 @@ while True:
             print(f'Lost sight of player (f#{failed_frames}).')
 
     server_socket.sendto(data, ('127.0.0.1', 52346))
-
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
 
 server_socket.close()
 dtr.cleanup()
