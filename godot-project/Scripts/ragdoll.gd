@@ -3,11 +3,11 @@ extends PhysicalBoneSimulator3D
 @export var controller_skeleton: Skeleton3D
 @export var skeleton: Skeleton3D
 
-@export var linear_stiffness: float  # = 1200
-@export var linear_damping: float  # = 40
+@export var linear_stiffness: float
+@export var linear_damping: float
 
-@export var angular_stiffness: float  # = 4000
-@export var angular_damping: float  # = 80
+@export var angular_stiffness: float
+@export var angular_damping: float
 
 var bones
 func _ready() -> void:
@@ -46,5 +46,10 @@ func _physics_process(delta: float) -> void:
         )
         b.angular_velocity += torque * delta
 
-func hookes_law(displacement: Vector3, current_vel: Vector3, stiffness: float, damping: float):
+func hookes_law(
+    displacement: Vector3,
+    current_vel: Vector3,
+    stiffness: float,
+    damping: float
+):
     return (stiffness * displacement) - (damping * current_vel)

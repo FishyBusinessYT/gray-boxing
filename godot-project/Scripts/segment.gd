@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends BoneAttachment3D
 
 @export_enum(
     "neck_head",
@@ -9,24 +9,31 @@ extends RigidBody3D
     ) var direction_key: String
 @export var controller: PlayerController
 
-@export var disable := false
-@export var gain := 2
+@export var disabled := false
 @export var bone_axis := Vector3.UP
 
-
-func _physics_process(_delta: float) -> void:
-    if disable: return
+func _process(_delta: float) -> void:
+    if disabled: return
     if not controller.directions.has(direction_key): return
     if controller.directions[direction_key] == Vector3.ZERO: return
 
-    var current_dir: Vector3 = global_transform.basis * bone_axis
     var target_dir: Vector3 = controller.directions[direction_key]
+    var current_dir: Vector3 = global_transform.basis * bone_axis
     var correction: Quaternion = Quaternion(current_dir, target_dir)
 
-    DebugDraw3D.draw_arrow(global_position, global_position+target_dir, Color.RED, 0.01)
-    DebugDraw3D.draw_arrow(global_position, global_position+bone_axis, Color.BLUE, 0.01)
+    DebugDraw3D.draw_arrow(
+        global_position, global_position + target_dir, Color.RED, 0.01
+    )
+    DebugDraw3D.draw_arrow(
+        global_position, global_position + current_dir, Color.GREEN, 0.01
+    )
+    DebugDraw3D.draw_arrow(
+        global_position, global_position+bone_axis, Color.BLUE, 0.01
+    )
 
-    # Convert quaternion to axis-angle, then to angular velocity
-    var axis: Vector3 = correction.get_axis()
-    var angle: float = correction.get_angle()
-    angular_velocity = axis * angle * gain
+
+    #quaternion = correction * quaternion
+    var current_quat: Quaternion = global_transform.basis.get_rotation_quaternion()
+    var new_quat: Quaternion = correction * current_quat
+
+    global_transform.basis = Basis(new_quat)
