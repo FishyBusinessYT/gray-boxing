@@ -17,22 +17,23 @@ func _process(_delta: float) -> void:
     if not controller.directions.has(direction_key): return
     if controller.directions[direction_key] == Vector3.ZERO: return
 
-    # Construct the basis. TODO: Do it for the rest of the parts
-    var basis = Basis(
-        controller.directions["l_shoulder_shoulder"],
-        controller.directions["l_shoulder_hip"] * (-1),
-        controller.directions["l_shoulder_shoulder"].cross(controller.directions["l_shoulder_hip"] * (-1))
-    )
-    basis = basis.orthonormalized() # Apply Gram-Schmidt
+    var target_dir: Vector3 = controller.directions[direction_key]
+    var current_dir: Vector3 = global_transform.basis * bone_axis
+    var correction: Quaternion = Quaternion(current_dir, target_dir)
 
     DebugDraw3D.draw_arrow(
-        global_position, global_position + basis.x, Color.RED, 0.1
+        global_position, global_position + target_dir, Color.RED, 0.01
     )
     DebugDraw3D.draw_arrow(
-        global_position, global_position + basis.y, Color.GREEN, 0.1
+        global_position, global_position + current_dir, Color.GREEN, 0.01
     )
     DebugDraw3D.draw_arrow(
-        global_position, global_position + basis.z, Color.YELLOW, 0.1
+        global_position, global_position+bone_axis, Color.BLUE, 0.01
     )
 
-    global_transform.basis = Basis(basis)
+
+    #quaternion = correction * quaternion
+    var current_quat: Quaternion = global_transform.basis.get_rotation_quaternion()
+    var new_quat: Quaternion = correction * current_quat
+
+    global_transform.basis = Basis(new_quat)

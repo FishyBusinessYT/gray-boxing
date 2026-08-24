@@ -8,7 +8,8 @@
 [ext_resource type="ArrayMesh" uid="uid://c0ioh66rgyink" path="res://Assets/CalfMesh.res" id="4_f83c8"]
 [ext_resource type="ArrayMesh" uid="uid://0rr2secbs28c" path="res://Assets/SphereMesh.res" id="4_s86ly"]
 [ext_resource type="ArrayMesh" uid="uid://0ow3ymr5accs" path="res://Assets/FootMesh.res" id="5_7krnh"]
-[ext_resource type="Script" uid="uid://2h46uiwswgtp" path="res://Scripts/segment.gd" id="10_ruybo"]
+[ext_resource type="Script" uid="uid://du8ooghyniwbl" path="res://Scripts/partial_constraint.gd" id="10_72ex2"]
+[ext_resource type="Script" uid="uid://2h46uiwswgtp" path="res://Scripts/fully_constrained.gd" id="10_ruybo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fib1c"]
 size = Vector3(1.5, 0.5, 1)
@@ -60,6 +61,8 @@ size = Vector3(0.6, 1, 0.6)
 size = Vector3(0.6, 1, 0.6)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8sucs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_w3ips"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_yb6cp"]
 
@@ -243,10 +246,10 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0.1)
 shape = SubResource("BoxShape3D_8sucs")
 
 [node name="Physical Bone LFoot" type="PhysicalBone3D" parent="Character/Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=916972266]
-transform = Transform3D(-7.549791e-08, 4.3711395e-08, -1, -1, -5.517836e-15, 7.549791e-08, -2.2177171e-15, 1, 4.3711395e-08, -0.5, -2.6299999, 0)
+transform = Transform3D(-7.549791e-08, 4.3711395e-08, -1, -1, -5.357596e-15, 7.549791e-08, -2.057477e-15, 1, 4.3711395e-08, -0.5, -2.6299999, 0)
 collision_layer = 2
 joint_type = 1
-body_offset = Transform3D(1.0000001, 5.517837e-15, -2.1316282e-14, 1.8209811e-16, 1, -7.1054274e-15, -9.693952e-23, 0, 1, 0, 0, 0)
+body_offset = Transform3D(1.0000001, 5.357597e-15, -2.1316282e-14, 3.4233832e-16, 1, -7.1054274e-15, -8.99352e-23, 0, 1, 0, 0, 0)
 bone_name = "Foot.L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -299,11 +302,11 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0.1)
 shape = SubResource("BoxShape3D_kkuyi")
 
 [node name="Physical Bone RFoot" type="PhysicalBone3D" parent="Character/Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=433371543]
-transform = Transform3D(-3.6507845e-06, -4.371346e-08, 1, 1, -1.6233457e-13, 3.6507845e-06, 2.7461486e-15, 1, 4.371346e-08, 0.5000011, -2.6299746, 2.081084e-09)
+transform = Transform3D(-3.6507845e-06, -4.371346e-08, 1, 1, -1.6233457e-13, 3.6507845e-06, 2.7461486e-15, 1, 4.371346e-08, 0.5000011, -2.6299746, 3.4252763e-09)
 collision_layer = 2
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5272362e-05, -2.0810358e-09, -1.1027763e-06)
-body_offset = Transform3D(1.0000001, -1.6233443e-13, 3.575287e-06, 1.5662713e-13, 1, 2.0570212e-12, -3.5752867e-06, -2.0641266e-12, 1, 2.527237e-05, 2.0810358e-09, 1.1026859e-06)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5272362e-05, -3.425228e-09, -1.1027763e-06)
+body_offset = Transform3D(1.0000001, -1.6233443e-13, 3.575287e-06, 1.5662713e-13, 1, 2.0570212e-12, -3.5752867e-06, -2.0641266e-12, 1, 2.527237e-05, 3.425228e-09, 1.1026859e-06)
 bone_name = "Foot.R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -366,11 +369,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
 shape = SubResource("SphereShape3D_2mi7c")
 
 [node name="Physical Bone LUpperArm" type="PhysicalBone3D" parent="Character/Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1222854750]
-transform = Transform3D(-5.215407e-07, -1.1199188e-07, 1, 1, 1.9478813e-07, 5.215407e-07, -1.9478819e-07, 1, 1.1199178e-07, -1.9000115, 2.1000063, -6.68749e-08)
+transform = Transform3D(-5.215407e-07, -1.1199188e-07, 1, 1, 1.9478813e-07, 5.215407e-07, -1.9478819e-07, 1, 1.1199178e-07, -1.9000115, 2.1000063, -1.0988905e-07)
 collision_layer = 2
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5118134e-06, 6.685671e-08, 0.60001147)
-body_offset = Transform3D(1, 8.094503e-11, 5.215407e-07, 5.215407e-07, 2.6204816e-11, -1, -8.094503e-11, 1, 2.61835e-11, 6.198883e-06, 0.60001147, -6.687242e-08)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5118134e-06, 1.0987086e-07, 0.60001147)
+body_offset = Transform3D(1, 8.094503e-11, 5.215407e-07, 5.215407e-07, 2.6204816e-11, -1, -8.094503e-11, 1, 2.61835e-11, 6.198883e-06, 0.60001147, -1.0988657e-07)
 bone_name = "Arm.L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -442,11 +445,11 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, -0.15)
 shape = SubResource("BoxShape3D_iyrbr")
 
 [node name="Physical Bone RForearm" type="PhysicalBone3D" parent="Character/Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=2140948481]
-transform = Transform3D(5.215407e-07, -9.141132e-12, -1, -1, 1.9474547e-07, -5.215407e-07, 1.9474547e-07, 1, -9.039564e-12, 3.050021, 2.1000113, -3.375235e-08)
+transform = Transform3D(5.215407e-07, -9.141132e-12, -1, -1, 1.9474547e-07, -5.215407e-07, 1.9474547e-07, 1, -9.039564e-12, 3.050021, 2.1000113, -1.2245273e-08)
 collision_layer = 2
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0918815e-05, -3.3424268e-08, 0.5500207)
-body_offset = Transform3D(1, -3.8284043e-11, 5.215407e-07, 5.215407e-07, -9.134027e-12, -1, 3.8284043e-11, 1, -9.155323e-12, -1.1205673e-05, 0.5500207, 3.3429302e-08)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0918815e-05, -5.4931345e-08, 0.5500207)
+body_offset = Transform3D(1, -3.8284043e-11, 5.215407e-07, 5.215407e-07, -9.134027e-12, -1, 3.8284043e-11, 1, -9.155323e-12, -1.1205673e-05, 0.5500207, 5.493638e-08)
 bone_name = "Forearm.R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -564,7 +567,7 @@ bones/11/parent = 7
 bones/11/rest = Transform3D(0, 1, 1.11965676e-07, -1, 0, 1.947072e-07, 1.9470718e-07, -1.1196569e-07, 1, 1.3000001, 1.8818748, 6.717942e-08)
 bones/11/enabled = true
 bones/11/position = Vector3(1.3000001, 1.8818748, 6.717942e-08)
-bones/11/rotation = Quaternion(-1.0842524e-07, -2.9253533e-08, -0.70710677, 0.70710677)
+bones/11/rotation = Quaternion(-1.08425226e-07, -2.9253535e-08, -0.70710677, 0.70710677)
 bones/11/scale = Vector3(1, 1, 1)
 bones/12/name = "Forearm.R"
 bones/12/parent = 11
@@ -590,17 +593,17 @@ bones/14/scale = Vector3(1, 1, 1)
 
 [node name="LFoot" type="BoneAttachment3D" parent="Animator/Skeleton3D" unique_id=1160584256 node_paths=PackedStringArray("controller")]
 transform = Transform3D(-7.54979e-08, 4.3711395e-08, -1, -0.99999994, 0, 7.549789e-08, -2.399815e-15, 1, 4.3711402e-08, -0.5, -2.6299999, 0)
-visible = false
 bone_name = "Foot.L"
 bone_idx = 3
 override_pose = true
 script = ExtResource("10_ruybo")
-direction_key = "l_ankle_toe"
+body_part = "l_foot"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
 [node name="RFoot Model" type="MeshInstance3D" parent="Animator/Skeleton3D/LFoot" unique_id=2102145875]
 transform = Transform3D(-3.694496e-06, 1, 1.19209226e-07, -5.9606705e-08, -1.1920947e-07, 1, 1, 3.694496e-06, 5.9607146e-08, -0.02, -0.2, 0)
+visible = false
 mesh = ExtResource("5_7krnh")
 
 [node name="LCalf" type="BoneAttachment3D" parent="Animator/Skeleton3D" unique_id=614217972 node_paths=PackedStringArray("controller")]
@@ -609,8 +612,8 @@ visible = false
 bone_name = "Calf.L"
 bone_idx = 2
 override_pose = true
-script = ExtResource("10_ruybo")
-direction_key = "l_knee_ankle"
+script = ExtResource("10_72ex2")
+direction_key = "l_hip_knee"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
@@ -625,7 +628,7 @@ bone_name = "Leg.L"
 bone_idx = 1
 override_pose = true
 script = ExtResource("10_ruybo")
-direction_key = "l_hip_knee"
+body_part = "l_thigh"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
@@ -640,7 +643,7 @@ bone_name = "Foot.R"
 bone_idx = 6
 override_pose = true
 script = ExtResource("10_ruybo")
-direction_key = "r_ankle_toe"
+body_part = "r_foot"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
@@ -654,8 +657,8 @@ visible = false
 bone_name = "Calf.R"
 bone_idx = 5
 override_pose = true
-script = ExtResource("10_ruybo")
-direction_key = "r_knee_ankle"
+script = ExtResource("10_72ex2")
+direction_key = "r_hip_knee"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
@@ -670,7 +673,7 @@ bone_name = "Leg.R"
 bone_idx = 4
 override_pose = true
 script = ExtResource("10_ruybo")
-direction_key = "r_hip_knee"
+body_part = "r_thigh"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
@@ -685,7 +688,6 @@ bone_name = "Hand.L"
 bone_idx = 10
 override_pose = true
 script = ExtResource("10_ruybo")
-direction_key = "l_wrist_hand"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
@@ -700,7 +702,6 @@ bone_name = "Forearm.L"
 bone_idx = 9
 override_pose = true
 script = ExtResource("10_ruybo")
-direction_key = "l_elbow_wrist"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
@@ -708,18 +709,16 @@ disabled = true
 transform = Transform3D(-1.6940659e-21, 1, -1.947072e-07, -1, -2.1800522e-14, 4.2351647e-21, 0, 1.947072e-07, 1, -4.7683716e-07, 0.59999967, 6.71794e-08)
 mesh = ExtResource("2_bo3v0")
 
-[node name="LUpperArm" type="BoneAttachment3D" parent="Animator/Skeleton3D" unique_id=1862969702 node_paths=PackedStringArray("controller")]
+[node name="RUpperArm" type="BoneAttachment3D" parent="Animator/Skeleton3D" unique_id=1862969702 node_paths=PackedStringArray("controller")]
 transform = Transform3D(0, -1, -1.11965676e-07, 1, 0, 1.9470718e-07, -1.9470718e-07, -1.119657e-07, 1, -1.3000001, 2.1000001, 6.717942e-08)
-visible = false
 bone_name = "Arm.L"
 bone_idx = 8
 override_pose = true
-script = ExtResource("10_ruybo")
-direction_key = "l_shoulder_elbow"
+script = ExtResource("10_72ex2")
+direction_key = "r_shoulder_elbow"
 controller = NodePath("../../../Character/PlayerController")
-disabled = true
 
-[node name="LUpperArm Model" type="MeshInstance3D" parent="Animator/Skeleton3D/LUpperArm" unique_id=335660351]
+[node name="RUpperArm Model" type="MeshInstance3D" parent="Animator/Skeleton3D/RUpperArm" unique_id=335660351]
 transform = Transform3D(2.1800522e-14, 1, -1.9470718e-07, -1, -2.1800522e-14, -1.1196569e-07, -1.11965676e-07, 1.947072e-07, 1, -4.7683716e-07, 0.74999964, -8.709037e-09)
 mesh = ExtResource("2_bo3v0")
 
@@ -730,7 +729,6 @@ bone_name = "Hand.R"
 bone_idx = 13
 override_pose = true
 script = ExtResource("10_ruybo")
-direction_key = "r_wrist_hand"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
@@ -745,7 +743,6 @@ bone_name = "Forearm.R"
 bone_idx = 12
 override_pose = true
 script = ExtResource("10_ruybo")
-direction_key = "r_elbow_wrist"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
@@ -753,18 +750,16 @@ disabled = true
 transform = Transform3D(-1.6940659e-21, -1, 1.947072e-07, 1, -2.1800522e-14, 4.2351647e-21, 0, 1.947072e-07, 1, 4.7683716e-07, 0.59999967, 8.022067e-08)
 mesh = ExtResource("2_bo3v0")
 
-[node name="RUpperArm" type="BoneAttachment3D" parent="Animator/Skeleton3D" unique_id=1983052597 node_paths=PackedStringArray("controller")]
+[node name="LUpperArm" type="BoneAttachment3D" parent="Animator/Skeleton3D" unique_id=1983052597 node_paths=PackedStringArray("controller")]
 transform = Transform3D(0, 1, 1.11965676e-07, -1, 0, 1.9470718e-07, 1.9470718e-07, -1.119657e-07, 1, 1.3000001, 2.1000001, 6.717942e-08)
-visible = false
 bone_name = "Arm.R"
 bone_idx = 11
 override_pose = true
-script = ExtResource("10_ruybo")
-direction_key = "r_shoulder_elbow"
+script = ExtResource("10_72ex2")
+direction_key = "l_shoulder_elbow"
 controller = NodePath("../../../Character/PlayerController")
-disabled = true
 
-[node name="RUpperArm Model" type="MeshInstance3D" parent="Animator/Skeleton3D/RUpperArm" unique_id=884649783]
+[node name="LUpperArm Model" type="MeshInstance3D" parent="Animator/Skeleton3D/LUpperArm" unique_id=884649783]
 transform = Transform3D(2.1800522e-14, -1, 1.9470718e-07, 1, -2.1800522e-14, -1.1196569e-07, 1.11965676e-07, 1.947072e-07, 1, 4.7683716e-07, 0.7500001, 1.6794615e-08)
 mesh = ExtResource("2_bo3v0")
 
@@ -775,12 +770,17 @@ bone_name = "Head"
 bone_idx = 14
 override_pose = true
 script = ExtResource("10_ruybo")
-direction_key = "neck_head"
+body_part = "head"
 controller = NodePath("../../../Character/PlayerController")
 disabled = true
 
+[node name="Head Model2" type="MeshInstance3D" parent="Animator/Skeleton3D/Head" unique_id=2021231732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.608, 0)
+mesh = SubResource("BoxMesh_w3ips")
+
 [node name="Head Model" type="MeshInstance3D" parent="Animator/Skeleton3D/Head" unique_id=704742309]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60816383, 0)
+visible = false
 mesh = ExtResource("4_s86ly")
 
 [node name="Torso" type="BoneAttachment3D" parent="Animator/Skeleton3D" unique_id=983303322 node_paths=PackedStringArray("controller")]
@@ -788,7 +788,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21812528, 0)
 bone_name = "Torso"
 bone_idx = 7
 override_pose = true
-script = ExtResource("10_ruybo")
+script = ExtResource("10_72ex2")
 direction_key = "l_shoulder_shoulder"
 controller = NodePath("../../../Character/PlayerController")
 bone_axis = Vector3(-1, 0, 0)
@@ -799,14 +799,12 @@ mesh = ExtResource("3_s86ly")
 
 [node name="Hips" type="BoneAttachment3D" parent="Animator/Skeleton3D" unique_id=1042202246 node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22611079, 0)
-visible = false
 bone_name = "Bone"
 bone_idx = 0
 override_pose = true
 script = ExtResource("10_ruybo")
-direction_key = "l_hip_hip"
+body_part = "hips"
 controller = NodePath("../../../Character/PlayerController")
-disabled = true
 
 [node name="Hips Model" type="MeshInstance3D" parent="Animator/Skeleton3D/Hips" unique_id=1755514338]
 transform = Transform3D(1, 5.215407e-07, 0, -5.215407e-07, 1, 0, 0, 0, 1, 6.968393e-07, -7.614494e-06, 0)
@@ -819,8 +817,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.552124, 0)
 shape = SubResource("WorldBoundaryShape3D_yb6cp")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1939939438]
-transform = Transform3D(1, 0, 0, 0, 0.9156131, 0.40206045, 0, -0.40206045, 0.9156131, 0, 3.7920609, 5.0736637)
+transform = Transform3D(-1, 3.513939e-08, -8.0049766e-08, 0, 0.9156626, 0.40194777, 8.742278e-08, 0.40194777, -0.9156626, 0, 3.7920609, -3.5063305)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1211785375]
-transform = Transform3D(0.25881907, -0.25, 0.93301266, -7.71341e-09, 0.9659258, 0.25881904, -0.9659259, -0.066987306, 0.25, 0, 0, 0)
+transform = Transform3D(-0.55339146, 0.21557587, -0.8045401, 0, 0.96592575, 0.258819, 0.83292127, 0.14322823, -0.53453505, 0, 0, 0)
 metadata/_edit_lock_ = true

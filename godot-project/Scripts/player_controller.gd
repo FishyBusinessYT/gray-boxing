@@ -2,7 +2,7 @@ extends Node
 class_name PlayerController
 
 const PORT = 52346
-const PACKET_SIZE = 17 * 3 * 4  # 17 vectors * 3 axes * 4-bytes per float
+const PACKET_SIZE = 18 * 3 * 4  # 17 vectors * 3 axes * 4-bytes per float
 
 var udp := PacketPeerUDP.new()
 var directions := {
@@ -22,7 +22,8 @@ var directions := {
     "l_heel_toe": Vector3(),
     "r_hip_knee": Vector3(),
     "r_knee_ankle": Vector3(),
-    "r_heel_toe": Vector3()
+    "r_heel_toe": Vector3(),
+    "head_r_eye": Vector3()
 }
 
 

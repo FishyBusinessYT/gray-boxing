@@ -30,10 +30,7 @@ while True:  # TODO handle exit properly
         landmarks = dtr.get_landmarks(mp_image, timestamp).pose_world_landmarks[0]
         node_directions = calculate_directions(landmarks)
 
-        node_directions = calculate_directions(landmarks)
-        data = struct.pack("51f", *node_directions)
-
-        # draw_landmarks_on_image(mp_image.numpy_view(), [landmarks])
+        data = struct.pack("54f", *node_directions)
 
         failed_frames = 0
 

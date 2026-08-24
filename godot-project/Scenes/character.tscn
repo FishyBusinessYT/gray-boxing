@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cl176wve2asiy"]
 
 [ext_resource type="Script" uid="uid://v8y62hdu0poi" path="res://Scripts/player_controller.gd" id="1_glpr6"]
-[ext_resource type="Script" uid="uid://2h46uiwswgtp" path="res://Scripts/segment.gd" id="1_wa5vi"]
+[ext_resource type="Script" uid="uid://2h46uiwswgtp" path="res://Scripts/fully_constrained.gd" id="1_wa5vi"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_ushfy"]
 
