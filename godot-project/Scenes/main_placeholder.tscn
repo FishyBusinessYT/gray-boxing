@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c7iyjn4ewkdxw"]
+
+[ext_resource type="Texture2D" uid="uid://cth3kmsrss8fn" path="res://icon.svg" id="1_da71r"]
+
+[node name="Game" type="Node2D" unique_id=647149448]
+
+[node name="Label" type="Label" parent="." unique_id=1980180660]
+offset_left = 280.0
+offset_top = 126.0
+offset_right = 419.0
+offset_bottom = 149.0
+text = "ESCENA DE JUEGO"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=963734858]
+modulate = Color(0.9985586, 0.44349512, 0.70865715, 1)
+position = Vector2(681, 343)
+texture = ExtResource("1_da71r")
+
+[node name="Button" type="Button" parent="." unique_id=1592372287]
+offset_left = 443.0
+offset_top = 478.0
+offset_right = 498.0
+offset_bottom = 509.0
+text = "Pausa"
