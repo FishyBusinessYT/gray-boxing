@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cs3xa5vobgtwf"]
+
+[ext_resource type="Texture2D" uid="uid://cth3kmsrss8fn" path="res://icon.svg" id="1_ojehl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8fo1c"]
+font_size = 32
+
+[sub_resource type="Theme" id="Theme_ek8ke"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eoghk"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[node name="GameOver" type="Control" unique_id=2009022156]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=1544511594]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+grow_horizontal = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_8fo1c")
+
+[node name="ButtonsPanel" type="PanelContainer" parent="." unique_id=1962228303]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.5
+anchor_right = 0.6
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ButtonsPanel" unique_id=969771794]
+layout_mode = 2
+
+[node name="Restart game" type="TextureButton" parent="ButtonsPanel/VBoxContainer" unique_id=1655923759]
+layout_mode = 2
+theme = SubResource("Theme_ek8ke")
+texture_normal = ExtResource("1_ojehl")
+texture_pressed = SubResource("CompressedTexture2D_eoghk")
+
+[node name="Main menu" type="TextureButton" parent="ButtonsPanel/VBoxContainer" unique_id=988648979]
+layout_mode = 2
+texture_normal = ExtResource("1_ojehl")

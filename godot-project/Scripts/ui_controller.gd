@@ -32,20 +32,29 @@ func _ready() -> void:
         'pressed', to_game
         )
     pause_menu.get_node('ButtonsPanel/VBoxContainer/Restart game').connect(
-        'pressed', to_leaderboard
+        'pressed', to_game
         )
     pause_menu.get_node('ButtonsPanel/VBoxContainer/Main menu').connect(
         'pressed', to_main_menu
         )
 
+    game_over.get_node('ButtonsPanel/VBoxContainer/Restart game').connect(
+        'pressed', to_game
+        )
+    game_over.get_node('ButtonsPanel/VBoxContainer/Main menu').connect(
+        'pressed', to_main_menu
+        )
+
     leaderboard.get_node('Main menu').connect('pressed', to_main_menu)
 
-    game.get_node('Button').connect('pressed', pause_game)
+    game.get_node('PauseButton').connect('pressed', pause_game)
+    game.get_node('EndGameButton').connect('pressed', to_game_over)
 
     to_main_menu()
 
 func pause_game():
-    remove_child(get_node('UI-NODE'))
+    if get_node_or_null('UI-NODE'):
+        remove_child(get_node('UI-NODE'))
     add_child(pause_menu)
 
 func to_main_menu():
@@ -55,12 +64,21 @@ func to_main_menu():
     add_child(main_menu)
 
 func to_game():
-    remove_child(get_node('UI-NODE'))
+    if get_node_or_null('UI-NODE'):
+        remove_child(get_node('UI-NODE'))
     if not get_node_or_null('Game'):
         add_child(game)
 
+func to_game_over():
+    if get_node_or_null('UI-NODE'):
+        remove_child(get_node('UI-NODE'))
+    if get_node_or_null('Game'):
+        remove_child(get_node('Game'))
+    add_child(game_over)
+
 func to_leaderboard():
-    remove_child(get_node('UI-NODE'))
+    if get_node_or_null('UI-NODE'):
+        remove_child(get_node('UI-NODE'))
     if get_node_or_null('Game'):
         remove_child(get_node('Game'))
     add_child(leaderboard)
