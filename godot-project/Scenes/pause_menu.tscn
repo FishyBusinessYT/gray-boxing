@@ -1,14 +1,19 @@
 [gd_scene format=3 uid="uid://db8jd0d3xrdbu"]
 
-[ext_resource type="Texture2D" uid="uid://cth3kmsrss8fn" path="res://icon.svg" id="1_emv3i"]
+[ext_resource type="Texture2D" uid="uid://cl3feg01j6y31" path="res://Assets/continuar.png" id="1_stj27"]
+[ext_resource type="Texture2D" uid="uid://b31sy28ewciya" path="res://Assets/continuar_pressed.png" id="2_ix48p"]
+[ext_resource type="Texture2D" uid="uid://cl3wm5twsc3r5" path="res://Assets/continuar_hover.png" id="3_524vl"]
+[ext_resource type="Texture2D" uid="uid://e1tepqlho5p3" path="res://Assets/reiniciar.png" id="4_0fi7f"]
+[ext_resource type="Texture2D" uid="uid://d1odmv8kksrl" path="res://Assets/reiniciar_pressed.png" id="5_uscpe"]
+[ext_resource type="Texture2D" uid="uid://tdd7cowon2sr" path="res://Assets/reiniciar_hover.png" id="6_taale"]
+[ext_resource type="Texture2D" uid="uid://q4kynvopiyyu" path="res://Assets/menu.png" id="7_q7fiq"]
+[ext_resource type="Texture2D" uid="uid://oiih588w6tjh" path="res://Assets/menu_pressed.png" id="8_6wqnn"]
+[ext_resource type="Texture2D" uid="uid://c04b6lo1tgisv" path="res://Assets/menu_hover.png" id="9_1ymcx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uwmw7"]
 font_size = 32
 
 [sub_resource type="Theme" id="Theme_k0w1u"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1och7"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
 
 [node name="PauseMenu" type="Control" unique_id=1120776721]
 layout_mode = 3
@@ -44,16 +49,23 @@ layout_mode = 2
 
 [node name="Resume game" type="TextureButton" parent="ButtonsPanel/VBoxContainer" unique_id=411481825]
 layout_mode = 2
+size_flags_horizontal = 4
 theme = SubResource("Theme_k0w1u")
-texture_normal = ExtResource("1_emv3i")
-texture_pressed = SubResource("CompressedTexture2D_1och7")
+texture_normal = ExtResource("1_stj27")
+texture_pressed = ExtResource("2_ix48p")
+texture_hover = ExtResource("3_524vl")
 
 [node name="Restart game" type="TextureButton" parent="ButtonsPanel/VBoxContainer" unique_id=113674354]
 layout_mode = 2
+size_flags_horizontal = 4
 theme = SubResource("Theme_k0w1u")
-texture_normal = ExtResource("1_emv3i")
-texture_pressed = SubResource("CompressedTexture2D_1och7")
+texture_normal = ExtResource("4_0fi7f")
+texture_pressed = ExtResource("5_uscpe")
+texture_hover = ExtResource("6_taale")
 
 [node name="Main menu" type="TextureButton" parent="ButtonsPanel/VBoxContainer" unique_id=2078133169]
 layout_mode = 2
-texture_normal = ExtResource("1_emv3i")
+size_flags_horizontal = 4
+texture_normal = ExtResource("7_q7fiq")
+texture_pressed = ExtResource("8_6wqnn")
+texture_hover = ExtResource("9_1ymcx")

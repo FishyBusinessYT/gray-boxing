@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://cs3xa5vobgtwf"]
 
-[ext_resource type="Texture2D" uid="uid://cth3kmsrss8fn" path="res://icon.svg" id="1_ojehl"]
+[ext_resource type="Texture2D" uid="uid://e1tepqlho5p3" path="res://Assets/reiniciar.png" id="1_eoghk"]
+[ext_resource type="Texture2D" uid="uid://d1odmv8kksrl" path="res://Assets/reiniciar_pressed.png" id="2_14u15"]
+[ext_resource type="Texture2D" uid="uid://tdd7cowon2sr" path="res://Assets/reiniciar_hover.png" id="3_j3ryr"]
+[ext_resource type="Texture2D" uid="uid://q4kynvopiyyu" path="res://Assets/menu.png" id="4_j3ryr"]
+[ext_resource type="Texture2D" uid="uid://oiih588w6tjh" path="res://Assets/menu_pressed.png" id="5_rjluv"]
+[ext_resource type="Texture2D" uid="uid://c04b6lo1tgisv" path="res://Assets/menu_hover.png" id="6_gjtdd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8fo1c"]
 font_size = 32
 
 [sub_resource type="Theme" id="Theme_ek8ke"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eoghk"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
 
 [node name="GameOver" type="Control" unique_id=2009022156]
 layout_mode = 3
@@ -44,10 +46,17 @@ layout_mode = 2
 
 [node name="Restart game" type="TextureButton" parent="ButtonsPanel/VBoxContainer" unique_id=1655923759]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme = SubResource("Theme_ek8ke")
-texture_normal = ExtResource("1_ojehl")
-texture_pressed = SubResource("CompressedTexture2D_eoghk")
+texture_normal = ExtResource("1_eoghk")
+texture_pressed = ExtResource("2_14u15")
+texture_hover = ExtResource("3_j3ryr")
 
 [node name="Main menu" type="TextureButton" parent="ButtonsPanel/VBoxContainer" unique_id=988648979]
 layout_mode = 2
-texture_normal = ExtResource("1_ojehl")
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture_normal = ExtResource("4_j3ryr")
+texture_pressed = ExtResource("5_rjluv")
+texture_hover = ExtResource("6_gjtdd")

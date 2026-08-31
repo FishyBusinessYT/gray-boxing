@@ -18,13 +18,13 @@ func _ready() -> void:
     game_over.name = 'UI-NODE'
     leaderboard.name = 'UI-NODE'
 
-    main_menu.get_node('ButtonsPanel/VBoxContainer/Start game').connect(
+    main_menu.get_node('VBoxContainer/Start game').connect(
         'pressed', to_game
         )
-    main_menu.get_node('ButtonsPanel/VBoxContainer/Leaderboard').connect(
+    main_menu.get_node('VBoxContainer/Leaderboard').connect(
         'pressed', to_leaderboard
         )
-    main_menu.get_node('ButtonsPanel/VBoxContainer/Exit game').connect(
+    main_menu.get_node('VBoxContainer/Exit game').connect(
         'pressed', get_tree().quit
         )
 
