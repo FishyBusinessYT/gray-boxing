@@ -8,7 +8,15 @@ extends BoneAttachment3D
 @export var controller: PlayerController
 
 @export var disabled := false
-@export var bone_axis := Vector3.UP
+@export var process_order: int = 0
+
+var _skel: Skeleton3D
+var _bone_idx: int = -1
+
+func _ready():
+    _skel = get_skeleton()
+    _bone_idx = get_bone_idx()
+    #process_order = process_order
 
 func _vecs_to_basis(x, y, z):
     var basis: Basis
@@ -28,17 +36,18 @@ func _build_basis_for_body_part():
     
     match body_part:
         "l_foot":
-            return _vecs_to_basis(null, parts["l_knee_ankle"] * (-1), parts["l_heel_toe"])
+            return _vecs_to_basis(null, parts["l_knee_ankle"], parts["l_heel_toe"])
         "l_thigh":
             return _vecs_to_basis(parts["l_hip_hip"] * (-1), parts["l_hip_knee"], null)
         "r_foot":
-            return _vecs_to_basis(null, parts["r_knee_ankle"] * (-1), parts["r_heel_toe"])
+            return _vecs_to_basis(null, parts["r_knee_ankle"], parts["r_heel_toe"])
         "r_thigh":
-            return _vecs_to_basis(parts["l_hip_hip"], parts["r_hip_knee"] * (-1), null)
+            var basis = _vecs_to_basis(parts["l_hip_hip"], parts["r_hip_knee"], null)
+            return basis * Basis(Vector3.UP, deg_to_rad(-90)) # The bones have a hardcoded rest pose of 90 degrees
         "torso":
-            return _vecs_to_basis(parts["l_shoulder_shoulder"] * (-1), parts["l_shoulder_hip"] * (-1), null)
+            return _vecs_to_basis(parts["l_shoulder_shoulder"] * (-1), parts["l_shoulder_hip"], null)
         "hips":
-            return _vecs_to_basis(parts["l_hip_hip"] * (-1), parts["l_shoulder_hip"] * (-1), null)
+            return _vecs_to_basis(parts["l_hip_hip"] * (-1), parts["l_shoulder_hip"], null)
         "head":
             var u: Vector3 = parts["head_r_eye"] * (-1)
             var v: Vector3 = parts["neck_head"]
@@ -56,14 +65,11 @@ func _process(_delta: float) -> void:
     var basis = _build_basis_for_body_part()
     if basis == Basis(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO): return;
 
-    #DebugDraw3D.draw_arrow(
-        #global_position, global_position + basis.x, Color.RED, 0.1
-    #)
-    #DebugDraw3D.draw_arrow(
-        #global_position, global_position + basis.y, Color.GREEN, 0.1
-    #)
-    #DebugDraw3D.draw_arrow(
-        #global_position, global_position + basis.z, Color.YELLOW, 0.1
-    #)
-
-    global_transform.basis = Basis(basis)
+    DebugDraw3D.draw_arrow(
+        global_position, global_position + controller.directions["l_shoulder_shoulder"], Color.GREEN, 0.1
+    )
+    DebugDraw3D.draw_arrow(
+        global_position, global_position + (controller.directions["l_shoulder_hip"]), Color.RED, 0.1
+    )
+    
+    _skel.set_bone_pose_rotation(_bone_idx, Basis(basis))

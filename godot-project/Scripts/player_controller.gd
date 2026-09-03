@@ -42,6 +42,15 @@ func _process(_delta):
     for i in directions.size():
         var key = directions.keys()[i]
         directions[key] = Vector3(raw[i * 3], raw[i * 3 + 1], raw[i * 3 + 2])
+    
+    # Manually invert some vectors components so the player related stuff works
+    directions["l_shoulder_hip"].y *= -1
+    directions["l_shoulder_elbow"].y *= -1
+    directions["r_shoulder_elbow"].y *= -1
+    directions["l_elbow_wrist"].y *= -1
+    directions["r_elbow_wrist"].y *= -1
+    directions["r_hip_knee"].z *= -1
+    directions["r_knee_ankle"].z *= -1
 
 func _exit_tree() -> void:
     udp.close()
