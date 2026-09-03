@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://q60m6jv2pmb1"]
 
-[ext_resource type="PackedScene" uid="uid://cl176wve2asiy" path="res://Scenes/character.tscn" id="1_ig7tw"]
-
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0xm2m"]
 
 [node name="Main" type="Node3D" unique_id=1968842158]
@@ -18,6 +16,3 @@ metadata/_edit_lock_ = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1958275940]
 transform = Transform3D(0.24647468, 0, -0.96914923, 0, 0.99999994, 0, 0.96914923, 0, 0.24647465, -9.506714, 6.1490993, 2.9884334)
-
-[node name="Character" parent="." unique_id=748320195 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.713928, 0)
