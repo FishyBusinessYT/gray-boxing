@@ -28,12 +28,16 @@ func _ready():
 func _process(_delta: float) -> void:
     if disabled or _skel == null or _bone_idx == -1:
         return
+        
     if not controller.directions.has(direction_key):
         return
     var target_dir_world: Vector3 = controller.directions[direction_key]
     if target_dir_world == Vector3.ZERO:
         return
     target_dir_world = target_dir_world.normalized()
+    
+    if direction_key == "r_knee_ankle":
+        DebugDraw3D.draw_arrow(global_position, global_position + target_dir_world, Color.RED)
     
     # Orientación actual del padre, YA actualizada este frame (gracias a process_priority)
     var parent_quat_skel: Quaternion

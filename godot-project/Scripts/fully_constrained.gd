@@ -3,7 +3,7 @@ extends BoneAttachment3D
 @export_enum(
     "l_foot", "l_thigh", "r_foot", "r_thigh", 
     "l_hand", "l_forearm", "l_upper_arm", "r_hand", "r_forearm", "r_upper_arm",
-    "head", "torso", "hips"
+    "head", "torso", "hips", "r_calf"
 ) var body_part: String
 @export var controller: PlayerController
 
@@ -38,23 +38,18 @@ func _build_basis_for_body_part():
         "l_foot":
             return _vecs_to_basis(null, parts["l_knee_ankle"], parts["l_heel_toe"])
         "l_thigh":
-            var basis = _vecs_to_basis(parts["l_hip_hip"], parts["l_hip_knee"], null)
-            return basis * Basis(Vector3.UP, deg_to_rad(90))
+            return _vecs_to_basis(null, parts["l_hip_knee"] * (-1), parts["l_hip_hip"])
         "r_foot":
             return _vecs_to_basis(null, parts["r_knee_ankle"], parts["r_heel_toe"])
         "r_thigh":
-            return _vecs_to_basis(null, parts["r_hip_knee"], parts["l_hip_hip"] * (-1))
-            var gb = global_basis
-            DebugDraw3D.draw_arrow(
-                global_position, global_position + gb.x, Color.RED, 0.1
-            )
-            DebugDraw3D.draw_arrow(
-                global_position, global_position + gb.y, Color.GREEN, 0.1
-            )
-            DebugDraw3D.draw_arrow(
-                global_position, global_position + gb.z, Color.YELLOW, 0.1
-            )
-            return Basis(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
+            return _vecs_to_basis(null, parts["r_hip_knee"] * (-1), parts["l_hip_hip"] * (-1))
+        "r_calf":
+            #DebugDraw3D.draw_arrow(global_position, global_position + parts["l_hip_hip"], Color.RED)
+            #DebugDraw3D.draw_arrow(global_position, global_position + parts["r_knee_ankle"], Color.GREEN)
+            #DebugDraw3D.draw_arrow(global_position, global_position + global_basis.x, Color.RED)
+            #DebugDraw3D.draw_arrow(global_position, global_position + global_basis.y, Color.GREEN)
+            #DebugDraw3D.draw_arrow(global_position, global_position + global_basis.z, Color.YELLOW)
+            return _vecs_to_basis(null, parts["r_knee_ankle"], parts["l_hip_hip"].rotated(Vector3.UP, deg_to_rad(90)))
         "torso":
             return _vecs_to_basis(parts["l_shoulder_shoulder"] * (-1), parts["l_shoulder_hip"], null)
         "hips":
@@ -68,7 +63,7 @@ func _build_basis_for_body_part():
                 global_position, global_position + u * 3, Color.RED, 0.1
             )
             #return _vecs_to_basis(x, parts["neck_head"], null)
-            return Basis(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
+    return Basis(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
 
 func _process(_delta: float) -> void:
     if disabled: return

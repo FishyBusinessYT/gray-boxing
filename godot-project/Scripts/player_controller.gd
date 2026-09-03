@@ -52,7 +52,8 @@ func _process(_delta):
     directions["l_elbow_wrist"].y *= -1
     directions["r_elbow_wrist"].y *= -1
     
-    directions["r_hip_knee"].z *= -1
-
+    directions["r_hip_knee"].y *= -1
+    directions["l_hip_knee"].y *= -1
+    
 func _exit_tree() -> void:
     udp.close()
