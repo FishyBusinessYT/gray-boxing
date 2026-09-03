@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b14wtgdttknpw"]
+
+[ext_resource type="Script" uid="uid://bqtr3w72a5rde" path="res://Scripts/ui_controller.gd" id="1_jxero"]
+[ext_resource type="PackedScene" uid="uid://dxcsklhorwj2" path="res://Scenes/main_menu.tscn" id="2_2246s"]
+[ext_resource type="PackedScene" uid="uid://db8jd0d3xrdbu" path="res://Scenes/pause_menu.tscn" id="3_q7pk6"]
+[ext_resource type="PackedScene" uid="uid://dbpgeno8sbhwy" path="res://Scenes/leaderboard.tscn" id="4_m78vo"]
+[ext_resource type="PackedScene" uid="uid://cs3xa5vobgtwf" path="res://Scenes/game_over.tscn" id="4_smcll"]
+[ext_resource type="PackedScene" uid="uid://c7iyjn4ewkdxw" path="res://Scenes/main_placeholder.tscn" id="5_q7pk6"]
+
+[node name="UI" type="Control" unique_id=505973180]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jxero")
+main_menu_scene = ExtResource("2_2246s")
+pause_menu_scene = ExtResource("3_q7pk6")
+game_over_scene = ExtResource("4_smcll")
+leaderboard_scene = ExtResource("4_m78vo")
+game_scene = ExtResource("5_q7pk6")
+
+[node name="UI-NODE" type="Node" parent="." unique_id=1608299261]

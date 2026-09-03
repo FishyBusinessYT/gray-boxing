@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dxcsklhorwj2"]
+
+[ext_resource type="Texture2D" uid="uid://d3degvtwi1w8p" path="res://Assets/title.png" id="1_16hvj"]
+[ext_resource type="Texture2D" uid="uid://dpfn2fvb25x4r" path="res://Assets/iniciar.png" id="2_16hvj"]
+[ext_resource type="Texture2D" uid="uid://c7kdkl65xmi8s" path="res://Assets/iniciar_pressed.png" id="3_vr1f0"]
+[ext_resource type="Texture2D" uid="uid://dvk561wt4ngwy" path="res://Assets/iniciar_hover.png" id="4_t1dhk"]
+[ext_resource type="Texture2D" uid="uid://cwc1734ykoddi" path="res://Assets/leaderboard.png" id="5_5egv6"]
+[ext_resource type="Texture2D" uid="uid://b8ayqw4p54g8d" path="res://Assets/leaderboard_pressed.png" id="6_vtepg"]
+[ext_resource type="Texture2D" uid="uid://otj42ys4w1px" path="res://Assets/leaderboard_hover.png" id="7_8dnnj"]
+[ext_resource type="Texture2D" uid="uid://cpbv7i7k74nlb" path="res://Assets/salir.png" id="8_m3bi6"]
+[ext_resource type="Texture2D" uid="uid://co0ik50c0iouf" path="res://Assets/salir_pressed.png" id="9_wyh8j"]
+[ext_resource type="Texture2D" uid="uid://dmlnobdo0uhye" path="res://Assets/salir_hover.png" id="10_ujyyl"]
+
+[sub_resource type="Theme" id="Theme_ugr05"]
+
+[node name="MainMenu" type="Control" unique_id=148084224]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=1944838071]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.54, 0.54, 0.54, 1)
+
+[node name="Title" type="TextureRect" parent="." unique_id=579783505]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+offset_left = -64.0
+offset_top = 0.19999695
+offset_right = 64.0
+offset_bottom = 128.2
+grow_horizontal = 2
+texture = ExtResource("1_16hvj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=458947229]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.19998
+offset_right = 115.20001
+offset_bottom = 130.0
+
+[node name="Start game" type="TextureButton" parent="VBoxContainer" unique_id=1410975395]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_ugr05")
+texture_normal = ExtResource("2_16hvj")
+texture_pressed = ExtResource("3_vr1f0")
+texture_hover = ExtResource("4_t1dhk")
+
+[node name="Leaderboard" type="TextureButton" parent="VBoxContainer" unique_id=1004836972]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_ugr05")
+texture_normal = ExtResource("5_5egv6")
+texture_pressed = ExtResource("6_vtepg")
+texture_hover = ExtResource("7_8dnnj")
+
+[node name="Exit game" type="TextureButton" parent="VBoxContainer" unique_id=1923726175]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("8_m3bi6")
+texture_pressed = ExtResource("9_wyh8j")
+texture_hover = ExtResource("10_ujyyl")
