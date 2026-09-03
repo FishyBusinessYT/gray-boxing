@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://db8jd0d3xrdbu" path="res://Scenes/pause_menu.tscn" id="3_q7pk6"]
 [ext_resource type="PackedScene" uid="uid://dbpgeno8sbhwy" path="res://Scenes/leaderboard.tscn" id="4_m78vo"]
 [ext_resource type="PackedScene" uid="uid://cs3xa5vobgtwf" path="res://Scenes/game_over.tscn" id="4_smcll"]
-[ext_resource type="PackedScene" uid="uid://c7iyjn4ewkdxw" path="res://Scenes/main_placeholder.tscn" id="5_q7pk6"]
+[ext_resource type="PackedScene" uid="uid://d16qvurgdcjlx" path="res://Scenes/game_scene.tscn" id="6_m78vo"]
 
 [node name="UI" type="Control" unique_id=505973180]
 layout_mode = 3
@@ -19,6 +19,6 @@ main_menu_scene = ExtResource("2_2246s")
 pause_menu_scene = ExtResource("3_q7pk6")
 game_over_scene = ExtResource("4_smcll")
 leaderboard_scene = ExtResource("4_m78vo")
-game_scene = ExtResource("5_q7pk6")
+game_scene = ExtResource("6_m78vo")
 
 [node name="UI-NODE" type="Node" parent="." unique_id=1608299261]

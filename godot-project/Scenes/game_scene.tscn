@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://d16qvurgdcjlx"]
+
+[ext_resource type="Script" uid="uid://5iys3phofy5n" path="res://Scripts/game_scene.gd" id="1_b6fju"]
+[ext_resource type="Script" uid="uid://cxskl33ffhwcv" path="res://Scripts/dummy.gd" id="2_b6fju"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0xm2m"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_nnjk7"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nnjk7"]
+top_radius = 0.0
+bottom_radius = 0.05
+height = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_wldta"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q0pli"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tytig"]
+size = Vector3(1, 1, 0.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uwmw7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jjgbg"]
+size = Vector3(1, 1, 0.7)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uwmw7"]
+
+[node name="Game" type="Node3D" unique_id=1968842158]
+script = ExtResource("1_b6fju")
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1587748164]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1727783277]
+shape = SubResource("WorldBoundaryShape3D_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1449104252]
+transform = Transform3D(0.25881907, -0.25, 0.93301266, -7.71341e-09, 0.9659258, 0.25881904, -0.9659259, -0.066987306, 0.25, 0, 0, 0)
+metadata/_edit_lock_ = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1958275940]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 11)
+fov = 40.0
+
+[node name="Dummy" type="RigidBody3D" parent="." unique_id=38101694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2)
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("2_b6fju")
+
+[node name="Meshes" type="Node3D" parent="Dummy" unique_id=1459922613]
+
+[node name="Head" type="MeshInstance3D" parent="Dummy/Meshes" unique_id=501000988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8999996, 0)
+mesh = SubResource("SphereMesh_nnjk7")
+
+[node name="Nose" type="MeshInstance3D" parent="Dummy/Meshes/Head" unique_id=1395249971]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.5)
+mesh = SubResource("CylinderMesh_nnjk7")
+
+[node name="RChest" type="MeshInstance3D" parent="Dummy/Meshes" unique_id=751483491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 1.8499994, 0)
+mesh = SubResource("BoxMesh_wldta")
+
+[node name="LChest" type="MeshInstance3D" parent="Dummy/Meshes" unique_id=623208085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 1.8499994, 0)
+mesh = SubResource("BoxMesh_q0pli")
+
+[node name="Abdomen" type="MeshInstance3D" parent="Dummy/Meshes" unique_id=167555070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79999995, 0)
+mesh = SubResource("BoxMesh_tytig")
+
+[node name="RChest" type="CollisionShape3D" parent="Dummy" unique_id=529770207]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 1.8499999, 0)
+shape = SubResource("BoxShape3D_uwmw7")
+
+[node name="LChest" type="CollisionShape3D" parent="Dummy" unique_id=1778404360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 1.8499999, 0)
+shape = SubResource("BoxShape3D_uwmw7")
+
+[node name="Abdomen" type="CollisionShape3D" parent="Dummy" unique_id=1703222750]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79999995, 0)
+shape = SubResource("BoxShape3D_jjgbg")
+
+[node name="Head" type="CollisionShape3D" parent="Dummy" unique_id=245785434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 0)
+shape = SubResource("SphereShape3D_uwmw7")
+
+[node name="Timer" type="Timer" parent="." unique_id=1010417539]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="PauseButton" type="Button" parent="." unique_id=1294608873]
+offset_left = 67.0
+offset_top = 51.0
+offset_right = 176.0
+offset_bottom = 102.0
+text = "Pausar"
+
+[connection signal="body_shape_entered" from="Dummy" to="Dummy" method="_on_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

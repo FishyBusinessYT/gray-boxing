@@ -10,7 +10,6 @@ extends Control
 @onready var pause_menu: Node = pause_menu_scene.instantiate()
 @onready var game_over: Node = game_over_scene.instantiate()
 @onready var leaderboard: Node = leaderboard_scene.instantiate()
-@onready var game: Node = game_scene.instantiate()
 
 func _ready() -> void:
     main_menu.name = 'UI-NODE'
@@ -19,7 +18,7 @@ func _ready() -> void:
     leaderboard.name = 'UI-NODE'
 
     main_menu.get_node('VBoxContainer/Start game').connect(
-        'pressed', to_game
+        'pressed', start_game
         )
     main_menu.get_node('VBoxContainer/Leaderboard').connect(
         'pressed', to_leaderboard
@@ -29,17 +28,17 @@ func _ready() -> void:
         )
 
     pause_menu.get_node('ButtonsPanel/VBoxContainer/Resume game').connect(
-        'pressed', to_game
+        'pressed', start_game
         )
     pause_menu.get_node('ButtonsPanel/VBoxContainer/Restart game').connect(
-        'pressed', to_game
+        'pressed', restart_game
         )
     pause_menu.get_node('ButtonsPanel/VBoxContainer/Main menu').connect(
         'pressed', to_main_menu
         )
 
     game_over.get_node('ButtonsPanel/VBoxContainer/Restart game').connect(
-        'pressed', to_game
+        'pressed', restart_game
         )
     game_over.get_node('ButtonsPanel/VBoxContainer/Main menu').connect(
         'pressed', to_main_menu
@@ -47,15 +46,30 @@ func _ready() -> void:
 
     leaderboard.get_node('Main menu').connect('pressed', to_main_menu)
 
-    game.get_node('PauseButton').connect('pressed', pause_game)
-    game.get_node('EndGameButton').connect('pressed', to_game_over)
-
     to_main_menu()
 
 func pause_game():
     if get_node_or_null('UI-NODE'):
         remove_child(get_node('UI-NODE'))
     add_child(pause_menu)
+
+func start_game():
+    if get_node_or_null('UI-NODE'):
+        remove_child(get_node('UI-NODE'))
+
+    if not get_node_or_null('Game'):
+        var game: Node = game_scene.instantiate()
+        game.get_node('PauseButton').connect('pressed', pause_game)
+        game.connect('game_ended', to_game_over)
+        add_child(game)
+
+func restart_game():
+    if get_node_or_null('UI-NODE'):
+        remove_child(get_node('UI-NODE'))
+    if get_node_or_null('Game'):
+        get_node('Game').queue_free()
+        remove_child(get_node('Game'))
+    start_game()
 
 func exit_game():
     get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
@@ -66,12 +80,6 @@ func to_main_menu():
     if get_node_or_null('Game'):
         remove_child(get_node('Game'))
     add_child(main_menu)
-
-func to_game():
-    if get_node_or_null('UI-NODE'):
-        remove_child(get_node('UI-NODE'))
-    if not get_node_or_null('Game'):
-        add_child(game)
 
 func to_game_over():
     if get_node_or_null('UI-NODE'):
