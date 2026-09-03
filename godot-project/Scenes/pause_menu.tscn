@@ -31,7 +31,7 @@ anchor_top = 0.1
 anchor_right = 0.5
 anchor_bottom = 0.1
 grow_horizontal = 2
-text = "Game paused"
+text = "Juego pausado"
 label_settings = SubResource("LabelSettings_uwmw7")
 
 [node name="ButtonsPanel" type="PanelContainer" parent="." unique_id=1561361604]

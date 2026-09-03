@@ -28,7 +28,7 @@ anchor_top = 0.1
 anchor_right = 0.5
 anchor_bottom = 0.1
 grow_horizontal = 2
-text = "Game Over"
+text = "Fin del juego"
 label_settings = SubResource("LabelSettings_8fo1c")
 
 [node name="ButtonsPanel" type="PanelContainer" parent="." unique_id=1962228303]
