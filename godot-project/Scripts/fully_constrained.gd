@@ -43,8 +43,18 @@ func _build_basis_for_body_part():
         "r_foot":
             return _vecs_to_basis(null, parts["r_knee_ankle"], parts["r_heel_toe"])
         "r_thigh":
-            var basis = _vecs_to_basis(parts["l_hip_hip"], parts["r_hip_knee"], null)
-            return basis * Basis(Vector3.UP, deg_to_rad(-90)) # The bones have a hardcoded rest pose of 90 degrees
+            return _vecs_to_basis(null, parts["r_hip_knee"], parts["l_hip_hip"] * (-1))
+            var gb = global_basis
+            DebugDraw3D.draw_arrow(
+                global_position, global_position + gb.x, Color.RED, 0.1
+            )
+            DebugDraw3D.draw_arrow(
+                global_position, global_position + gb.y, Color.GREEN, 0.1
+            )
+            DebugDraw3D.draw_arrow(
+                global_position, global_position + gb.z, Color.YELLOW, 0.1
+            )
+            return Basis(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
         "torso":
             return _vecs_to_basis(parts["l_shoulder_shoulder"] * (-1), parts["l_shoulder_hip"], null)
         "hips":
@@ -60,17 +70,10 @@ func _build_basis_for_body_part():
             #return _vecs_to_basis(x, parts["neck_head"], null)
             return Basis(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
 
-func _process(_delta: float) -> void:    
+func _process(_delta: float) -> void:
     if disabled: return
 
     var basis = _build_basis_for_body_part()
     if basis == Basis(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO): return;
-
-    DebugDraw3D.draw_arrow(
-        global_position, global_position + controller.directions["l_shoulder_shoulder"], Color.GREEN, 0.1
-    )
-    DebugDraw3D.draw_arrow(
-        global_position, global_position + (controller.directions["l_shoulder_hip"]), Color.RED, 0.1
-    )
     
     _skel.set_bone_pose_rotation(_bone_idx, Basis(basis))

@@ -50,7 +50,6 @@ func _process(_delta: float) -> void:
     target_dir_local = target_dir_local.normalized()
 
     if direction_key == "r_knee_ankle":
-        print("rotating")
         basis = basis * Basis(Vector3.UP, deg_to_rad(-90))
 
     # Dirección actual según NUESTRO propio estado recordado (no leído del engine)
