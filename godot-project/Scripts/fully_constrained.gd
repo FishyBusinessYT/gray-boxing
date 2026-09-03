@@ -38,7 +38,8 @@ func _build_basis_for_body_part():
         "l_foot":
             return _vecs_to_basis(null, parts["l_knee_ankle"], parts["l_heel_toe"])
         "l_thigh":
-            return _vecs_to_basis(parts["l_hip_hip"] * (-1), parts["l_hip_knee"], null)
+            var basis = _vecs_to_basis(parts["l_hip_hip"], parts["l_hip_knee"], null)
+            return basis * Basis(Vector3.UP, deg_to_rad(90))
         "r_foot":
             return _vecs_to_basis(null, parts["r_knee_ankle"], parts["r_heel_toe"])
         "r_thigh":
