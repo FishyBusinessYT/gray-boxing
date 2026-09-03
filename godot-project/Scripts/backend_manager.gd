@@ -17,6 +17,6 @@ func _ready() -> void:
         await get_tree().create_timer(0.3).timeout
         get_tree().quit(1)
 
-func _exit_tree() -> void:
-    if process_id != -1:
+func _notification(what: int) -> void:
+    if what == NOTIFICATION_WM_CLOSE_REQUEST and process_id != -1:
         OS.kill(process_id)

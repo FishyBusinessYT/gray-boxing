@@ -25,7 +25,7 @@ func _ready() -> void:
         'pressed', to_leaderboard
         )
     main_menu.get_node('VBoxContainer/Exit game').connect(
-        'pressed', get_tree().quit
+        'pressed', exit_game
         )
 
     pause_menu.get_node('ButtonsPanel/VBoxContainer/Resume game').connect(
@@ -56,6 +56,10 @@ func pause_game():
     if get_node_or_null('UI-NODE'):
         remove_child(get_node('UI-NODE'))
     add_child(pause_menu)
+
+func exit_game():
+    get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+    get_tree().quit()
 
 func to_main_menu():
     remove_child(get_node('UI-NODE'))
