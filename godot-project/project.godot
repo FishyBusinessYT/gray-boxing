@@ -32,6 +32,10 @@ enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")
 
 import/blender/enabled=false
 
+[gray_boxing]
+
+camera_index=1
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

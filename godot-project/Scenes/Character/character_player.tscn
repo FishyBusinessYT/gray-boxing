@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://b20er8wu4vx7k"]
+
+[ext_resource type="Script" uid="uid://v8y62hdu0poi" path="res://Scripts/player_controller.gd" id="1_f83c8"]
+[ext_resource type="PackedScene" uid="uid://cl176wve2asiy" path="res://Scenes/Character/character_base.tscn" id="1_mxohm"]
+[ext_resource type="Script" uid="uid://du8ooghyniwbl" path="res://Scripts/partial_constraint.gd" id="10_72ex2"]
+[ext_resource type="Script" uid="uid://2h46uiwswgtp" path="res://Scripts/fully_constrained.gd" id="10_ruybo"]
+
+[node name="Character" unique_id=1560907941 instance=ExtResource("1_mxohm")]
+
+[node name="Physical Bone LFoot" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(2092691925) index="3" unique_id=9851027]
+transform = Transform3D(-7.549791e-08, 4.3711395e-08, -1, -1, -4.9486e-15, 7.549791e-08, -1.6484809e-15, 1, 4.3711395e-08, -0.5, -2.6299999, 0)
+body_offset = Transform3D(1.0000001, 4.948601e-15, -2.1316282e-14, 7.513343e-16, 1, -7.1054274e-15, -7.205741e-23, 0, 1, 0, 0, 0)
+
+[node name="Physical Bone RFoot" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(2092691925) index="6" unique_id=734535079]
+transform = Transform3D(-3.6507845e-06, -4.371346e-08, 1, 1, -1.6233457e-13, 3.6507845e-06, 2.7461486e-15, 1, 4.371346e-08, 0.5000011, -2.6299746, 6.719129e-09)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5272362e-05, -6.7190804e-09, -1.1027763e-06)
+body_offset = Transform3D(1.0000001, -1.6233443e-13, 3.575287e-06, 1.5662713e-13, 1, 2.0570212e-12, -3.5752867e-06, -2.0641266e-12, 1, 2.527237e-05, 6.7190804e-09, 1.1026859e-06)
+
+[node name="Physical Bone RHand" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(2092691925) index="14" unique_id=1917965401]
+transform = Transform3D(5.215407e-07, 1, 3.69616e-12, -1, 5.215407e-07, 1.9474547e-07, 1.9474547e-07, -3.7977278e-12, 1, 3.6000123, 2.100005, -5.821298e-08)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.768365e-06, -1.1920932e-05, -8.967419e-09)
+body_offset = Transform3D(1, -5.215407e-07, -3.8284043e-11, 5.215407e-07, 1, 3.7032656e-12, 3.8284043e-11, -3.6819692e-12, 1, -4.7683716e-06, 1.1920929e-05, 8.967419e-09)
+
+[node name="LFoot" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="0" unique_id=2004940248 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_ruybo")
+body_part = "l_foot"
+controller = NodePath("../../../PlayerController")
+disabled = true
+
+[node name="LCalf" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="1" unique_id=1890215078 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_72ex2")
+direction_key = "r_knee_ankle"
+controller = NodePath("../../../PlayerController")
+disabled = true
+
+[node name="LThigh" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="2" unique_id=306430168 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_ruybo")
+body_part = "l_thigh"
+controller = NodePath("../../../PlayerController")
+process_order = 1
+
+[node name="RFoot" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="3" unique_id=1400524024 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_ruybo")
+body_part = "r_foot"
+controller = NodePath("../../../PlayerController")
+disabled = true
+
+[node name="RCalf" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="4" unique_id=1057550602 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_ruybo")
+body_part = "r_calf"
+controller = NodePath("../../../PlayerController")
+disabled = true
+process_order = 2
+
+[node name="RThigh" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="5" unique_id=62920255 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_ruybo")
+body_part = "r_thigh"
+controller = NodePath("../../../PlayerController")
+process_order = 1
+
+[node name="LHand" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="6" unique_id=315247043 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_ruybo")
+controller = NodePath("../../../PlayerController")
+disabled = true
+
+[node name="LForearm" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="7" unique_id=931718828 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_72ex2")
+direction_key = "l_elbow_wrist"
+controller = NodePath("../../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
+process_order = 3
+
+[node name="LUpperArm" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="8" unique_id=1621823299 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_72ex2")
+direction_key = "l_shoulder_elbow"
+controller = NodePath("../../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
+process_order = 2
+
+[node name="RHand" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="9" unique_id=830711611 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_ruybo")
+controller = NodePath("../../../PlayerController")
+disabled = true
+
+[node name="RForearm" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="10" unique_id=2124860841 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_72ex2")
+direction_key = "r_elbow_wrist"
+controller = NodePath("../../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
+process_order = 3
+
+[node name="RUpperArm" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="11" unique_id=1661714797 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_72ex2")
+direction_key = "r_shoulder_elbow"
+controller = NodePath("../../../PlayerController")
+bone_axis = Vector3(0, -1, 0)
+process_order = 2
+
+[node name="Head" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="12" unique_id=85523903 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_ruybo")
+body_part = "head"
+controller = NodePath("../../../PlayerController")
+disabled = true
+
+[node name="Torso" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="13" unique_id=437509188 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_ruybo")
+body_part = "torso"
+controller = NodePath("../../../PlayerController")
+process_order = 1
+
+[node name="Hips" parent="Animator/Skeleton3D" parent_id_path=PackedInt32Array(179505756) index="14" unique_id=2127355082 node_paths=PackedStringArray("controller")]
+script = ExtResource("10_ruybo")
+body_part = "hips"
+controller = NodePath("../../../PlayerController")
+
+[node name="PlayerController" type="Node" parent="." index="2" unique_id=2080491582]
+script = ExtResource("1_f83c8")
