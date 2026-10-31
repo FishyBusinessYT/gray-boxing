@@ -1,3 +1,4 @@
+import argparse
 import struct
 import socket
 
@@ -6,10 +7,24 @@ from capture_controller import CaptureController, draw_landmarks_on_image
 from detector import Detector
 from direction_calculator import calculate_directions
 
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Gray Boxing motion capture backend.")
+    parser.add_argument(
+        "--camera-index",
+        type=int,
+        default=0,
+        help="VideoCapture device index to open (default: 0).",
+        )
+    return parser.parse_args()
+
+
+args = parse_args()
+
 download_task()
 
 dtr = Detector()
-captcont = CaptureController()
+captcont = CaptureController(args.camera_index)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 failed_frames = 0
