@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
-uid="uid://85786g73qqgb"
-path="res://.godot/imported/Uppercut.fbx-cbd5c90ba612c4ea748aaf2a433c27de.scn"
+type="AnimationLibrary"
+uid="uid://bmyuo8s8smkll"
+path="res://.godot/imported/Uppercut.fbx-cbd5c90ba612c4ea748aaf2a433c27de.res"
 
 [deps]
 
 source_file="res://Assets/animations/Uppercut.fbx"
-dest_files=["res://.godot/imported/Uppercut.fbx-cbd5c90ba612c4ea748aaf2a433c27de.scn"]
+dest_files=["res://.godot/imported/Uppercut.fbx-cbd5c90ba612c4ea748aaf2a433c27de.res"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bo2tytj74u87u"
-path="res://.godot/imported/Illegal Elbow Punch.fbx-63d765b053f818d3681108d98317affb.scn"
+uid="uid://bay0r8ghef74i"
+path="res://.godot/imported/character.fbx-002614cdd88a375aff45c2a5ae7d3cbc.scn"
 
 [deps]
 
-source_file="res://Assets/animations/Illegal Elbow Punch.fbx"
-dest_files=["res://.godot/imported/Illegal Elbow Punch.fbx-63d765b053f818d3681108d98317affb.scn"]
+source_file="res://character.fbx"
+dest_files=["res://.godot/imported/character.fbx-002614cdd88a375aff45c2a5ae7d3cbc.scn"]
 
 [params]
 
