@@ -58,11 +58,11 @@ func _build_basis_for_body_part():
 			var u: Vector3 = parts["head_r_eye"] * (-1)
 			var v: Vector3 = parts["neck_head"]
 			var u_into_v = (u.dot(v) / v.dot(v)) * v # Project u onto v
-			var x = u - u_into_v # x is the u vector projected onto the orthogonal subspace of v
+			var _x = u - u_into_v # x is the u vector projected onto the orthogonal subspace of v
 			DebugDraw3D.draw_arrow(
 				global_position, global_position + u * 3, Color.RED, 0.1
 			)
-			#return _vecs_to_basis(x, parts["neck_head"], null)
+			#return _vecs_to_basis(_x, parts["neck_head"], null)
 	return Basis(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO)
 
 func _process(_delta: float) -> void:

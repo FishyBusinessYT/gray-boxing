@@ -21,9 +21,9 @@ func _physics_process(delta: float) -> void:
 		)
 
 		# Resorte lineal (Hooke): F = k*x - c*v
-		#var pos_error := target.origin - b.global_position
-		#var force := linear_stiffness * pos_error - linear_damping * b.linear_velocity
-		#b.apply_central_impulse(force * delta)
+		var pos_error := target.origin - b.global_position
+		var force := linear_stiffness * pos_error - linear_damping * b.linear_velocity
+		b.apply_central_impulse(force * delta)
 
 		# Resorte angular (Hooke): α = k*θ - c*ω
 		var err_q := target.basis.get_rotation_quaternion() * b.global_transform.basis.get_rotation_quaternion().inverse()
