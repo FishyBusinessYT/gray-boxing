@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://7kn14jowsena" path="res://Scripts/ragdoll.gd" id="1_f3x1h"]
 [ext_resource type="Texture2D" uid="uid://cewcgeworcsks" path="res://Assets/pic.jpg" id="2_8epfh"]
+[ext_resource type="Material" uid="uid://da7gxr2wr03ah" path="res://Assets/enemy_head.tres" id="3_qtpkr"]
 [ext_resource type="Script" uid="uid://dmhup382114wr" path="res://Scripts/enemy_animator.gd" id="6_sb1cn"]
+[ext_resource type="Script" uid="uid://h6fwhi5kqe4" path="res://Scripts/body_part.gd" id="7_bdprt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm4ed"]
 
@@ -183,13 +185,8 @@ radius = 0.51665074
 [sub_resource type="SphereShape3D" id="SphereShape3D_eeq3r"]
 radius = 0.5266977
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eeq3r"]
-albedo_texture = ExtResource("2_8epfh")
-uv1_scale = Vector3(1.3, 1, 1)
-uv1_offset = Vector3(-0.15, 0, 0)
-
 [sub_resource type="SphereMesh" id="SphereMesh_w3ips"]
-material = SubResource("StandardMaterial3D_eeq3r")
+material = ExtResource("3_qtpkr")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvl27"]
 
@@ -797,6 +794,7 @@ controller_skeleton = NodePath("../../../character/Armature/Skeleton3D")
 linear_stiffness = 70.0
 linear_damping = 5.0
 angular_stiffness = 70.0
+limp_duration = 2.5
 
 [node name="Hips" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1783718079]
 transform = Transform3D(0.010000001, -1.1641532e-10, 9.313226e-10, -1.3969839e-09, -1.2805685e-09, 0.010000002, -8.731149e-11, -0.010000002, -1.2805685e-09, -2.2118911e-09, -4.656613e-10, 0.03365472)
@@ -808,6 +806,7 @@ bone_name = "Hip"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="Hips" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/Hips" unique_id=1116836698]
 transform = Transform3D(100, -2.384186e-05, 4.973799e-12, 0, -1.1920929e-05, -99.99999, 2.384186e-05, 99.99999, -1.1920929e-05, 0, 3.365472, 0)
@@ -827,6 +826,7 @@ bone_name = "Torso"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="Torso1" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/Torso1" unique_id=4818200]
 transform = Transform3D(99.998474, -2.0954758e-07, -0.5564412, 0.556441, -2.3841858e-05, 99.99851, -3.026799e-07, -100, -2.3841872e-05, 0.018726852, -3.3654218, 3.931058e-08)
@@ -846,6 +846,7 @@ bone_name = "Arm.L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="LUpperArm" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LUpperArm" unique_id=819934639]
 transform = Transform3D(-1.9649622, -8.046627e-05, -99.98073, 99.98068, 1.7881393e-05, -1.9649602, 2.3841856e-05, -100, 7.748607e-05, 5.2293687, -1.498272, -5.3734984e-06)
@@ -865,6 +866,7 @@ bone_name = "Forearm.L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="LForearm" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LForearm" unique_id=1230940865]
 transform = Transform3D(-1.1920929e-05, -5.9604645e-05, -100.00004, 100, 0, -1.1920933e-05, 0, -100, 5.960467e-05, 5.179496, -2.5889442, -3.8222165e-06)
@@ -884,6 +886,7 @@ bone_name = "Hand.L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="LHand" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LHand" unique_id=217997577]
 transform = Transform3D(1.9073486e-05, 4.7683716e-07, -100.00003, 100.00001, -1.1920929e-05, 4.196167e-05, -8.583069e-06, -100.000015, 1.9073486e-06, 5.179494, -3.5841298, -9.536743e-07)
@@ -903,6 +906,7 @@ bone_name = "Head"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/Head1" unique_id=1257907493]
 transform = Transform3D(1, -7.450581e-09, 0, 0, 1, 0, -2.9802322e-08, -7.450581e-09, 0.99999994, -0.005533308, 0.35156155, -0.025428176)
@@ -913,15 +917,16 @@ transform = Transform3D(-0.96928436, -0.013231976, 0.24558645, -0.048435524, 0.9
 mesh = SubResource("SphereMesh_w3ips")
 
 [node name="RUpperArm" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=826885183]
-transform = Transform3D(4.656613e-10, -0.00999807, -0.00019649384, 0.010000001, 1.3969839e-09, 1.8335413e-09, -1.9208528e-09, -0.00019649394, 0.009998071, -0.01600737, -2.561137e-08, 0.051989183)
+transform = Transform3D(4.656613e-10, -0.00999807, -0.00019649387, 0.010000001, 1.3969839e-09, 1.8626451e-09, -1.9208528e-09, -0.00019649394, 0.009998071, -0.01600737, -2.561137e-08, 0.051989183)
 collision_layer = 2
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8626441e-06, 7.450569e-07, -2.607702e-06)
-body_offset = Transform3D(0.010000004, 1.8626451e-09, -1.4551915e-10, -9.313226e-10, 0.010000002, -4.48199e-09, 3.4924597e-10, 4.5693014e-09, 0.010000006, -1.8626451e-08, -7.450581e-09, 2.6077032e-08)
+body_offset = Transform3D(0.010000004, 1.8626451e-09, -1.7462298e-10, -9.313226e-10, 0.010000002, -4.5110937e-09, 3.4924597e-10, 4.5693014e-09, 0.010000006, -1.8626451e-08, -7.450581e-09, 2.6077032e-08)
 bone_name = "Arm.R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="RUpperArm" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RUpperArm" unique_id=1203608334]
 transform = Transform3D(-1.9649622, 2.682209e-05, 99.98072, -99.98068, 1.1920929e-05, -1.9649602, -1.490116e-05, -100, 2.3841865e-05, -5.229368, -1.4982718, -3.404217e-06)
@@ -941,6 +946,7 @@ bone_name = "Forearm.R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="RForearm" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RForearm" unique_id=1890863230]
 transform = Transform3D(0, 4.7683716e-05, 100.00004, -100, 5.9604645e-06, -2.9802334e-06, -2.9802322e-06, -100, 4.7683734e-05, -5.179496, -2.5889444, -3.81942e-06)
@@ -960,6 +966,7 @@ bone_name = "Hand.R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="RHand" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RHand" unique_id=484641864]
 transform = Transform3D(3.0517578e-05, 0, 100.00003, -100, -1.1444092e-05, 4.9591064e-05, 9.059906e-06, -100.00003, 4.7683716e-07, -5.1794944, -3.5841284, -9.536743e-07)
@@ -979,6 +986,7 @@ bone_name = "Leg.L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="LThigh" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LThigh" unique_id=516823210]
 transform = Transform3D(-100, 8.694036e-06, -1.5146077e-05, 1.5099579e-05, -0.532341, -99.9986, -8.774542e-06, -99.99858, 0.532347, 0.48717424, 2.7968686, -0.007118785)
@@ -998,6 +1006,7 @@ bone_name = "Shin.L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="LShin" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LShin" unique_id=1875982299]
 transform = Transform3D(-100, -1.5099583e-05, -2.8421714e-12, 2.1316282e-12, 5.960465e-06, -100.00001, 1.509958e-05, -100.00001, -1.192093e-05, 0.487174, 1.8237231, 0.002589806)
@@ -1017,6 +1026,7 @@ bone_name = "Foot.L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="LFoot" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LFoot" unique_id=1038989644]
 transform = Transform3D(-100, 8.742279e-06, -2.857345e-12, -8.742278e-06, -100.00001, 3.821369e-13, -2.8573448e-12, 3.8213714e-13, 100.00001, 0.487174, 0.0025898218, -0.7745192)
@@ -1035,6 +1045,7 @@ bone_name = "Leg.R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="RThigh" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RThigh" unique_id=2143471450]
 transform = Transform3D(-100, 8.789594e-06, 1.5053003e-05, -1.509958e-05, -0.532341, -99.9986, -8.709336e-06, -99.99858, 0.532347, -0.4871742, 2.7968686, -0.007118871)
@@ -1054,6 +1065,7 @@ bone_name = "Shin.R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="RShin" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RShin" unique_id=271198792]
 transform = Transform3D(-100, 1.5099582e-05, 3.552714e-12, -2.842171e-12, 5.960465e-06, -100.00001, -1.5099579e-05, -100.00001, -1.192093e-05, -0.487174, 1.823723, 0.002589805)
@@ -1073,6 +1085,7 @@ bone_name = "Foot.R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
+script = ExtResource("7_bdprt")
 
 [node name="RFoot" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RFoot" unique_id=1481045946]
 transform = Transform3D(-100, -8.742279e-06, 2.1513616e-12, 8.742278e-06, -100.00001, 3.8213698e-13, 2.1513611e-12, 3.8213714e-13, 100.00001, -0.487174, 0.0025898218, -0.7745192)
