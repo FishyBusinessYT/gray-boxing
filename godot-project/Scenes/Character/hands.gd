@@ -12,6 +12,6 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
     global_transform = get_parent().global_transform
 
-
 func _on_body_entered(body: Node) -> void:
+    print('AAAAAAHHAAAAAAAAAAAAAAAAAAAA')
     print("Hit: ", body.name)
