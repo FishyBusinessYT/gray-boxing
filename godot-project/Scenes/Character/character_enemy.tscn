@@ -886,11 +886,11 @@ joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 
 [node name="LHand" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LHand" unique_id=217997577]
-transform = Transform3D(2.9802322e-05, 0, -100.00004, 100, -1.1920929e-05, 3.2782566e-05, -8.940697e-06, -100, 0, 5.1794944, -3.5841293, -9.611921e-07)
+transform = Transform3D(1.9073486e-05, 4.7683716e-07, -100.00003, 100.00001, -1.1920929e-05, 4.196167e-05, -8.583069e-06, -100.000015, 1.9073486e-06, 5.179494, -3.5841298, -9.536743e-07)
 mesh = SubResource("ArrayMesh_anvoc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LHand" unique_id=1509842441]
-transform = Transform3D(1, 2.9802322e-08, 3.725291e-09, -2.9802322e-08, 1, -3.7252872e-09, -3.725291e-09, 3.725287e-09, 1, -0.021582127, 0.56853485, 0.0073885918)
+transform = Transform3D(1, -1.4901161e-07, -7.450581e-09, -2.9802322e-08, 1.0000001, -1.1175871e-08, -3.7252903e-09, 3.7252903e-09, 1.0000002, -0.021582127, 0.56853485, 0.0073885918)
 shape = SubResource("SphereShape3D_w3ips")
 
 [node name="Head1" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=88524398]
@@ -962,11 +962,12 @@ joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 
 [node name="RHand" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RHand" unique_id=484641864]
-transform = Transform3D(2.9802322e-05, 0, 100.00004, -100, -1.1920929e-05, 3.2782566e-05, 8.940697e-06, -100, 0, -5.179494, -3.584129, -9.583954e-07)
+transform = Transform3D(3.0517578e-05, 0, 100.00003, -100, -1.1444092e-05, 4.9591064e-05, 9.059906e-06, -100.00003, 4.7683716e-07, -5.1794944, -3.5841284, -9.536743e-07)
 mesh = SubResource("ArrayMesh_mfelt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RHand" unique_id=470107314]
-transform = Transform3D(1, 2.9802322e-08, 3.725291e-09, -2.9802322e-08, 1, -3.7252872e-09, -3.725291e-09, 3.725287e-09, 1, -0.021582127, 0.56853485, 0.0073885918)
+transform = Transform3D(1, -2.9802322e-08, 7.450581e-09, 2.9802322e-08, 1, -3.7252903e-09, -3.7252903e-09, 3.7252903e-09, 1, -0.021581888, 0.5685351, 0.0073895454)
+visible = false
 shape = SubResource("SphereShape3D_w3ips")
 
 [node name="LThigh" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=591346474]
