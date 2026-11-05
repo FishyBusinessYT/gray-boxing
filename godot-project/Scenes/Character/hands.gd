@@ -27,6 +27,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	global_transform = get_parent().global_transform
 
+<<<<<<< HEAD
 	# The parent bone moves this body by teleporting it, so the physics engine
 	# does not report the punch speed. Derive it from the movement instead.
 	if delta > 0.0:
@@ -48,3 +49,8 @@ func _on_body_entered(body: Node) -> void:
 func _calculate_impact_force(part: BodyPartScript) -> float:
 	var relative_velocity := _tracked_velocity - part.linear_velocity
 	return mass * relative_velocity.length()
+=======
+func _on_body_entered(body: Node) -> void:
+    print('AAAAAAHHAAAAAAAAAAAAAAAAAAAA')
+    print("Hit: ", body.name)
+>>>>>>> d72073802dbbf283254bc179bb78c9e6e895066a
