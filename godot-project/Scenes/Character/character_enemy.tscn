@@ -3,8 +3,21 @@
 [ext_resource type="Script" uid="uid://7kn14jowsena" path="res://Scripts/ragdoll.gd" id="1_f3x1h"]
 [ext_resource type="Texture2D" uid="uid://cewcgeworcsks" path="res://Assets/pic.jpg" id="2_8epfh"]
 [ext_resource type="Material" uid="uid://da7gxr2wr03ah" path="res://Assets/enemy_head.tres" id="3_qtpkr"]
+[ext_resource type="AnimationLibrary" uid="uid://cvmes5ha7vs57" path="res://Assets/animations/Blocking.fbx" id="5_ic7m5"]
+[ext_resource type="AnimationLibrary" uid="uid://bm6b87cn522ny" path="res://Assets/animations/Feint.fbx" id="6_dawxs"]
 [ext_resource type="Script" uid="uid://dmhup382114wr" path="res://Scripts/enemy_animator.gd" id="6_sb1cn"]
 [ext_resource type="Script" uid="uid://h6fwhi5kqe4" path="res://Scripts/body_part.gd" id="7_bdprt"]
+[ext_resource type="AnimationLibrary" uid="uid://blu2i3sr1nxsc" path="res://Assets/animations/Fighting Idle.fbx" id="7_t8xol"]
+[ext_resource type="AnimationLibrary" uid="uid://dr2b3bysrlfch" path="res://Assets/animations/Hook.fbx" id="8_n01pl"]
+[ext_resource type="AnimationLibrary" uid="uid://ccn5itmayjm33" path="res://Assets/animations/Jab.fbx" id="9_gsheo"]
+[ext_resource type="AnimationLibrary" uid="uid://bsyxfii6pkg23" path="res://Assets/animations/Jab Cross.fbx" id="10_ynf11"]
+[ext_resource type="AnimationLibrary" uid="uid://dvtw4l7psqh3j" path="res://Assets/animations/Jab1.fbx" id="11_m7p5e"]
+[ext_resource type="AnimationLibrary" uid="uid://bsl2yp58j6qy1" path="res://Assets/animations/Punch1.fbx" id="12_qu230"]
+[ext_resource type="AnimationLibrary" uid="uid://kv1r0c062yu" path="res://Assets/animations/Reaction.fbx" id="13_5vh8t"]
+[ext_resource type="AnimationLibrary" uid="uid://ckat5ylhpmb48" path="res://Assets/animations/Stepping Backward.fbx" id="14_kmioq"]
+[ext_resource type="AnimationLibrary" uid="uid://dyq3rq2sl1iex" path="res://Assets/animations/Taking Punch.fbx" id="15_jdw2v"]
+[ext_resource type="AnimationLibrary" uid="uid://sxvmju0gn7hk" path="res://Assets/animations/Taunt.fbx" id="16_drncq"]
+[ext_resource type="AnimationLibrary" uid="uid://c6f4eck4f6g8m" path="res://Assets/animations/Uppercut.fbx" id="17_l1hye"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm4ed"]
 
@@ -937,11 +950,11 @@ transform = Transform3D(1, -2.9802322e-08, 6.183982e-07, -2.9802322e-08, 1, -8.7
 shape = SubResource("BoxShape3D_nqcac")
 
 [node name="RForearm" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=616153880]
-transform = Transform3D(-1.3969839e-09, -0.010000001, -1.4260877e-09, 0.010000002, -1.3969839e-09, 2.1536835e-09, -2.2118911e-09, -1.4260877e-09, 0.010000002, -0.02588944, 4.656613e-10, 0.051794946)
+transform = Transform3D(-1.3969839e-09, -0.010000001, -1.4260877e-09, 0.010000002, -9.313226e-10, 2.1536835e-09, -2.2118911e-09, -1.4260877e-09, 0.010000002, -0.02588944, 4.656613e-10, 0.051794946)
 collision_layer = 2
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.656611e-07, -1.8626457e-07, -3.7252877e-07)
-body_offset = Transform3D(0.0100000035, 4.656613e-10, 4.0745363e-10, -4.656613e-10, 0.010000001, -1.0768417e-09, -2.910383e-10, 1.4551915e-09, 0.010000007, 4.656613e-09, 1.8626451e-09, 3.7252903e-09)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.656611e-07, -1.8626457e-07, -3.7252875e-07)
+body_offset = Transform3D(0.0100000035, 0, 4.0745363e-10, -4.656613e-10, 0.010000001, -1.1350494e-09, -2.910383e-10, 1.5133992e-09, 0.010000007, 4.656613e-09, 1.8626451e-09, 3.7252903e-09)
 bone_name = "Forearm.R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -1102,7 +1115,6 @@ visible = false
 transform = Transform3D(79.64467, 60.39062, -3.1144032, -1.5696307, 7.213095, 99.72716, 60.4505, -79.37848, 6.6927547, 0.08809202, -0.22733948, -0.21823803)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="character/Armature" unique_id=622193756]
-show_rest_only = true
 bones/0/name = "Hip"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -4.973799e-14, 2.384186e-07, -2.384186e-07, -1.1920929e-07, 0.99999994, 0, -0.99999994, -1.1920929e-07, 0, 0, 0.03365472)
@@ -1245,7 +1257,7 @@ bones/19/rotation = Quaternion(0, 0, 0, 1)
 bones/19/scale = Vector3(1, 1, 1)
 
 [node name="Hips" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=1825970900]
-transform = Transform3D(1, -4.973799e-14, 2.384186e-07, -2.384186e-07, -1.1920929e-07, 0.99999994, 0, -0.99999994, -1.1920929e-07, 0, 0, 0.03365472)
+transform = Transform3D(1, -3.5527133e-14, 2.3841856e-07, -2.384186e-07, -1.1920928e-07, 0.9999999, 1.4210855e-14, -0.9999999, -1.1920928e-07, 0, 0, 0.03365472)
 bone_name = "Hip"
 bone_idx = 0
 
@@ -1254,7 +1266,7 @@ transform = Transform3D(1, -2.384186e-07, 4.973799e-14, 0, -1.1920929e-07, -0.99
 mesh = SubResource("ArrayMesh_opj80")
 
 [node name="Torso1" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=1659965061]
-transform = Transform3D(0.99998444, 0.005564405, -5.287319e-09, -6.429815e-09, 2.0530348e-07, -0.99999994, -0.0055644065, 0.999984, 2.0533616e-07, 0, 0, 0.03365472)
+transform = Transform3D(0.9979686, 0.014544603, 0.06202295, 0.06271363, -0.05316654, -0.99661446, -0.011197818, 0.99847925, -0.053970717, 0, 0, 0.03365472)
 bone_name = "Torso"
 bone_idx = 1
 
@@ -1263,7 +1275,7 @@ transform = Transform3D(0.99998474, -2.0954758e-09, -0.0055644116, 0.00556441, -
 mesh = SubResource("ArrayMesh_nypb3")
 
 [node name="LUpperArm" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=2142931685]
-transform = Transform3D(5.4150565e-08, 0.9998069, 0.019649554, -0.99999994, 2.0481261e-08, 1.455879e-07, 1.7520266e-07, -0.019649519, 0.99980646, 0.016007377, -5.549148e-09, 0.05198916)
+transform = Transform3D(0.22226925, 0.77430665, 0.5924908, -0.70179474, -0.29478922, 0.648524, 0.67681605, -0.5599536, 0.47788158, 0.016140759, 1.7958226e-05, 0.051871836)
 bone_name = "Arm.L"
 bone_idx = 2
 
@@ -1272,7 +1284,7 @@ transform = Transform3D(-0.019649623, -8.046627e-07, -0.9998073, 0.9998068, 1.78
 mesh = SubResource("ArrayMesh_d4ahg")
 
 [node name="LForearm" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=1103399702]
-transform = Transform3D(-8.288353e-08, 0.9999999, -2.0489097e-08, -0.99999994, -1.1369604e-07, 9.184033e-08, 1.2188566e-07, 4.656613e-08, 0.9999996, 0.025889438, -5.346713e-09, 0.051794942)
+transform = Transform3D(-0.7084196, -0.38353065, 0.592491, 0.7018813, -0.29458383, 0.6485236, -0.07419042, 0.87528473, 0.47788182, 0.023793982, -0.0028957312, 0.04633727)
 bone_name = "Forearm.L"
 bone_idx = 3
 
@@ -1281,7 +1293,7 @@ transform = Transform3D(-1.1920929e-07, -5.9604645e-07, -1.0000004, 1, 0, -1.192
 mesh = SubResource("ArrayMesh_8foek")
 
 [node name="LHand" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=828969656]
-transform = Transform3D(-8.288353e-08, 0.9999999, -5.10382e-07, -0.99999994, -1.13696e-07, 9.1840285e-08, 1.2188556e-07, 5.3645886e-07, 0.9999996, 0.035841264, -6.4781958e-09, 0.051794946)
+transform = Transform3D(-0.6915434, -0.7148118, 0.10397816, 0.6049501, -0.49447075, 0.6241266, -0.39471877, 0.4945119, 0.7743731, 0.019977156, -0.0058273748, 0.05504795)
 bone_name = "Hand.L"
 bone_idx = 4
 
@@ -1290,7 +1302,7 @@ transform = Transform3D(2.9802322e-07, 0, -1.0000004, 1, -1.1920929e-07, 3.27825
 mesh = SubResource("ArrayMesh_anvoc")
 
 [node name="Head1" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=394507510]
-transform = Transform3D(0.9999998, 7.916242e-09, 2.4110432e-07, 2.4110432e-07, 2.170166e-07, -0.99999994, -1.1641583e-08, 0.9999994, 2.1701669e-07, -5.820766e-11, 4.9365547e-09, 0.056402065)
+transform = Transform3D(0.97593915, 0.09601827, 0.19576228, 0.21605065, -0.30477682, -0.92759544, -0.029402291, 0.9475708, -0.3181884, 0.00020452768, -0.0012173173, 0.05636855)
 bone_name = "Head"
 bone_idx = 6
 
@@ -1299,7 +1311,7 @@ transform = Transform3D(0.99999994, 2.4210533e-07, -9.313292e-09, 9.313324e-09, 
 mesh = SubResource("ArrayMesh_2js7l")
 
 [node name="RUpperArm" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=1606685127]
-transform = Transform3D(5.121487e-09, -0.99980694, -0.019649826, 0.99999994, -2.8550843e-08, 2.0540033e-07, -2.35138e-07, -0.019649848, 0.9998064, -0.016007377, -5.566576e-09, 0.051989157)
+transform = Transform3D(-0.49414045, -0.18712315, -0.8490053, 0.5807589, -0.7977561, -0.16218719, -0.64694977, -0.5732107, 0.50287664, -0.01581106, -0.001980301, 0.052052453)
 bone_name = "Arm.R"
 bone_idx = 8
 
@@ -1308,7 +1320,7 @@ transform = Transform3D(-0.019649623, 2.682209e-07, 0.99980724, -0.9998068, 1.19
 mesh = SubResource("ArrayMesh_y7ci3")
 
 [node name="RForearm" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=1884203594]
-transform = Transform3D(-1.321988e-07, -0.99999994, -2.5704503e-07, 0.99999994, -1.6182956e-07, 1.6273809e-07, -1.9195447e-07, -2.8871e-07, 0.9999995, -0.025889441, -5.848774e-09, 0.051794935)
+transform = Transform3D(0.03779889, 0.5270305, -0.84900516, -0.9679302, -0.19185068, -0.16218728, -0.24836011, 0.8279078, 0.5028768, -0.017660579, -0.009865301, 0.046386853)
 bone_name = "Forearm.R"
 bone_idx = 9
 
@@ -1317,7 +1329,7 @@ transform = Transform3D(0, 4.7683716e-07, 1.0000004, -1, 5.9604645e-08, -2.98023
 mesh = SubResource("ArrayMesh_qjxw7")
 
 [node name="RHand" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=654979857]
-transform = Transform3D(-1.3219882e-07, -0.99999994, 2.3284775e-07, 0.99999994, -1.6182949e-07, 1.6273817e-07, -1.9195448e-07, 2.0118262e-07, 0.9999995, -0.035841264, -7.459272e-09, 0.05179494)
+transform = Transform3D(0.088830926, 0.7279707, -0.67982894, -0.99198353, 0.12624623, 0.005567208, 0.08987818, 0.6738842, 0.7333493, -0.012415668, -0.011774565, 0.054626048)
 bone_name = "Hand.R"
 bone_idx = 10
 
@@ -1326,7 +1338,7 @@ transform = Transform3D(2.9802322e-07, 0, 1.0000004, -1, -1.1920929e-07, 3.27825
 mesh = SubResource("ArrayMesh_mfelt")
 
 [node name="LThigh" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=1050501021]
-transform = Transform3D(-1, 1.2122644e-07, -8.806943e-08, 8.742279e-08, -0.005323647, -0.9999858, -1.2169357e-07, -0.99998564, 0.005323647, 0.004871738, 7.770409e-05, 0.027968666)
+transform = Transform3D(-0.95095557, 0.30806342, 0.027934182, -0.21751778, -0.6017684, -0.7684793, -0.21993051, -0.7368658, 0.6392644, 0.004871738, 7.770409e-05, 0.027968666)
 bone_name = "Leg.L"
 bone_idx = 12
 
@@ -1335,7 +1347,7 @@ transform = Transform3D(-1, 8.694036e-08, -1.5146077e-07, 1.5099579e-07, -0.0053
 mesh = SubResource("ArrayMesh_bwiqm")
 
 [node name="LShin" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=627890506]
-transform = Transform3D(-1, -3.2918113e-14, 1.5067187e-07, -1.5067188e-07, -1.1874363e-07, -0.9999999, 1.5210055e-14, -0.9999997, 1.1967495e-07, 0.004871739, 2.589661e-05, 0.01823723)
+transform = Transform3D(-0.94546276, 0.18057357, 0.27109608, -0.2554552, 0.10532093, -0.96106684, -0.20209546, -0.977906, -0.05344841, 0.00786968, -0.005778451, 0.0207978)
 bone_name = "Shin.L"
 bone_idx = 13
 
@@ -1344,7 +1356,7 @@ transform = Transform3D(-1, -1.5099583e-07, -2.8421713e-14, 2.1316282e-14, 5.960
 mesh = SubResource("ArrayMesh_rnp7i")
 
 [node name="LFoot" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=10983745]
-transform = Transform3D(-1, -3.2397907e-10, -6.359659e-15, 3.2392222e-10, -0.9999998, 2.3795289e-07, -4.5492913e-14, 2.3888418e-07, 0.99999964, 0.004871739, 2.5895364e-05, 0.0077451933)
+transform = Transform3D(-0.9610076, 0.27607563, -0.015696257, -0.27647862, -0.9583088, 0.07213166, 0.004871883, 0.073658936, 0.9972712, 0.009764265, -0.0046734195, 0.010537572)
 bone_name = "Foot.L"
 bone_idx = 14
 
@@ -1353,7 +1365,7 @@ transform = Transform3D(-1, 8.7422784e-08, -2.857345e-14, -8.742278e-08, -1.0000
 mesh = SubResource("ArrayMesh_746ac")
 
 [node name="RThigh" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=1913152278]
-transform = Transform3D(-1, -1.2376493e-07, -8.676518e-08, 8.742285e-08, -0.005323647, -0.9999858, 1.2330126e-07, -0.99998564, 0.005323647, -0.004871738, 7.77041e-05, 0.027968666)
+transform = Transform3D(-0.8861158, -0.26262864, -0.3818704, 0.38786754, 0.030780265, -0.921201, 0.25368786, -0.9644056, 0.07459028, -0.004871738, 7.77041e-05, 0.027968666)
 bone_name = "Leg.R"
 bone_idx = 16
 
@@ -1362,7 +1374,7 @@ transform = Transform3D(-1, 8.789594e-08, 1.5053003e-07, -1.509958e-07, -0.00532
 mesh = SubResource("ArrayMesh_0hcmm")
 
 [node name="RShin" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=1253852340]
-transform = Transform3D(-1, -2.6895153e-14, -1.5066763e-07, 1.5066766e-07, -1.17812306e-07, -0.9999999, 2.5063285e-14, -0.9999997, 1.1874363e-07, -0.004871739, 2.5896625e-05, 0.018237228)
+transform = Transform3D(-0.84234345, -0.25413993, -0.47525826, 0.33744973, 0.43887416, -0.83277655, 0.42022046, -0.8618594, -0.2839232, -0.007427529, 0.0003772446, 0.018583477)
 bone_name = "Shin.R"
 bone_idx = 17
 
@@ -1371,7 +1383,7 @@ transform = Transform3D(-1, 1.5099582e-07, 3.552714e-14, -2.842171e-14, 5.960465
 mesh = SubResource("ArrayMesh_rl1t8")
 
 [node name="RFoot" type="BoneAttachment3D" parent="character/Armature/Skeleton3D" unique_id=1952709765]
-transform = Transform3D(-1, 3.282139e-10, 6.6172416e-14, -3.2814285e-10, -0.9999998, 2.3702157e-07, 8.5625626e-14, 2.3795288e-07, 0.99999964, -0.004871739, 2.589539e-05, 0.0077451924)
+transform = Transform3D(-0.8947877, -0.44631705, -0.012490466, 0.44445136, -0.8930209, 0.0705397, -0.042636998, 0.057566702, 0.9974302, -0.010093975, 0.004981929, 0.009540815)
 bone_name = "Foot.R"
 bone_idx = 18
 
@@ -1381,4 +1393,19 @@ mesh = SubResource("ArrayMesh_n81fq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="character" unique_id=751273887]
 libraries/ = SubResource("AnimationLibrary_vc7r0")
+libraries/Blocking = ExtResource("5_ic7m5")
+libraries/Feint = ExtResource("6_dawxs")
+"libraries/Fighting Idle" = ExtResource("7_t8xol")
+libraries/Hook = ExtResource("8_n01pl")
+libraries/Jab = ExtResource("9_gsheo")
+"libraries/Jab Cross" = ExtResource("10_ynf11")
+libraries/Jab1 = ExtResource("11_m7p5e")
+libraries/Punch1 = ExtResource("12_qu230")
+libraries/Reaction = ExtResource("13_5vh8t")
+"libraries/Stepping Backward" = ExtResource("14_kmioq")
+"libraries/Taking Punch" = ExtResource("15_jdw2v")
+libraries/Taunt = ExtResource("16_drncq")
+libraries/Uppercut = ExtResource("17_l1hye")
 script = ExtResource("6_sb1cn")
+
+[connection signal="animation_finished" from="character/AnimationPlayer" to="character/AnimationPlayer" method="_on_animation_finished"]
