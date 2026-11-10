@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://dvtw4l7psqh3j"
-path="res://.godot/imported/Jab1.fbx-49aec17c88ae926c81b5eaa4917136c1.scn"
+path="res://.godot/imported/Jab1.fbx-49aec17c88ae926c81b5eaa4917136c1.res"
 
 [deps]
 
 source_file="res://Assets/animations/Jab1.fbx"
-dest_files=["res://.godot/imported/Jab1.fbx-49aec17c88ae926c81b5eaa4917136c1.scn"]
+dest_files=["res://.godot/imported/Jab1.fbx-49aec17c88ae926c81b5eaa4917136c1.res"]
 
 [params]
 

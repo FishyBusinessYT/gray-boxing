@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://bm6b87cn522ny"
-path="res://.godot/imported/Feint.fbx-f68fbf752de548aaab0df44ca2f3e2d0.scn"
+path="res://.godot/imported/Feint.fbx-f68fbf752de548aaab0df44ca2f3e2d0.res"
 
 [deps]
 
 source_file="res://Assets/animations/Feint.fbx"
-dest_files=["res://.godot/imported/Feint.fbx-f68fbf752de548aaab0df44ca2f3e2d0.scn"]
+dest_files=["res://.godot/imported/Feint.fbx-f68fbf752de548aaab0df44ca2f3e2d0.res"]
 
 [params]
 

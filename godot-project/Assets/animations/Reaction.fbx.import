@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://kv1r0c062yu"
-path="res://.godot/imported/Reaction.fbx-0f06df1bf48efdda0be69e9852976a20.scn"
+path="res://.godot/imported/Reaction.fbx-0f06df1bf48efdda0be69e9852976a20.res"
 
 [deps]
 
 source_file="res://Assets/animations/Reaction.fbx"
-dest_files=["res://.godot/imported/Reaction.fbx-0f06df1bf48efdda0be69e9852976a20.scn"]
+dest_files=["res://.godot/imported/Reaction.fbx-0f06df1bf48efdda0be69e9852976a20.res"]
 
 [params]
 

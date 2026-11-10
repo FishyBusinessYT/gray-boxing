@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://ckat5ylhpmb48"
-path="res://.godot/imported/Stepping Backward.fbx-6545cea70b483cd08af83206320866bb.scn"
+path="res://.godot/imported/Stepping Backward.fbx-6545cea70b483cd08af83206320866bb.res"
 
 [deps]
 
 source_file="res://Assets/animations/Stepping Backward.fbx"
-dest_files=["res://.godot/imported/Stepping Backward.fbx-6545cea70b483cd08af83206320866bb.scn"]
+dest_files=["res://.godot/imported/Stepping Backward.fbx-6545cea70b483cd08af83206320866bb.res"]
 
 [params]
 

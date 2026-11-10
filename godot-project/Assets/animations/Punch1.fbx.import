@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://bsl2yp58j6qy1"
-path="res://.godot/imported/Punch1.fbx-af17ec7f25f042f8a1f71eb0797f3e62.scn"
+path="res://.godot/imported/Punch1.fbx-af17ec7f25f042f8a1f71eb0797f3e62.res"
 
 [deps]
 
 source_file="res://Assets/animations/Punch1.fbx"
-dest_files=["res://.godot/imported/Punch1.fbx-af17ec7f25f042f8a1f71eb0797f3e62.scn"]
+dest_files=["res://.godot/imported/Punch1.fbx-af17ec7f25f042f8a1f71eb0797f3e62.res"]
 
 [params]
 
