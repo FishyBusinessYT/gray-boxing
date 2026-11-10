@@ -15,7 +15,6 @@ var _skel: Skeleton3D
 var _bone_idx: int = -1
 var _parent_idx: int = -1
 var _last_local_quat: Quaternion = Quaternion.IDENTITY
-var _initialized := false
 
 func _ready():
     _skel = get_skeleton()

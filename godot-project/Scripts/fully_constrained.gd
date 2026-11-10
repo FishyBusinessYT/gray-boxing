@@ -19,17 +19,17 @@ func _ready():
     #process_order = process_order
 
 func _vecs_to_basis(x, y, z):
-    var basis: Basis
+    var bsis: Basis
     if x == null:
-        basis = Basis(y.cross(z), y, z)
+        bsis = Basis(y.cross(z), y, z)
     elif y == null:
-        basis = Basis(x, z.cross(x), z)
+        bsis = Basis(x, z.cross(x), z)
     elif z == null:
-        basis = Basis(x, y, x.cross(y))
+        bsis = Basis(x, y, x.cross(y))
     else:
         push_error("All vectors are 0")
-    basis = basis.orthonormalized()
-    return basis
+    bsis = bsis.orthonormalized()
+    return bsis
 
 func _build_basis_for_body_part():
     var parts = controller.directions
@@ -68,7 +68,7 @@ func _build_basis_for_body_part():
 func _process(_delta: float) -> void:
     if disabled: return
 
-    var basis = _build_basis_for_body_part()
-    if basis == Basis(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO): return;
+    var bsis = _build_basis_for_body_part()
+    if bsis == Basis(Vector3.ZERO, Vector3.ZERO, Vector3.ZERO): return;
 
-    _skel.set_bone_pose_rotation(_bone_idx, Basis(basis))
+    _skel.set_bone_pose_rotation(_bone_idx, Basis(bsis))

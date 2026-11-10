@@ -1,15 +1,15 @@
 [remap]
 
-importer="animation_library"
+importer="scene"
 importer_version=1
-type="AnimationLibrary"
-uid="uid://b8ky5k4ki7vyn"
-path="res://.godot/imported/Fighting Idle.fbx-02cf748ba6ee6551a5a08e624d24de3c.res"
+type="PackedScene"
+uid="uid://blu2i3sr1nxsc"
+path="res://.godot/imported/Fighting Idle.fbx-02cf748ba6ee6551a5a08e624d24de3c.scn"
 
 [deps]
 
 source_file="res://Assets/animations/Fighting Idle.fbx"
-dest_files=["res://.godot/imported/Fighting Idle.fbx-02cf748ba6ee6551a5a08e624d24de3c.res"]
+dest_files=["res://.godot/imported/Fighting Idle.fbx-02cf748ba6ee6551a5a08e624d24de3c.scn"]
 
 [params]
 
