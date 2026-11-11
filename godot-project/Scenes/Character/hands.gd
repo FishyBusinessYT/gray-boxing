@@ -8,7 +8,7 @@ const BodyPartScript := preload("res://Scripts/body_part.gd")
 @export var bone_name: String
 
 ## Impact force (mass * relative speed) required before the hit deals damage.
-@export var minimum_impact_force: float = 1.0
+@export var minimum_impact_force: float = 10.0
 ## Damage dealt per unit of impact force.
 @export var damage_per_force: float = 1.5
 ## Maximum damage a single hit can deal, regardless of impact force.

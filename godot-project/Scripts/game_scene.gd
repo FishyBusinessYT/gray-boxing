@@ -9,6 +9,7 @@ signal game_ended
 
 func _ready() -> void:
     RoundLog.reset()
+    $DamageHUD.refresh_score()
 
 func _on_timer_timeout() -> void:
     RoundLog.finish_run(player_name)

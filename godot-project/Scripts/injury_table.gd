@@ -4,7 +4,7 @@ extends RefCounted
 ## still selects that injury, so a hit uses the first threshold at or above it.
 const INJURIES := {
     "head": {
-        10: "Chichón",
+        18: "Chichón",
         20: "Ojo negro",
         35: "Viene el ratón Pérez!",
         50: "Tabique roto",
@@ -13,7 +13,7 @@ const INJURIES := {
         100: "Hemorragia cerebral",
     },
     "torso": {
-        10: "Moretón",
+        18: "Moretón",
         30: "Corte",
         40: "Hernia abdominal",
         60: "Fractura de esternón",
@@ -22,7 +22,7 @@ const INJURIES := {
         100: "Sangrado interno",
     },
     "upper": {
-        10: "Raspón",
+        18: "Raspón",
         20: "Moretón",
         35: "Contusión muscular",
         45: "Dislocación de hombro",
@@ -31,7 +31,7 @@ const INJURIES := {
         100: "Fractura expuesta",
     },
     "forearm": {
-        10: "Raspón",
+        18: "Raspón",
         20: "Moretón",
         35: "Tendinitis",
         45: "Dislocación de codo",
@@ -40,7 +40,7 @@ const INJURIES := {
         100: "Fractura expuesta",
     },
     "hand": {
-        10: "Raspón",
+        18: "Raspón",
         20: "Moretón",
         30: "Esguince de muñeca",
         45: "Luxación de dedo",
@@ -50,7 +50,7 @@ const INJURIES := {
         100: "Fractura expuesta",
     },
     "hips": {
-        10: "Moretón",
+        18: "Moretón",
         25: "Laceración",
         40: "Desgarro del flexor de cadera",
         55: "Chau bolas!",
@@ -59,7 +59,7 @@ const INJURIES := {
         100: "Fractura de pelvis",
     },
     "thigh": {
-        10: "Moretón",
+        18: "Moretón",
         20: "Raspón",
         30: "Laceración",
         40: "Desgarre",
@@ -71,7 +71,7 @@ const INJURIES := {
         100: "Fractura abierta de fémur",
     },
     "shin": {
-        10: "Moretón",
+        18: "Moretón",
         20: "Raspón",
         30: "Laceración",
         40: "Hematoma óseo",
@@ -81,7 +81,7 @@ const INJURIES := {
         100: "Fractura abierta de tibia",
     },
     "foot": {
-        10: "Moretón",
+        18: "Moretón",
         20: "Ampolla",
         30: "Esguince leve de tobillo",
         45: "Hematoma subungueal",
