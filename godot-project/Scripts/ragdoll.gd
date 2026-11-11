@@ -72,7 +72,7 @@ func _setup_limp_timer() -> void:
 func _connect_head_hit() -> void:
 	for b in bones:
 		var part := b as BodyPartScript
-		if part != null and part.bone_name == "Head":
+		if part != null and part.get_bone_name() == "Head":
 			_head_part = part
 			_head_part.strong_hit.connect(_on_head_strong_hit)
 			return

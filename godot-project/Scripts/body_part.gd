@@ -1,16 +1,23 @@
 class_name BodyPart
 extends PhysicalBone3D
 
+const InjuryTable := preload("res://Scripts/injury_table.gd")
+const RoundLog := preload("res://Scripts/round_log.gd")
+
 ## Emitted every time this body part takes damage.
 signal damaged(amount: float, remaining_health: float, source: Node)
 ## Emitted once when this body part runs out of health.
 signal depleted(source: Node)
 ## Emitted when an incoming hit is strong enough to spawn a particle burst.
 signal strong_hit(amount: float, source: Node)
+## Emitted once per damaging hit with the selected injury.
+signal injury_sustained(segment: String, damage: float, injury: String, source: Node)
 
 ## Health this body part starts with.
 @export var max_health: float = 100.0
 @export var damage_divisor = 4
+## Injury region override. Leave empty to infer it from `bone_name`.
+@export var injury_region: String = ""
 
 ## Colour used while the part is at full health.
 @export var healthy_color: Color = Color.WHITE
@@ -51,10 +58,11 @@ func _ready() -> void:
 ## The applied damage is clamped to the remaining health, so health never drops
 ## below zero and a depleted part ignores further hits.
 func apply_damage(amount: float, source: Node = null) -> float:
-    amount = amount / damage_divisor
-
     if amount <= 0.0 or health <= 0.0:
         return 0.0
+
+    var hit_damage := amount
+    amount = amount / damage_divisor
 
     var applied := minf(amount, health)
     health -= applied / 10
@@ -64,11 +72,27 @@ func apply_damage(amount: float, source: Node = null) -> float:
         _spawn_burst()
         strong_hit.emit(amount, source)
 
+    var segment := get_bone_name()
+    var injury := InjuryTable.get_injury(get_injury_region(), hit_damage)
+    RoundLog.record_hit(segment, hit_damage, injury)
+    injury_sustained.emit(segment, hit_damage, injury, source)
+
     damaged.emit(applied, health, source)
     if health <= 0.0:
         depleted.emit(source)
 
     return applied
+
+## PhysicalBone3D exposes `bone_name` as a dynamic property that GDScript
+## cannot reference by identifier on this engine version.
+func get_bone_name() -> String:
+    return str(get("bone_name"))
+
+## Region used to select an injury. The side suffix ("Forearm.R") is ignored.
+func get_injury_region() -> String:
+    if not injury_region.is_empty():
+        return injury_region
+    return InjuryTable.get_region_for_bone(get_bone_name())
 
 func get_health_ratio() -> float:
     if max_health <= 0.0:

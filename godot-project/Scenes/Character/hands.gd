@@ -1,50 +1,5 @@
 extends RigidBody3D
 
-var injuries = {
-    'head': {
-        10: 'Chichón',
-        20: 'Ojo negro',
-        35: 'Viene el Ratón Pérez',
-        50: 'Tabique roto',
-        75: 'Contusión',
-        90: 'Fractura de mandíbula',
-        100: 'Hemorragia cerebral'
-    },
-    'torso': {
-        10: 'Moretón',
-        30: 'Corte',
-        40: 'Hernia abdominal',
-        60: 'Fractura de esternón',
-        75: 'Hemotórax',
-        85: 'Fractura de costilla',
-        100: 'Sangrado interno'
-    },
-    'upper': {
-        10: 'Raspón',
-        20: 'Moretón',
-        35: 'Contusión muscular',
-        45: 'Dislocación de hombro',
-        60: 'Fractura incompleta',
-        75: 'Fractura',
-        100: 'Fractura expuesta'
-    },
-    'forearm': {
-        10: 'Raspón',
-        20: 'Moretón',
-        35: 'Tendinitis',
-        45: 'Dislocación de codo',
-        60: 'Fractura en tallo verde',
-        75: 'Fractura',
-        100: 'Fractura expuesta'
-    },
-    'hips': {
-        15: 'Paralítica',
-        25: 'Laceración',
-        45: 'Chau bolas!',
-
-    }
-}
-
 const BodyPartScript := preload("res://Scripts/body_part.gd")
 
 ## Skeleton that drives this hand.
@@ -55,7 +10,7 @@ const BodyPartScript := preload("res://Scripts/body_part.gd")
 ## Impact force (mass * relative speed) required before the hit deals damage.
 @export var minimum_impact_force: float = 1.0
 ## Damage dealt per unit of impact force.
-@export var damage_per_force: float = 1.0
+@export var damage_per_force: float = 1.5
 ## Maximum damage a single hit can deal, regardless of impact force.
 @export var maximum_damage: float = 100.0
 
@@ -88,7 +43,6 @@ func _on_body_entered(body: Node) -> void:
         return
 
     var damage := minf(impact_force * damage_per_force, maximum_damage)
-    print(damage)
     part.apply_damage(damage, self)
 
 func _calculate_impact_force(part: BodyPartScript) -> float:
