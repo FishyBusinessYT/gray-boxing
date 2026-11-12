@@ -60,6 +60,8 @@ var _materials: Array[BaseMaterial3D] = []
 var _burst: CPUParticles3D
 var _burst_mesh: SphereMesh
 
+@export var mediumHitPlayer: AudioStreamPlayer
+
 func _ready() -> void:
     health = max_health
     add_to_group(GROUP)
@@ -84,6 +86,8 @@ func apply_damage(amount: float, source: Node = null) -> float:
     if amount >= burst_damage_threshold:
         _spawn_burst(hit_damage)
         strong_hit.emit(amount, source)
+        if !mediumHitPlayer.playing:
+            mediumHitPlayer.play()
 
     var segment := get_bone_name()
     var injury := InjuryTable.get_injury(get_injury_region(), hit_damage)

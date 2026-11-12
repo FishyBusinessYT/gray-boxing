@@ -1,8 +1,9 @@
 [gd_scene format=4 uid="uid://duayn1asloekb"]
 
 [ext_resource type="Script" uid="uid://7kn14jowsena" path="res://Scripts/ragdoll.gd" id="1_f3x1h"]
+[ext_resource type="AudioStream" uid="uid://biip061x2dwkj" path="res://Assets/audio/strong.wav" id="1_t8xol"]
 [ext_resource type="Texture2D" uid="uid://cewcgeworcsks" path="res://Assets/pic.jpg" id="2_8epfh"]
-[ext_resource type="Material" uid="uid://da7gxr2wr03ah" path="res://Assets/enemy_head.tres" id="3_qtpkr"]
+[ext_resource type="AudioStream" uid="uid://bx2eh1j6gwsar" path="res://Assets/audio/low.wav" id="2_n01pl"]
 [ext_resource type="AnimationLibrary" uid="uid://cvmes5ha7vs57" path="res://Assets/animations/Blocking.fbx" id="5_ic7m5"]
 [ext_resource type="AnimationLibrary" uid="uid://bm6b87cn522ny" path="res://Assets/animations/Feint.fbx" id="6_dawxs"]
 [ext_resource type="Script" uid="uid://dmhup382114wr" path="res://Scripts/enemy_animator.gd" id="6_sb1cn"]
@@ -199,7 +200,6 @@ radius = 0.51665074
 radius = 0.5266977
 
 [sub_resource type="SphereMesh" id="SphereMesh_w3ips"]
-material = ExtResource("3_qtpkr")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvl27"]
 
@@ -658,6 +658,12 @@ _data = {
 [node name="Ragdoll" type="Node3D" parent="." unique_id=117286412]
 transform = Transform3D(79.64467, 60.39062, -3.1144032, -1.5696307, 7.213095, 99.72716, 60.4505, -79.37848, 6.6927547, 0.08809202, -0.22733948, -0.21823803)
 
+[node name="highHit" type="AudioStreamPlayer" parent="Ragdoll" unique_id=745834530]
+stream = ExtResource("1_t8xol")
+
+[node name="mediumHit" type="AudioStreamPlayer" parent="Ragdoll" unique_id=337185792]
+stream = ExtResource("2_n01pl")
+
 [node name="Skeleton3D" type="Skeleton3D" parent="Ragdoll" unique_id=86015458]
 show_rest_only = true
 bones/0/name = "Hip"
@@ -801,15 +807,16 @@ bones/19/position = Vector3(0, 0.007876542, 0)
 bones/19/rotation = Quaternion(0, 0, 0, 1)
 bones/19/scale = Vector3(1, 1, 1)
 
-[node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="Ragdoll/Skeleton3D" unique_id=416649204 node_paths=PackedStringArray("controller_skeleton")]
+[node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="Ragdoll/Skeleton3D" unique_id=416649204 node_paths=PackedStringArray("controller_skeleton", "highHitPlayer")]
 script = ExtResource("1_f3x1h")
 controller_skeleton = NodePath("../../../character/Armature/Skeleton3D")
 linear_stiffness = 70.0
 linear_damping = 5.0
 angular_stiffness = 70.0
 limp_duration = 2.5
+highHitPlayer = NodePath("../../highHit")
 
-[node name="Hips" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1783718079]
+[node name="Hips" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1783718079 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(0.010000001, -1.1641532e-10, 9.313226e-10, -1.3969839e-09, -1.2805685e-09, 0.010000002, -8.731149e-11, -0.010000002, -1.2805685e-09, -2.2118911e-09, -4.656613e-10, 0.03365472)
 collision_layer = 2
 joint_type = 1
@@ -820,16 +827,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="Hips" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/Hips" unique_id=1116836698]
-transform = Transform3D(100, -2.384186e-05, 4.973799e-12, 0, -1.1920929e-05, -99.99999, 2.384186e-05, 99.99999, -1.1920929e-05, 0, 3.365472, 0)
+transform = Transform3D(100.00001, -2.2888184e-05, 0, 0, -1.1920929e-05, -100, 2.2888184e-05, 100, -1.1444092e-05, 7.450581e-09, 3.365472, -1.4901161e-08)
 mesh = SubResource("ArrayMesh_opj80")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/Hips" unique_id=438047163]
-transform = Transform3D(1, 1.1175871e-08, 2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.00030520558, 0.2604971, -2.9802322e-08)
+transform = Transform3D(1, 1.4901161e-08, 2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, -0.0003052093, 0.2604971, -5.9604645e-08)
 shape = SubResource("BoxShape3D_eeq3r")
 
-[node name="Torso1" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1882283192]
+[node name="Torso1" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1882283192 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(0.009999845, 5.565124e-05, 7.590279e-08, 7.590279e-08, -2.3283064e-10, -0.010000002, -5.565118e-05, 0.009999846, -6.4028427e-10, -7.3341653e-09, 1.8626451e-09, 0.033654757)
 collision_layer = 2
 joint_type = 1
@@ -840,16 +848,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="Torso1" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/Torso1" unique_id=4818200]
-transform = Transform3D(99.998474, -2.0954758e-07, -0.5564412, 0.556441, -2.3841858e-05, 99.99851, -3.026799e-07, -100, -2.3841872e-05, 0.018726852, -3.3654218, 3.931058e-08)
+transform = Transform3D(99.998474, -3.8146973e-06, -0.5564418, 0.55644107, -2.3841858e-05, 99.99852, -3.8146973e-06, -100, -2.4318695e-05, 0.018726856, -3.3654218, 2.9802322e-08)
 mesh = SubResource("ArrayMesh_nypb3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/Torso1" unique_id=2104161363]
-transform = Transform3D(0.99999964, -1.0430813e-07, 2.9802322e-08, -7.450581e-09, 0.99999243, 5.289912e-07, -2.0861626e-07, -6.631017e-07, 0.99999845, 0.0052185357, 1.0789468, -1.1920929e-07)
+transform = Transform3D(0.99999964, -1.0430813e-07, 2.9802322e-08, -7.450581e-09, 0.99999243, 5.2154064e-07, -2.0861626e-07, -6.593764e-07, 0.9999984, 0.005218543, 1.0789464, -1.0430813e-07)
 shape = SubResource("BoxShape3D_mscpb")
 
-[node name="LUpperArm" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1735402783]
+[node name="LUpperArm" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1735402783 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(-2.7939677e-08, 0.009998069, 0.00019649693, -0.010000002, -2.7939677e-08, -1.5133992e-08, -1.44355e-08, -0.00019649693, 0.009998071, 0.016007379, -3.259629e-09, 0.051989228)
 collision_layer = 2
 joint_type = 1
@@ -860,16 +869,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="LUpperArm" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LUpperArm" unique_id=819934639]
-transform = Transform3D(-1.9649622, -8.046627e-05, -99.98073, 99.98068, 1.7881393e-05, -1.9649602, 2.3841856e-05, -100, 7.748607e-05, 5.2293687, -1.498272, -5.3734984e-06)
+transform = Transform3D(-1.9649658, -8.106232e-05, -99.98073, 99.98068, 1.8119812e-05, -1.964962, 2.336502e-05, -99.99999, 7.724762e-05, 5.229369, -1.498272, -6.198883e-06)
 mesh = SubResource("ArrayMesh_d4ahg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LUpperArm" unique_id=776862453]
-transform = Transform3D(1, -2.9802322e-08, 6.183982e-07, -2.9802322e-08, 1, -8.791685e-07, 0, -3.7252903e-09, 0.9999903, -0.007995486, 0.44281006, -0.0023441315)
+transform = Transform3D(1, -2.9802322e-08, 6.183982e-07, -2.9802322e-08, 1, -8.791685e-07, 0, -3.7252903e-09, 0.9999903, -0.007995367, 0.44281006, -0.0023450851)
 shape = SubResource("BoxShape3D_nqcac")
 
-[node name="LForearm" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=552590254]
+[node name="LForearm" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=552590254 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(-2.7939677e-09, 0.010000001, 2.3574103e-09, -0.010000002, -3.259629e-09, 1.8626451e-09, 1.9790605e-09, -2.3283064e-09, 0.010000002, 0.02588944, -4.1909516e-09, 0.05179494)
 collision_layer = 2
 joint_type = 1
@@ -880,16 +890,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="LForearm" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LForearm" unique_id=1230940865]
-transform = Transform3D(-1.1920929e-05, -5.9604645e-05, -100.00004, 100, 0, -1.1920933e-05, 0, -100, 5.960467e-05, 5.179496, -2.5889442, -3.8222165e-06)
+transform = Transform3D(-1.1444092e-05, -5.9604645e-05, -100.00003, 100.00001, 0, -7.6293945e-06, 0, -99.999985, 5.9127808e-05, 5.179496, -2.5889444, -3.8146973e-06)
 mesh = SubResource("ArrayMesh_8foek")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LForearm" unique_id=727806113]
-transform = Transform3D(1, -4.5657942e-14, -3.5017732e-07, 0, 1, -1.303852e-07, 3.5017732e-07, 1.303852e-07, 1, -0.007995963, 0.50688195, -0.0023441315)
+transform = Transform3D(1, -2.9802322e-08, -3.501773e-07, 0, 1.0000001, -1.3038516e-07, 3.5762787e-07, 1.3038516e-07, 0.99999994, -0.007996082, 0.50688195, -0.0023441315)
 shape = SubResource("BoxShape3D_nqcac")
 
-[node name="LHand" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1311211021]
+[node name="LHand" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1311211021 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(1.8626451e-09, 0.010000001, 1.8335413e-09, -0.010000002, 1.3969839e-09, -2.910383e-10, -2.3283064e-10, -1.8044375e-09, 0.010000002, 0.03584133, 7.497147e-08, 0.051795073)
 collision_layer = 2
 joint_type = 1
@@ -900,16 +911,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="LHand" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LHand" unique_id=217997577]
-transform = Transform3D(1.9073486e-05, 4.7683716e-07, -100.00003, 100.00001, -1.1920929e-05, 4.196167e-05, -8.583069e-06, -100.000015, 1.9073486e-06, 5.179494, -3.5841298, -9.536743e-07)
+transform = Transform3D(1.9073486e-05, 4.7683716e-07, -100.00003, 100.00001, -1.1920929e-05, 4.5776367e-05, -8.106232e-06, -100.00002, 2.3841858e-06, 5.179494, -3.5841298, -9.536743e-07)
 mesh = SubResource("ArrayMesh_anvoc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LHand" unique_id=1509842441]
-transform = Transform3D(1, -1.4901161e-07, -7.450581e-09, -2.9802322e-08, 1.0000001, -1.1175871e-08, -3.7252903e-09, 3.7252903e-09, 1.0000002, -0.021582127, 0.56853485, 0.0073885918)
+transform = Transform3D(1, -2.682209e-07, -1.1175871e-08, -2.9802322e-08, 1.0000002, -1.8626451e-08, -3.7252903e-09, 3.7252903e-09, 1.0000004, -0.021582127, 0.56853485, 0.0073885918)
 shape = SubResource("SphereShape3D_w3ips")
 
-[node name="Head1" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=88524398]
+[node name="Head1" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=88524398 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(0.01, 1.7462298e-10, 2.7939677e-09, 2.3283064e-09, -9.022187e-09, -0.010000002, -1.4551915e-10, 0.010000002, -9.080395e-09, -2.1129381e-08, 4.377216e-08, 0.05640211)
 collision_layer = 2
 joint_type = 1
@@ -920,16 +932,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/Head1" unique_id=1257907493]
-transform = Transform3D(1, -7.450581e-09, 0, 0, 1, 0, -2.9802322e-08, -7.450581e-09, 0.99999994, -0.005533308, 0.35156155, -0.025428176)
+transform = Transform3D(1, -1.1175871e-08, 0, 0, 1, 3.7252903e-09, -2.9802322e-08, -1.4901161e-08, 0.9999999, -0.005533308, 0.35156155, -0.025428206)
 shape = SubResource("SphereShape3D_eeq3r")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/Head1" unique_id=1582072920]
-transform = Transform3D(-0.96928436, -0.013231976, 0.24558645, -0.048435524, 0.98926616, -0.13786525, -0.24112615, -0.14552577, -0.9595206, -0.0057255477, 0.36377382, -0.026311547)
+transform = Transform3D(-0.9692844, -0.013231982, 0.24558643, -0.048435524, 0.98926616, -0.13786523, -0.24112606, -0.14552577, -0.9595205, -0.0057255477, 0.36377382, -0.026311576)
 mesh = SubResource("SphereMesh_w3ips")
 
-[node name="RUpperArm" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=826885183]
+[node name="RUpperArm" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=826885183 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(4.656613e-10, -0.00999807, -0.00019649387, 0.010000001, 1.3969839e-09, 1.8626451e-09, -1.9208528e-09, -0.00019649394, 0.009998071, -0.01600737, -2.561137e-08, 0.051989183)
 collision_layer = 2
 joint_type = 1
@@ -940,36 +953,38 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="RUpperArm" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RUpperArm" unique_id=1203608334]
-transform = Transform3D(-1.9649622, 2.682209e-05, 99.98072, -99.98068, 1.1920929e-05, -1.9649602, -1.490116e-05, -100, 2.3841865e-05, -5.229368, -1.4982718, -3.404217e-06)
+transform = Transform3D(-1.9649582, 2.7656555e-05, 99.98073, -99.98068, 1.2397766e-05, -1.9649582, -1.5258789e-05, -100, 2.336502e-05, -5.229368, -1.498272, -3.8146973e-06)
 mesh = SubResource("ArrayMesh_y7ci3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RUpperArm" unique_id=485383227]
-transform = Transform3D(1, -2.9802322e-08, 6.183982e-07, -2.9802322e-08, 1, -8.791685e-07, 0, -3.7252903e-09, 0.9999903, -0.007995486, 0.44281006, -0.0023441315)
+transform = Transform3D(1, -2.9802322e-08, 6.183982e-07, 0, 1, -8.828938e-07, -3.7252903e-09, -7.450581e-09, 0.9999902, -0.007995456, 0.44281006, -0.0023450851)
 shape = SubResource("BoxShape3D_nqcac")
 
-[node name="RForearm" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=616153880]
-transform = Transform3D(-1.3969839e-09, -0.010000001, -1.4260877e-09, 0.010000002, -9.313226e-10, 2.1536835e-09, -2.2118911e-09, -1.4260877e-09, 0.010000002, -0.02588944, 4.656613e-10, 0.051794946)
+[node name="RForearm" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=616153880 node_paths=PackedStringArray("mediumHitPlayer")]
+transform = Transform3D(-1.3969839e-09, -0.01, -1.4842954e-09, 0.010000002, -9.313226e-10, 2.1536835e-09, -2.2118911e-09, -1.4842954e-09, 0.010000002, -0.02588944, 4.656613e-10, 0.051794946)
 collision_layer = 2
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.656611e-07, -1.8626457e-07, -3.7252875e-07)
-body_offset = Transform3D(0.0100000035, 0, 4.0745363e-10, -4.656613e-10, 0.010000001, -1.1350494e-09, -2.910383e-10, 1.5133992e-09, 0.010000007, 4.656613e-09, 1.8626451e-09, 3.7252903e-09)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6566112e-07, -1.8626456e-07, -3.7252875e-07)
+body_offset = Transform3D(0.0100000035, 4.656613e-10, 4.0745363e-10, -4.656613e-10, 0.010000002, -1.1350494e-09, -2.910383e-10, 1.4842954e-09, 0.010000007, 4.656613e-09, 1.8626451e-09, 3.7252903e-09)
 bone_name = "Forearm.R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="RForearm" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RForearm" unique_id=1890863230]
-transform = Transform3D(0, 4.7683716e-05, 100.00004, -100, 5.9604645e-06, -2.9802334e-06, -2.9802322e-06, -100, 4.7683734e-05, -5.179496, -2.5889444, -3.81942e-06)
+transform = Transform3D(3.8146973e-06, 4.720688e-05, 100.00004, -100, 5.722046e-06, -3.8146973e-06, -2.861023e-06, -100, 4.720688e-05, -5.1794953, -2.5889437, -3.8146973e-06)
 mesh = SubResource("ArrayMesh_qjxw7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RForearm" unique_id=1186528660]
-transform = Transform3D(0.9999998, -2.9802322e-08, 6.03497e-07, -2.9802322e-08, 0.99999976, -8.7171793e-07, -3.7252903e-09, -1.1175871e-08, 0.99999005, -0.022330642, 0.5097933, -0.0023612976)
+transform = Transform3D(0.9999998, 2.9802322e-08, 5.9977174e-07, 2.9802322e-08, 0.99999976, -8.6799264e-07, -3.7252903e-09, -1.4901161e-08, 0.99999, -0.022330403, 0.5097933, -0.0023608208)
 shape = SubResource("BoxShape3D_nqcac")
 
-[node name="RHand" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=43513394]
+[node name="RHand" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=43513394 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(-9.313226e-10, -0.010000001, 1.1059456e-09, 0.010000002, 0, 2.6193447e-09, -2.6193447e-09, 1.0768417e-09, 0.010000002, -0.035841297, 4.9825758e-08, 0.051794954)
 collision_layer = 2
 joint_type = 1
@@ -980,17 +995,18 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="RHand" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RHand" unique_id=484641864]
-transform = Transform3D(3.0517578e-05, 0, 100.00003, -100, -1.1444092e-05, 4.9591064e-05, 9.059906e-06, -100.00003, 4.7683716e-07, -5.1794944, -3.5841284, -9.536743e-07)
+transform = Transform3D(2.670288e-05, -4.7683716e-07, 100.00003, -100, -1.1444092e-05, 5.722046e-05, 9.059906e-06, -100.00004, 9.536743e-07, -5.1794944, -3.5841281, -9.536743e-07)
 mesh = SubResource("ArrayMesh_mfelt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RHand" unique_id=470107314]
-transform = Transform3D(1, -2.9802322e-08, 7.450581e-09, 2.9802322e-08, 1, -3.7252903e-09, -3.7252903e-09, 3.7252903e-09, 1, -0.021581888, 0.5685351, 0.0073895454)
+transform = Transform3D(1, -2.9802322e-08, 3.7252903e-09, 2.9802322e-08, 1, -7.450581e-09, 0, 0, 1, -0.021581769, 0.5685353, 0.0073900223)
 visible = false
 shape = SubResource("SphereShape3D_w3ips")
 
-[node name="LThigh" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=591346474]
+[node name="LThigh" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=591346474 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(-0.010000001, 2.4505425e-08, 2.561137e-08, -2.514571e-08, -5.3260068e-05, -0.00999986, -2.438901e-08, -0.00999986, 5.3260068e-05, 0.004871738, 7.770397e-05, 0.027968667)
 collision_layer = 2
 joint_type = 1
@@ -1000,16 +1016,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="LThigh" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LThigh" unique_id=516823210]
-transform = Transform3D(-100, 8.694036e-06, -1.5146077e-05, 1.5099579e-05, -0.532341, -99.9986, -8.774542e-06, -99.99858, 0.532347, 0.48717424, 2.7968686, -0.007118785)
+transform = Transform3D(-100, 3.8146973e-06, -1.4781952e-05, 1.4305115e-05, -0.5323405, -99.9986, -1.1444092e-05, -99.99858, 0.5323467, 0.4871743, 2.7968686, -0.0071187466)
 mesh = SubResource("ArrayMesh_bwiqm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LThigh" unique_id=2135816095]
-transform = Transform3D(1.0000017, -5.2154064e-08, 1.4305115e-06, 4.4703484e-07, 1, -5.029142e-07, 7.56979e-06, 7.8231096e-08, 0.9999999, -0.017150402, 0.48935056, 0.0051270425)
+transform = Transform3D(1.0000017, -5.2154064e-08, 1.4603138e-06, 4.5076013e-07, 1, -5.029142e-07, 7.6293945e-06, 7.8231096e-08, 0.9999998, -0.017150402, 0.4893508, 0.0051270574)
 shape = SubResource("BoxShape3D_frucx")
 
-[node name="LShin" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=901349497]
+[node name="LShin" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=901349497 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(-0.010000001, -4.3655746e-10, 5.5879354e-09, -5.122274e-09, 3.4924597e-10, -0.010000002, 4.0745363e-10, -0.010000002, -3.4924597e-10, 0.004871742, 2.5898218e-05, 0.01823723)
 collision_layer = 2
 joint_type = 1
@@ -1020,16 +1037,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="LShin" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LShin" unique_id=1875982299]
-transform = Transform3D(-100, -1.5099583e-05, -2.8421714e-12, 2.1316282e-12, 5.960465e-06, -100.00001, 1.509958e-05, -100.00001, -1.192093e-05, 0.487174, 1.8237231, 0.002589806)
+transform = Transform3D(-100.000015, -1.1444092e-05, 0, 0, 6.198883e-06, -100.000015, 1.1444092e-05, -100.000015, -1.1444092e-05, 0.487174, 1.8237233, 0.0025898218)
 mesh = SubResource("ArrayMesh_rnp7i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LShin" unique_id=231596589]
-transform = Transform3D(1.0000017, -5.2154064e-08, 1.4305115e-06, 4.5076013e-07, 1.0000001, -4.991889e-07, 7.56979e-06, 7.8231096e-08, 0.99999994, -0.01900202, 0.6069934, 0.013635963)
+transform = Transform3D(1.0000017, -4.8428774e-08, 1.4007092e-06, 4.582107e-07, 1.0000002, -5.029142e-07, 7.56979e-06, 7.8231096e-08, 1, -0.01900205, 0.60699344, 0.013635963)
 shape = SubResource("BoxShape3D_frucx")
 
-[node name="LFoot" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=2075108442]
+[node name="LFoot" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=2075108442 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(-0.010000001, 9.778887e-09, -4.0454324e-09, -9.313226e-09, -0.010000002, -2.9744115e-08, -4.0745363e-09, -2.9685907e-08, 0.010000002, 0.004871748, 2.5883783e-05, 0.0077451933)
 collision_layer = 2
 joint_type = 1
@@ -1040,16 +1058,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="LFoot" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LFoot" unique_id=1038989644]
-transform = Transform3D(-100, 8.742279e-06, -2.857345e-12, -8.742278e-06, -100.00001, 3.821369e-13, -2.8573448e-12, 3.8213714e-13, 100.00001, 0.487174, 0.0025898218, -0.7745192)
+transform = Transform3D(-99.99999, 7.6293945e-06, 0, -1.1444092e-05, -100, -4.7683716e-07, -4.7683716e-07, 0, 100, 0.487174, 0.0025898516, -0.7745192)
 mesh = SubResource("ArrayMesh_746ac")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/LFoot" unique_id=1702157144]
-transform = Transform3D(0.9999981, 3.6656857e-06, 4.0978193e-08, 0, 0.99998856, -3.9860606e-07, 1.8626451e-08, 3.7252903e-09, 0.999987, -0.018785834, 0.14939292, -0.29549813)
+transform = Transform3D(0.9999981, 3.6656857e-06, 4.0978193e-08, 0, 0.99998856, -4.0605664e-07, 1.8626451e-08, 3.7252903e-09, 0.999987, -0.018785805, 0.14939292, -0.29549807)
 shape = SubResource("BoxShape3D_bjwxe")
 
-[node name="RThigh" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=2013998167]
+[node name="RThigh" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=2013998167 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(-0.01, -1.6007107e-09, 8.8475645e-09, -8.381903e-09, -5.3237134e-05, -0.00999986, 1.6589183e-09, -0.00999986, 5.3237134e-05, -0.004871738, 7.770443e-05, 0.027968667)
 collision_layer = 2
 joint_type = 1
@@ -1059,16 +1078,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="RThigh" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RThigh" unique_id=2143471450]
-transform = Transform3D(-100, 8.789594e-06, 1.5053003e-05, -1.509958e-05, -0.532341, -99.9986, -8.709336e-06, -99.99858, 0.532347, -0.4871742, 2.7968686, -0.007118871)
+transform = Transform3D(-100.00001, 7.6293945e-06, 1.5258789e-05, -1.5497208e-05, -0.5323396, -99.9986, -1.1444092e-05, -99.99858, 0.5323467, -0.48717415, 2.7968686, -0.0071189106)
 mesh = SubResource("ArrayMesh_0hcmm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RThigh" unique_id=1390603836]
-transform = Transform3D(1.0000017, -5.2154064e-08, 1.4305115e-06, 4.4703484e-07, 1, -5.029142e-07, 7.56979e-06, 7.8231096e-08, 0.9999999, -0.017150402, 0.48935056, 0.0051270425)
+transform = Transform3D(1.0000017, -4.8428774e-08, 1.4305115e-06, 4.5076013e-07, 0.99999994, -4.991889e-07, 7.659197e-06, 7.0780516e-08, 0.9999999, -0.017150402, 0.4893508, 0.0051270425)
 shape = SubResource("BoxShape3D_frucx")
 
-[node name="RShin" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1921606242]
+[node name="RShin" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1921606242 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(-0.010000001, 9.313226e-10, -2.3283064e-09, 2.7939677e-09, 3.3178367e-09, -0.010000002, -9.313226e-10, -0.010000002, -3.259629e-09, -0.0048717544, 2.5865156e-05, 0.018237237)
 collision_layer = 2
 joint_type = 1
@@ -1079,16 +1099,17 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="RShin" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RShin" unique_id=271198792]
-transform = Transform3D(-100, 1.5099582e-05, 3.552714e-12, -2.842171e-12, 5.960465e-06, -100.00001, -1.5099579e-05, -100.00001, -1.192093e-05, -0.487174, 1.823723, 0.002589805)
+transform = Transform3D(-100, 1.9073486e-05, 0, -4.7683716e-07, 6.67572e-06, -100.000015, -1.5258789e-05, -100.000015, -1.2874603e-05, -0.48717406, 1.8237228, 0.002589777)
 mesh = SubResource("ArrayMesh_rl1t8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RShin" unique_id=1311739064]
-transform = Transform3D(1.0000017, -5.2154064e-08, 1.4305115e-06, 4.5076013e-07, 1.0000001, -4.991889e-07, 7.56979e-06, 7.8231096e-08, 0.99999994, -0.01900202, 0.6069934, 0.013635963)
+transform = Transform3D(1.0000017, -4.8428774e-08, 1.3709068e-06, 4.5076013e-07, 1.0000001, -4.991889e-07, 7.599592e-06, 7.8231096e-08, 1, -0.01900202, 0.6069933, 0.013635963)
 shape = SubResource("BoxShape3D_frucx")
 
-[node name="RFoot" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1814349226]
+[node name="RFoot" type="PhysicalBone3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1814349226 node_paths=PackedStringArray("mediumHitPlayer")]
 transform = Transform3D(-0.01, 5.5879354e-09, 1.2805685e-09, -5.5879354e-09, -0.010000002, 1.8044375e-09, 1.2805685e-09, 1.8044375e-09, 0.010000002, -0.0048717423, 2.5892863e-05, 0.0077451956)
 collision_layer = 2
 joint_type = 1
@@ -1099,13 +1120,14 @@ joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 script = ExtResource("7_bdprt")
+mediumHitPlayer = NodePath("../../../mediumHit")
 
 [node name="RFoot" type="MeshInstance3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RFoot" unique_id=1481045946]
-transform = Transform3D(-100, -8.742279e-06, 2.1513616e-12, 8.742278e-06, -100.00001, 3.8213698e-13, 2.1513611e-12, 3.8213714e-13, 100.00001, -0.487174, 0.0025898218, -0.7745192)
+transform = Transform3D(-100, -7.6293945e-06, 4.7683716e-07, 1.1444092e-05, -100.00001, 4.7683716e-07, 4.7683716e-07, 9.536743e-07, 100.00001, -0.48717403, 0.0025898218, -0.7745192)
 mesh = SubResource("ArrayMesh_n81fq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ragdoll/Skeleton3D/PhysicalBoneSimulator3D/RFoot" unique_id=1265823020]
-transform = Transform3D(0.9999981, 3.6656857e-06, 4.0978193e-08, 0, 0.99998856, -3.9860606e-07, 1.8626451e-08, 3.7252903e-09, 0.999987, -0.018785834, 0.14939292, -0.29549813)
+transform = Transform3D(0.99999815, 3.6358833e-06, 4.4703484e-08, 2.9802322e-08, 0.9999887, -4.0233135e-07, 1.4901161e-08, 7.450581e-09, 0.999987, -0.018785894, 0.14939293, -0.29549813)
 shape = SubResource("BoxShape3D_bjwxe")
 
 [node name="character" type="Node3D" parent="." unique_id=1247637260]
