@@ -1,3 +1,4 @@
+import argparse
 import struct
 import socket
 
@@ -6,17 +7,31 @@ from capture_controller import CaptureController, draw_landmarks_on_image
 from detector import Detector
 from direction_calculator import calculate_directions
 
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Gray Boxing motion capture backend.")
+    parser.add_argument(
+        "--camera-index",
+        type=int,
+        default=0,
+        help="VideoCapture device index to open (default: 0).",
+        )
+    return parser.parse_args()
+
+
+args = parse_args()
+
 download_task()
 
 dtr = Detector()
-captcont = CaptureController()
+captcont = CaptureController(args.camera_index)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 failed_frames = 0
 processed_frames = 0
 skip_ratio = 1 / 3
 
-while True: # TODO handle exit properly
+while True:  # TODO handle exit properly
     # If the camera frames aren't continually consumed, they generate latency
     timestamp, mp_image = captcont.get_frame()
 
@@ -25,25 +40,23 @@ while True: # TODO handle exit properly
     else:
         processed_frames += skip_ratio
         continue
-    
+
     try:
-        landmarks = dtr.get_landmarks(mp_image, timestamp).pose_landmarks[0]
-
+        landmarks = dtr.get_landmarks(mp_image, timestamp).pose_world_landmarks[0]
         node_directions = calculate_directions(landmarks)
-        data = struct.pack('51f', *node_directions)
 
-        #draw_landmarks_on_image(mp_image.numpy_view(), [landmarks])
-        
+        data = struct.pack("54f", *node_directions)
+
         failed_frames = 0
 
     except IndexError:
-        data = struct.pack('7s', b'plyr404')
+        data = struct.pack("7s", b"plyr404")
 
         failed_frames += 1
         if failed_frames >= 100:
-            print(f'Lost sight of player (f#{failed_frames}).')
+            print(f"Lost sight of player (f#{failed_frames}).")
 
-    server_socket.sendto(data, ('127.0.0.1', 52346))
+    server_socket.sendto(data, ("127.0.0.1", 52346))
 
 server_socket.close()
 dtr.cleanup()

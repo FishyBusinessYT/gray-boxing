@@ -17,11 +17,24 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-BackendManager="uid://dbytswah2ssfr"
+BackendManager="*uid://dbytswah2ssfr"
+_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [debug_draw_3d]
 
 settings/addon_root_folder="res://addons/debug_draw_3d"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false
+
+[gray_boxing]
+
+camera_index=1
 
 [physics]
 

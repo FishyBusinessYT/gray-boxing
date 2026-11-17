@@ -81,6 +81,7 @@ def calculate_directions(landmarks):
         'r_an': Vector3(landmarks[27]),
         'r_he': Vector3(landmarks[29]),
         'r_to': Vector3(landmarks[31]),
+        'eye': Vector3(landmarks[7])
         }
 
     return [
@@ -101,4 +102,5 @@ def calculate_directions(landmarks):
         *get_direction(nodes['r_hi'], nodes['r_kn']),  # r_hip_knee
         *get_direction(nodes['r_kn'], nodes['r_an']),  # r_knee_ankle
         *get_direction(nodes['r_he'], nodes['r_to']),  # r_heel_toe
+        *get_direction(nodes['head'], nodes['eye'])    # head_r_eye
         ]

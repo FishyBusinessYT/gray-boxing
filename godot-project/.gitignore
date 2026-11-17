@@ -2,5 +2,9 @@
 .godot/
 /android/
 
+# Runtime leaderboard data
+leaderboard.json
+leaderboard.json.tmp
+
 # Exclude symlink from version control
 backend

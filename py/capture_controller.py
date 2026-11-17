@@ -6,10 +6,19 @@ from mediapipe.tasks.python.vision import drawing_styles
 from mediapipe.tasks.python import vision
 
 class CaptureController:
-    def __init__(self):
-        self.capture = cv2.VideoCapture(0)
-        self.fps = self.capture.get(cv2.CAP_PROP_FPS)
+    def __init__(self, camera_index=0):
+        self.capture = cv2.VideoCapture(camera_index)
+        # Some backends report 0 FPS until the first frame; MediaPipe still
+        # needs a monotonically increasing timestamp, so fall back to 30.
+        self.fps = self.capture.get(cv2.CAP_PROP_FPS) or 30.0
         self.current_frame = 0
+
+        if not self.capture.isOpened():
+            raise RuntimeError(
+                f"Could not open camera at index {camera_index}. "
+                "Check the device is connected and not in use, or pass a "
+                "different index."
+                )
 
     def get_frame(self):
         timestamp = int(self.current_frame/self.fps*1000)
