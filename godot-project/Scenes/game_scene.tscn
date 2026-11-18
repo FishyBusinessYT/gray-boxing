@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d16qvurgdcjlx"]
 
 [ext_resource type="Script" uid="uid://5iys3phofy5n" path="res://Scripts/game_scene.gd" id="1_b6fju"]
-[ext_resource type="ArrayMesh" uid="uid://bekqnj0ulhb55" path="res://Assets/ring.obj" id="2_2fmhe"]
+[ext_resource type="ArrayMesh" uid="uid://bekqnj0ulhb55" path="res://Assets/models-etc/ring.obj" id="2_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://b20er8wu4vx7k" path="res://Scenes/Character/character_player.tscn" id="3_7iton"]
 [ext_resource type="PackedScene" uid="uid://duayn1asloekb" path="res://Scenes/Character/character_enemy.tscn" id="4_ikfsv"]
 [ext_resource type="Script" uid="uid://bs5p1258qsv30" path="res://Scripts/damage_hud.gd" id="5_hud"]

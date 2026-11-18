@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dbpgeno8sbhwy"]
 
-[ext_resource type="Texture2D" uid="uid://q4kynvopiyyu" path="res://Assets/menu.png" id="1_fjik7"]
-[ext_resource type="Texture2D" uid="uid://oiih588w6tjh" path="res://Assets/menu_pressed.png" id="2_pobhu"]
-[ext_resource type="Texture2D" uid="uid://c04b6lo1tgisv" path="res://Assets/menu_hover.png" id="3_n70i8"]
+[ext_resource type="Texture2D" uid="uid://q4kynvopiyyu" path="res://Assets/images/menu.png" id="1_fjik7"]
+[ext_resource type="Texture2D" uid="uid://oiih588w6tjh" path="res://Assets/images/menu_pressed.png" id="2_pobhu"]
+[ext_resource type="Texture2D" uid="uid://c04b6lo1tgisv" path="res://Assets/images/menu_hover.png" id="3_n70i8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uwmw7"]
 font_size = 36

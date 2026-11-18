@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cl176wve2asiy"]
 
-[ext_resource type="ArrayMesh" uid="uid://0ow3ymr5accs" path="res://Assets/FootMesh.res" id="2_kq7hj"]
-[ext_resource type="ArrayMesh" uid="uid://c0ioh66rgyink" path="res://Assets/CalfMesh.res" id="4_l1rcp"]
-[ext_resource type="ArrayMesh" uid="uid://dodqurewjth57" path="res://Assets/LimbMesh.res" id="5_le1tg"]
-[ext_resource type="ArrayMesh" uid="uid://0rr2secbs28c" path="res://Assets/SphereMesh.res" id="6_2daya"]
-[ext_resource type="ArrayMesh" uid="uid://bdubh3rmmn3qr" path="res://Assets/TorsoMesh.res" id="7_mvyft"]
-[ext_resource type="ArrayMesh" uid="uid://bp5r768oafkg8" path="res://Assets/HipsMesh.res" id="8_dm6ib"]
+[ext_resource type="ArrayMesh" uid="uid://0ow3ymr5accs" path="res://Assets/models-etc/FootMesh.res" id="2_kq7hj"]
+[ext_resource type="ArrayMesh" uid="uid://c0ioh66rgyink" path="res://Assets/models-etc/CalfMesh.res" id="4_l1rcp"]
+[ext_resource type="ArrayMesh" uid="uid://dodqurewjth57" path="res://Assets/models-etc/LimbMesh.res" id="5_le1tg"]
+[ext_resource type="ArrayMesh" uid="uid://0rr2secbs28c" path="res://Assets/models-etc/SphereMesh.res" id="6_2daya"]
+[ext_resource type="ArrayMesh" uid="uid://bdubh3rmmn3qr" path="res://Assets/models-etc/TorsoMesh.res" id="7_mvyft"]
+[ext_resource type="ArrayMesh" uid="uid://bp5r768oafkg8" path="res://Assets/models-etc/HipsMesh.res" id="8_dm6ib"]
 [ext_resource type="Script" uid="uid://7kn14jowsena" path="res://Scripts/ragdoll.gd" id="10_q5mnj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fib1c"]
