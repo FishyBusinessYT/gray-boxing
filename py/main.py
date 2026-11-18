@@ -3,7 +3,7 @@ import struct
 import socket
 
 from setup import download_task
-from capture_controller import CaptureController, draw_landmarks_on_image
+from capture_controller import CaptureController, draw_landmarks_on_image, LandmarkPlotter
 from detector import Detector
 from direction_calculator import calculate_directions
 
@@ -31,6 +31,8 @@ failed_frames = 0
 processed_frames = 0
 skip_ratio = 1 / 3
 
+plotter = LandmarkPlotter()
+
 while True:  # TODO handle exit properly
     # If the camera frames aren't continually consumed, they generate latency
     timestamp, mp_image = captcont.get_frame()
@@ -42,7 +44,10 @@ while True:  # TODO handle exit properly
         continue
 
     try:
-        landmarks = dtr.get_landmarks(mp_image, timestamp).pose_world_landmarks[0]
+        detection_result = dtr.get_landmarks(mp_image, timestamp)
+        landmarks = detection_result.pose_world_landmarks[0]
+        #draw_landmarks_on_image(mp_image.numpy_view(), detection_result.pose_landmarks)
+        plotter.plot(detection_result.pose_landmarks[0])
         node_directions = calculate_directions(landmarks)
 
         data = struct.pack("54f", *node_directions)

@@ -54,7 +54,7 @@ def get_direction(node1, node2):
         dirVector.x / dirVectorLength,
         dirVector.y / dirVectorLength,
         dirVector.z / dirVectorLength
-        ]
+    ]
 
     return directionNormalized
 

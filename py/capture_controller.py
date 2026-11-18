@@ -4,6 +4,7 @@ import numpy as np
 from mediapipe.tasks.python.vision import drawing_utils
 from mediapipe.tasks.python.vision import drawing_styles
 from mediapipe.tasks.python import vision
+from matplotlib import pyplot as plt
 
 class CaptureController:
     def __init__(self, camera_index=0):
@@ -55,3 +56,33 @@ def draw_landmarks_on_image(rgb_image, pose_landmarks_list):
 
   cv2.imshow("mp", annotated_image)
   cv2.waitKey(1)
+
+class LandmarkPlotter:
+    def __init__(self) -> None:
+        plt.ion()
+        self.fig = plt.figure(figsize=(8, 6))
+        self.ax = self.fig.add_subplot(projection='3d')
+        for axis, color in zip('xyz', ('red', 'green', 'blue')):
+            getattr(self.ax, f'set_{axis}label')(axis.upper(), color=color)
+            self.ax.tick_params(axis=axis, colors=color)
+            getattr(self.ax, f'{axis}axis').line.set_color(color)
+        self.ax.view_init(elev=90, azim=90) # z-axis is pointing front
+
+    def plot(self, landmarks) -> None:
+        self.ax.cla()  # limpia el eje, no la figura
+        self.ax.set_xlim(0, 1)
+        self.ax.set_ylim(0, 1)
+        self.ax.set_zlim(-1, 1)  # cla() resetea los límites
+        self.ax.scatter(
+            [lm.x for lm in landmarks],
+            [lm.y for lm in landmarks],
+            [lm.z for lm in landmarks],
+            c='blue',
+        )
+        self.fig.canvas.draw_idle()
+        self.fig.canvas.flush_events()
+        plt.pause(0.001)
+
+    def close(self) -> None:
+        plt.ioff()
+        plt.close(self.fig)
