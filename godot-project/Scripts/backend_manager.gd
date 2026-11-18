@@ -2,7 +2,6 @@ extends Node
 
 var process_id := -1
 
-
 func _ready() -> void:
     var exe_name := "backend.exe" if OS.get_name() == "Windows" else "backend"
     var py_path := OS.get_executable_path().get_base_dir().path_join(exe_name)
