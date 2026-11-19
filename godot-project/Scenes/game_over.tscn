@@ -50,6 +50,40 @@ theme_override_font_sizes/font_size = 40
 text = "Puntaje  0"
 horizontal_alignment = 1
 
+[node name="NamePanel" type="VBoxContainer" parent="." unique_id=1225508414]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.3
+anchor_right = 0.5
+anchor_bottom = 0.3
+offset_left = -240.0
+offset_top = -45.0
+offset_right = 240.0
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="NamePanel" unique_id=1225508415]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Ingresa tu nombre"
+horizontal_alignment = 1
+
+[node name="NameEntry" type="LineEdit" parent="NamePanel" unique_id=1225508416]
+custom_minimum_size = Vector2(460, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+placeholder_text = "Nombre"
+alignment = 1
+max_length = 16
+
+[node name="Hint" type="Label" parent="NamePanel" unique_id=1225508417]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Escribe tu nombre y presiona Enter"
+horizontal_alignment = 1
+
 [node name="ButtonsPanel" type="CenterContainer" parent="." unique_id=1225508413]
 layout_mode = 1
 anchors_preset = -1

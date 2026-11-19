@@ -36,6 +36,10 @@ static func record_hit(segment: String, damage: float, injury: String) -> void:
 		"injury": injury,
 	})
 
+## True when this round already produced a persisted leaderboard entry.
+static func is_saved() -> bool:
+	return _saved
+
 ## Saves the current round as one leaderboard entry. A round is saved once;
 ## repeated calls after a successful finish do nothing.
 static func finish_run(player_name: String) -> bool:

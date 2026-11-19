@@ -48,6 +48,9 @@ func _ready() -> void:
     game_over.get_node('ButtonsPanel/VBoxContainer/Main menu').connect(
         'pressed', to_main_menu
         )
+    game_over.get_node('NamePanel/NameEntry').connect(
+        'text_submitted', _on_name_submitted
+        )
 
     leaderboard.get_node('PanelContainer/VBoxContainer/VBoxContainer/Main menu').connect('pressed', to_main_menu)
 
@@ -109,7 +112,16 @@ func to_game_over() -> void:
     game_over.get_node('Score').text = 'Puntaje  %d' % roundi(
         RoundLog.total_damage
         )
+
+    var name_entry: LineEdit = game_over.get_node('NamePanel/NameEntry')
+    name_entry.text = ''
+    name_entry.editable = true
+    game_over.get_node('NamePanel/Hint').text = (
+        'Escribe tu nombre y presiona Enter'
+        )
+
     add_child(game_over)
+    name_entry.call_deferred('grab_focus')
 
 func to_leaderboard() -> void:
     get_tree().paused = false
@@ -119,6 +131,38 @@ func to_leaderboard() -> void:
 
     _clear_game()
     add_child(leaderboard)
+    leaderboard.call('refresh')
+
+## Saves the finished round once, using the sanitized name from the input.
+func _on_name_submitted(raw_name: String) -> void:
+    var name_entry: LineEdit = game_over.get_node('NamePanel/NameEntry')
+    var hint: Label = game_over.get_node('NamePanel/Hint')
+
+    if RoundLog.is_saved():
+        name_entry.editable = false
+        hint.text = 'Guardado'
+        return
+
+    var safe_name := _sanitize_name(raw_name)
+    if safe_name.is_empty():
+        name_entry.text = ''
+        hint.text = 'Escribe un nombre'
+        name_entry.grab_focus()
+        return
+
+    if RoundLog.finish_run(safe_name):
+        name_entry.text = safe_name
+        name_entry.editable = false
+        hint.text = 'Guardado'
+        return
+
+    hint.text = 'No se pudo guardar. Intenta otra vez.'
+
+## Keeps one visible line of printable text that fits the input field.
+func _sanitize_name(raw_name: String) -> String:
+    var cleaned := raw_name.strip_edges()
+    cleaned = cleaned.replace('\t', ' ').replace('\r', ' ').replace('\n', ' ')
+    return cleaned.left(16)
 
 ## Frees the running round so a restart never leaves a stale scene behind.
 func _clear_game() -> void:

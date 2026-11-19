@@ -6,8 +6,6 @@ const RoundLog := preload("res://Scripts/round_log.gd")
 
 signal game_ended
 
-## Name stored in the leaderboard until the name-entry screen exists.
-@export var player_name: String = "Jugador"
 ## Length of one round, in seconds.
 @export var round_duration: float = 60.0
 
@@ -45,7 +43,6 @@ func end_round() -> void:
         return
     round_state = RoundState.GAME_OVER
     round_timer.stop()
-    RoundLog.finish_run(player_name)
     emit_signal('game_ended')
 
 func _on_timer_timeout() -> void:
