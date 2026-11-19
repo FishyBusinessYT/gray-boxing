@@ -1,14 +1,12 @@
 [gd_scene format=3 uid="uid://dbpgeno8sbhwy"]
 
-[ext_resource type="Texture2D" uid="uid://q4kynvopiyyu" path="res://Assets/menu.png" id="1_fjik7"]
-[ext_resource type="Texture2D" uid="uid://oiih588w6tjh" path="res://Assets/menu_pressed.png" id="2_pobhu"]
-[ext_resource type="Texture2D" uid="uid://c04b6lo1tgisv" path="res://Assets/menu_hover.png" id="3_n70i8"]
+[ext_resource type="Texture2D" uid="uid://bcck34kc1sgsx" path="res://Assets/images/menu_normal.png" id="1_fjik7"]
+[ext_resource type="Texture2D" uid="uid://yx1fy5a44h5a" path="res://Assets/images/menu_pressed.png" id="2_pobhu"]
+[ext_resource type="Texture2D" uid="uid://cnbkwr8a1tslh" path="res://Assets/images/menu_hover.png" id="3_n70i8"]
+[ext_resource type="Script" path="res://Scripts/leaderboard.gd" id="4_leaderboard"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uwmw7"]
 font_size = 36
-
-[sub_resource type="LabelSettings" id="LabelSettings_sw8pe"]
-font_size = 22
 
 [node name="Leaderboard" type="Control" unique_id=1787415524]
 layout_mode = 3
@@ -17,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_leaderboard")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1718140036]
 layout_mode = 1
@@ -57,215 +56,17 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=2147217876]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1916093106]
+custom_maximum_size = Vector2(-1, 50)
 layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
+size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=323928991]
+[node name="Main menu" type="TextureButton" parent="PanelContainer/VBoxContainer/VBoxContainer" unique_id=1422708550]
+custom_minimum_size = Vector2(170, 50)
+custom_maximum_size = Vector2(170, -1)
 layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1628080971]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label4" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1576729068]
-layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label5" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=557355746]
-layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label6" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=351575614]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label7" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1263772084]
-layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label8" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=217482391]
-layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label9" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=99069287]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label10" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=221368745]
-layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label11" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=808694345]
-layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label12" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=167223848]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label13" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=763120286]
-layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label14" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1886899054]
-layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label15" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1508795254]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label16" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=131833861]
-layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label17" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1228525865]
-layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label18" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1127198986]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label19" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=89394969]
-layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label20" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=671919942]
-layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label21" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1773075634]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label22" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1621144607]
-layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label23" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1240464766]
-layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label24" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1756519014]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label25" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1215151683]
-layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label26" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=486890053]
-layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label27" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=77640410]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label28" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1163174911]
-layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label29" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=377750562]
-layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label30" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1597412053]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label31" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1242108793]
-layout_mode = 2
-text = "Felipe: 100pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label32" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=1175683263]
-layout_mode = 2
-text = "Bautista: 135pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Label33" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/PanelContainer/ScrollContainer/VBoxContainer" unique_id=2020332372]
-layout_mode = 2
-text = "Facundo: 1355pts"
-label_settings = SubResource("LabelSettings_sw8pe")
-horizontal_alignment = 1
-
-[node name="Main menu" type="TextureButton" parent="." unique_id=1422708550]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -32.0
-offset_right = 72.0
-grow_vertical = 0
-scale = Vector2(1.0010147, 1)
-size_flags_horizontal = 0
-size_flags_vertical = 0
 texture_normal = ExtResource("1_fjik7")
 texture_pressed = ExtResource("2_pobhu")
 texture_hover = ExtResource("3_n70i8")
+ignore_texture_size = true
+stretch_mode = 4

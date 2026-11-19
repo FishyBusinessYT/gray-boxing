@@ -1,12 +1,11 @@
 import argparse
 import struct
 import socket
-
 from setup import download_task
-from capture_controller import CaptureController, draw_landmarks_on_image
+from capture_controller import CaptureController, draw_landmarks_on_image, LandmarkPlotter
 from detector import Detector
-from direction_calculator import calculate_directions
-
+from direction_calculator import calculate_directions, calculate_player_rotation_offset
+import select
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Gray Boxing motion capture backend.")
@@ -20,16 +19,22 @@ def parse_args():
 
 
 args = parse_args()
-
 download_task()
 
 dtr = Detector()
 captcont = CaptureController(args.camera_index)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+calibration_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+calibration_socket.bind(("127.0.0.1", 52347))
 
 failed_frames = 0
 processed_frames = 0
 skip_ratio = 1 / 3
+
+#plotter = LandmarkPlotter()
+# Start at 0°
+cos_angle = 1
+sin_angle = 0
 
 while True:  # TODO handle exit properly
     # If the camera frames aren't continually consumed, they generate latency
@@ -42,11 +47,22 @@ while True:  # TODO handle exit properly
         continue
 
     try:
-        landmarks = dtr.get_landmarks(mp_image, timestamp).pose_world_landmarks[0]
-        node_directions = calculate_directions(landmarks)
+        detection_result = dtr.get_landmarks(mp_image, timestamp)
+        landmarks = detection_result.pose_world_landmarks[0]
+        #draw_landmarks_on_image(mp_image.numpy_view(), detection_result.pose_landmarks)
+        #plotter.plot(detection_result.pose_world_landmarks[0])
 
+        # Non-blockingly check if there's data
+        legibles, _, _ = select.select([calibration_socket], [], [], 0)
+        if calibration_socket in legibles:
+            print("READING SOCKET")
+            data = calibration_socket.recv(100)
+            if data.decode("ascii") == "cal":
+                print("Calibrating...")
+                sin_angle, cos_angle = calculate_player_rotation_offset(landmarks)
+
+        node_directions = calculate_directions(landmarks, sin_angle, cos_angle)
         data = struct.pack("54f", *node_directions)
-
         failed_frames = 0
 
     except IndexError:

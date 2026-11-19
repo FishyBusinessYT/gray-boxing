@@ -5,6 +5,8 @@ const PORT = 52346
 const PACKET_SIZE = 18 * 3 * 4  # 17 vectors * 3 axes * 4-bytes per float
 
 var udp := PacketPeerUDP.new()
+var calibrationUdp := PacketPeerUDP.new()
+
 var directions := {
     "neck_head": Vector3(),
     "l_shoulder_shoulder": Vector3(),
@@ -29,6 +31,8 @@ var directions := {
 
 func _ready():
     udp.bind(PORT, "127.0.0.1")
+    calibrationUdp.set_dest_address("127.0.0.1", 52347)
+    calibrationUdp.put_packet("cal".to_ascii_buffer())
 
 func _process(_delta):
     if udp.get_available_packet_count() == 0:
@@ -57,3 +61,4 @@ func _process(_delta):
 
 func _exit_tree() -> void:
     udp.close()
+    calibrationUdp.close()
