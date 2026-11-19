@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://dxcsklhorwj2"]
 
-[ext_resource type="Texture2D" uid="uid://cakucdmol6j21" path="res://Assets/images/GameTitle.png" id="1_16hvj"]
-[ext_resource type="Texture2D" uid="uid://dpfn2fvb25x4r" path="res://Assets/images/iniciar.png" id="2_16hvj"]
-[ext_resource type="Texture2D" uid="uid://c7kdkl65xmi8s" path="res://Assets/images/iniciar_pressed.png" id="3_vr1f0"]
-[ext_resource type="Texture2D" uid="uid://dvk561wt4ngwy" path="res://Assets/images/iniciar_hover.png" id="4_t1dhk"]
-[ext_resource type="Texture2D" uid="uid://cwc1734ykoddi" path="res://Assets/images/leaderboard.png" id="5_5egv6"]
-[ext_resource type="Texture2D" uid="uid://b8ayqw4p54g8d" path="res://Assets/images/leaderboard_pressed.png" id="6_vtepg"]
-[ext_resource type="Texture2D" uid="uid://otj42ys4w1px" path="res://Assets/images/leaderboard_hover.png" id="7_8dnnj"]
-[ext_resource type="Texture2D" uid="uid://cpbv7i7k74nlb" path="res://Assets/images/salir.png" id="8_m3bi6"]
-[ext_resource type="Texture2D" uid="uid://co0ik50c0iouf" path="res://Assets/images/salir_pressed.png" id="9_wyh8j"]
-[ext_resource type="Texture2D" uid="uid://dmlnobdo0uhye" path="res://Assets/images/salir_hover.png" id="10_ujyyl"]
+[ext_resource type="Texture2D" uid="uid://bjfdqqa5mc11y" path="res://Assets/images/GameTitle.png" id="1_16hvj"]
+[ext_resource type="Texture2D" uid="uid://dknfr45bs22jg" path="res://Assets/images/leaderboard_normal.png" id="2_48xlc"]
+[ext_resource type="Texture2D" uid="uid://j2q7fc6q7lpf" path="res://Assets/images/iniciar_normal.png" id="2_cp0ys"]
+[ext_resource type="Texture2D" uid="uid://bcrxpkjcutev2" path="res://Assets/images/leaderboard_pressed.png" id="3_ce3w2"]
+[ext_resource type="Texture2D" uid="uid://b130qrrtnwuv3" path="res://Assets/images/iniciar_pressed.png" id="3_yhxw7"]
+[ext_resource type="Texture2D" uid="uid://dsgh2433p3mln" path="res://Assets/images/leaderboard_hover.png" id="4_n45e2"]
+[ext_resource type="Texture2D" uid="uid://o6l1w2uecjqe" path="res://Assets/images/iniciar_hover.png" id="4_trj04"]
+[ext_resource type="Texture2D" uid="uid://cn5fcp0nk0diw" path="res://Assets/images/salir_normal.png" id="8_16hvj"]
+[ext_resource type="Texture2D" uid="uid://baxfpccd77w34" path="res://Assets/images/salir_pressed.png" id="9_vr1f0"]
+[ext_resource type="Texture2D" uid="uid://dsiiasn3n73no" path="res://Assets/images/salir_hover.png" id="10_t1dhk"]
 
 [sub_resource type="Theme" id="Theme_ugr05"]
 
@@ -46,36 +46,44 @@ texture = ExtResource("1_16hvj")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=458947229]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1784008945]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
+anchor_left = 0.4
 anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -115.19998
-offset_right = 115.20001
-offset_bottom = 130.0
+anchor_right = 0.6
+anchor_bottom = 0.9
 
-[node name="Start game" type="TextureButton" parent="VBoxContainer" unique_id=1410975395]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=458947229]
+layout_mode = 2
+
+[node name="Start game" type="TextureButton" parent="CenterContainer/VBoxContainer" unique_id=1410975395]
+custom_minimum_size = Vector2(170, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_ugr05")
-texture_normal = ExtResource("2_16hvj")
-texture_pressed = ExtResource("3_vr1f0")
-texture_hover = ExtResource("4_t1dhk")
+texture_normal = ExtResource("2_cp0ys")
+texture_pressed = ExtResource("3_yhxw7")
+texture_hover = ExtResource("4_trj04")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="Leaderboard" type="TextureButton" parent="VBoxContainer" unique_id=1004836972]
+[node name="Leaderboard" type="TextureButton" parent="CenterContainer/VBoxContainer" unique_id=1004836972]
+custom_minimum_size = Vector2(170, 50)
 layout_mode = 2
-size_flags_horizontal = 4
 theme = SubResource("Theme_ugr05")
-texture_normal = ExtResource("5_5egv6")
-texture_pressed = ExtResource("6_vtepg")
-texture_hover = ExtResource("7_8dnnj")
+texture_normal = ExtResource("2_48xlc")
+texture_pressed = ExtResource("3_ce3w2")
+texture_hover = ExtResource("4_n45e2")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="Exit game" type="TextureButton" parent="VBoxContainer" unique_id=1923726175]
+[node name="Exit game" type="TextureButton" parent="CenterContainer/VBoxContainer" unique_id=1923726175]
+custom_minimum_size = Vector2(170, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-texture_normal = ExtResource("8_m3bi6")
-texture_pressed = ExtResource("9_wyh8j")
-texture_hover = ExtResource("10_ujyyl")
+texture_normal = ExtResource("8_16hvj")
+texture_pressed = ExtResource("9_vr1f0")
+texture_hover = ExtResource("10_t1dhk")
+ignore_texture_size = true
+stretch_mode = 4

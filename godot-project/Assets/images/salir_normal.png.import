@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwc1734ykoddi"
-path="res://.godot/imported/leaderboard.png-b44d0cd973d3cb455c0f86e27fabc343.ctex"
+uid="uid://cn5fcp0nk0diw"
+path="res://.godot/imported/salir_normal.png-332f5f0e22aa96a2fd33122fd6755988.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/images/leaderboard.png"
-dest_files=["res://.godot/imported/leaderboard.png-b44d0cd973d3cb455c0f86e27fabc343.ctex"]
+source_file="res://Assets/images/salir_normal.png"
+dest_files=["res://.godot/imported/salir_normal.png-332f5f0e22aa96a2fd33122fd6755988.ctex"]
 
 [params]
 
