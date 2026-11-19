@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7kn14jowsena" path="res://Scripts/ragdoll.gd" id="1_f3x1h"]
 [ext_resource type="AudioStream" uid="uid://biip061x2dwkj" path="res://Assets/audio/strong.wav" id="1_t8xol"]
-[ext_resource type="Texture2D" uid="uid://cewcgeworcsks" path="res://Assets/pic.jpg" id="2_8epfh"]
+[ext_resource type="Texture2D" uid="uid://cewcgeworcsks" path="res://Assets/images/pic.jpg" id="2_8epfh"]
 [ext_resource type="AudioStream" uid="uid://bx2eh1j6gwsar" path="res://Assets/audio/low.wav" id="2_n01pl"]
 [ext_resource type="AnimationLibrary" uid="uid://cvmes5ha7vs57" path="res://Assets/animations/Blocking.fbx" id="5_ic7m5"]
 [ext_resource type="Material" uid="uid://da7gxr2wr03ah" path="res://Assets/enemy_head.tres" id="5_t8xol"]

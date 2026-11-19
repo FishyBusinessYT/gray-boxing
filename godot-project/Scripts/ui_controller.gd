@@ -22,23 +22,23 @@ func _ready() -> void:
     game_over.name = 'UI-NODE'
     leaderboard.name = 'UI-NODE'
 
-    main_menu.get_node('VBoxContainer/Start game').connect(
+    main_menu.get_node('CenterContainer/VBoxContainer/Start game').connect(
         'pressed', start_game
         )
-    main_menu.get_node('VBoxContainer/Leaderboard').connect(
+    main_menu.get_node('CenterContainer/VBoxContainer/Leaderboard').connect(
         'pressed', to_leaderboard
         )
-    main_menu.get_node('VBoxContainer/Exit game').connect(
+    main_menu.get_node('CenterContainer/VBoxContainer/Exit game').connect(
         'pressed', exit_game
         )
 
-    pause_menu.get_node('ButtonsPanel/VBoxContainer/Resume game').connect(
+    pause_menu.get_node('VBoxContainer/Resume game').connect(
         'pressed', start_game
         )
-    pause_menu.get_node('ButtonsPanel/VBoxContainer/Restart game').connect(
+    pause_menu.get_node('VBoxContainer/Restart game').connect(
         'pressed', restart_game
         )
-    pause_menu.get_node('ButtonsPanel/VBoxContainer/Main menu').connect(
+    pause_menu.get_node('VBoxContainer/Main menu').connect(
         'pressed', to_main_menu
         )
 
@@ -49,7 +49,7 @@ func _ready() -> void:
         'pressed', to_main_menu
         )
 
-    leaderboard.get_node('Main menu').connect('pressed', to_main_menu)
+    leaderboard.get_node('PanelContainer/VBoxContainer/VBoxContainer/Main menu').connect('pressed', to_main_menu)
 
     to_main_menu()
 
